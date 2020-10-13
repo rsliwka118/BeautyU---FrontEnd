@@ -1,0 +1,19 @@
+
+    <FlexboxLayout class="page">
+        <StackLayout class="form" width="80%">
+            <Image class="logo" src="res://blogo"></Image>
+
+            <StackLayout class="input-field">
+                <TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+
+            <StackLayout class="input-field">
+                <TextField #password class="input" hint="Hasło" secure="true"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+
+            <Button [text]="'Zaloguj'" class="btn btn-primary m-t-20"></Button>
+        </StackLayout>
+    </FlexboxLayout>
+
