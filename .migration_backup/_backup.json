@@ -1,0 +1,16 @@
+{
+	"name": "migration",
+	"paths": [
+		"webpack.config.js",
+		"package.json",
+		"package.json",
+		"webpack.config.js",
+		"package.json",
+		"package.json",
+		"hooks",
+		"webpack.config.js",
+		"package.json",
+		"package-lock.json",
+		"package.json"
+	]
+}

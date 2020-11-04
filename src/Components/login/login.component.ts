@@ -9,11 +9,29 @@ import { Page } from "@nativescript/core/ui/page";
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private page: Page) {
-        if (isAndroid) {
-            this.page.actionBarHidden = true;
-        }
+  constructor(private page: Page) {
+    if (isAndroid) {
+        this.page.actionBarHidden = true;
     }
+  }
+
+    isLoggingIn = false;
+
+    toggleForm() {
+      this.isLoggingIn = !this.isLoggingIn;
+    }
+
+    submit(){
+      if(this.isLoggingIn){
+
+      } else {
+
+      }
+
+    }
+    
+
+
 
   ngOnInit(): void {
   }

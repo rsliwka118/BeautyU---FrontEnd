@@ -1,6 +1,6 @@
 
     <FlexboxLayout class="page">
-        <StackLayout class="form" width="80%">
+        <StackLayout class="form" width="70%">
             <Image class="logo" src="res://blogo"></Image>
 
             <StackLayout class="input-field">
@@ -8,12 +8,36 @@
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
 
+            <StackLayout *ngIf="!isLoggingIn" orientation="horizontal">
+                <StackLayout class="input-field" width="50%">
+                    <TextField class="input" hint="Imię" ></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+
+                <StackLayout class="input-field" width="50%">
+                    <TextField class="input" hint="Nazwisko"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+            </StackLayout>   
+     
             <StackLayout class="input-field">
                 <TextField #password class="input" hint="Hasło" secure="true"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
 
-            <Button [text]="'Zaloguj'" class="btn btn-primary m-t-20"></Button>
+            <StackLayout *ngIf="!isLoggingIn" class="input-field">
+                <TextField #password class="input" hint="Potwierdź hasło" secure="true"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+
+            <Button [text]="isLoggingIn ? 'Zaloguj' : 'Rejestracja'" class="btn btn-primary m-t-20"></Button>
+            
+            <Label (tap)="toggleForm()" class="login-label">
+                <FormattedString>
+                    <Span [text]="isLoggingIn ? 'Nie masz konta? ' : 'Masz konto? '"></Span>
+                    <Span [text]="isLoggingIn ? 'Utwórz je!' : 'Logowanie'" class="bold-form"></Span>
+                </FormattedString>
+            </Label>
         </StackLayout>
     </FlexboxLayout>
 
