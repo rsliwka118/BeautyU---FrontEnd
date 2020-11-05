@@ -4,24 +4,24 @@
             <Image class="logo" src="res://blogo"></Image>
 
             <StackLayout class="input-field">
-                <TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                <TextField class="input" hint="Email" [(ngModel)]="User.user.email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
 
             <StackLayout *ngIf="!isLoggingIn" orientation="horizontal">
                 <StackLayout class="input-field" width="50%">
-                    <TextField class="input" hint="Imię" ></TextField>
+                    <TextField class="input" hint="Imię" [(ngModel)]="User.user.firstName"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
 
                 <StackLayout class="input-field" width="50%">
-                    <TextField class="input" hint="Nazwisko"></TextField>
+                    <TextField class="input" hint="Nazwisko" [(ngModel)]="User.user.lastName"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
             </StackLayout>   
      
             <StackLayout class="input-field">
-                <TextField #password class="input" hint="Hasło" secure="true"></TextField>
+                <TextField #password class="input" hint="Hasło" secure="true" [(ngModel)]="User.user.password"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
 
@@ -30,7 +30,7 @@
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
 
-            <Button [text]="isLoggingIn ? 'Zaloguj' : 'Rejestracja'" class="btn btn-primary m-t-20"></Button>
+            <Button [text]="isLoggingIn ? 'Zaloguj' : 'Rejestracja'" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
             
             <Label (tap)="toggleForm()" class="login-label">
                 <FormattedString>

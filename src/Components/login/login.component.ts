@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { isAndroid } from "@nativescript/core/platform";
-import { Page } from "@nativescript/core/ui/page";
+import { Component, OnInit } from '@angular/core'
+import { isAndroid } from "@nativescript/core/platform"
+import { Page } from "@nativescript/core/ui/page"
+import { UserService } from '../../shared/user/user.service'
 
 @Component({
   selector: 'ns-login',
@@ -8,32 +9,25 @@ import { Page } from "@nativescript/core/ui/page";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+ 
+  isLoggingIn = true
+  
+  constructor(private page: Page, public User: UserService) {}
 
-  constructor(private page: Page) {
-    if (isAndroid) {
-        this.page.actionBarHidden = true;
-    }
+  ngOnInit(): void{
+    this.page.actionBarHidden = true
   }
 
-    isLoggingIn = false;
+  toggleForm() {
+    this.isLoggingIn = !this.isLoggingIn
+  }
 
-    toggleForm() {
-      this.isLoggingIn = !this.isLoggingIn;
+  submit(){
+    if(this.isLoggingIn){
+      this.User.login()
+    } else {
+      this.User.register()
     }
-
-    submit(){
-      if(this.isLoggingIn){
-
-      } else {
-
-      }
-
-    }
-    
-
-
-
-  ngOnInit(): void {
   }
 
 }
