@@ -19,15 +19,15 @@
                     <Label *ngIf="lastNameErrors()" class="error-msg" [text]="getLastNameError()"></Label>
                 </StackLayout>
             </StackLayout>   
-     
+
             <StackLayout class="input-field">
                 <TextField #password class="input" hint="Hasło" secure="true" [(ngModel)]="user.password" (focus)="onPasswordFocus()" [ngClass]="{'color-danger': passwordErrors()}"></TextField>
                 <Label *ngIf="passwordErrors()" class="error-msg" [text]="getPasswordError()"></Label>
             </StackLayout>
 
             <StackLayout *ngIf="!isLoggingIn" class="input-field">
-                <TextField #password class="input" hint="Potwierdź hasło" secure="true"></TextField>
-                <StackLayout class="hr-light"></StackLayout>
+                <TextField #password class="input" hint="Potwierdź hasło" secure="true" [(ngModel)]="confirmPassword"  [ngClass]="{'color-danger': confirmErrors()}"></TextField>
+                <Label *ngIf="confirmErrors()" class="error-msg" [text]="getConfirmPasswordError()"></Label>>
             </StackLayout>
 
             <Button [text]="isLoggingIn ? 'Zaloguj' : 'Rejestracja'" [isEnabled]="isSubmitEnabled()" (tap)="submit()" class="btn btn-primary m-t-20"></Button>

@@ -5,6 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "../Components/login/login.component";
 import { ValidationService } from "../shared/validation.service";
+import { ToastsService } from "../shared/toasts.service";
 import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HttpClientModule } from "@angular/common/http";
         LoginComponent
     ],
     providers: [
-        ValidationService
+        ValidationService,
+        ToastsService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
