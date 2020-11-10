@@ -4,7 +4,7 @@ import { NativeScriptFormsModule, NativeScriptModule } from "@nativescript/angul
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "../Components/login/login.component";
-import { UserService } from "../shared/user/user.service";
+import { ValidationService } from "../shared/validation.service";
 import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
@@ -22,7 +22,7 @@ import { HttpClientModule } from "@angular/common/http";
         LoginComponent
     ],
     providers: [
-        UserService
+        ValidationService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -4,25 +4,25 @@
             <Image class="logo" src="res://blogo"></Image>
 
             <StackLayout class="input-field">
-                <TextField class="input" hint="Email" [(ngModel)]="User.user.email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
-                <StackLayout class="hr-light"></StackLayout>
+                <TextField class="input" hint="Email" [(ngModel)]="user.email" keyboardType="email" autocorrect="false" autocapitalizationType="none" (focus)="onEmailFocus()" [ngClass]="{'color-danger': emailErrors()}"></TextField>
+                <Label *ngIf="emailErrors()" class="error-msg" [text]="getEmailError()"></Label>
             </StackLayout>
 
             <StackLayout *ngIf="!isLoggingIn" orientation="horizontal">
                 <StackLayout class="input-field" width="50%">
-                    <TextField class="input" hint="Imię" [(ngModel)]="User.user.firstName"></TextField>
-                    <StackLayout class="hr-light"></StackLayout>
+                    <TextField class="input" hint="Imię" [(ngModel)]="user.firstName" (focus)="onFirstNameFocus()" [ngClass]="{'color-danger': firstNameErrors()}"></TextField>
+                    <Label *ngIf="firstNameErrors()" class="error-msg" [text]="getFirstNameError()"></Label>
                 </StackLayout>
 
                 <StackLayout class="input-field" width="50%">
-                    <TextField class="input" hint="Nazwisko" [(ngModel)]="User.user.lastName"></TextField>
-                    <StackLayout class="hr-light"></StackLayout>
+                    <TextField class="input" hint="Nazwisko" [(ngModel)]="user.lastName" (focus)="onLastNameFocus()" [ngClass]="{'color-danger': lastNameErrors()}"></TextField>
+                    <Label *ngIf="lastNameErrors()" class="error-msg" [text]="getLastNameError()"></Label>
                 </StackLayout>
             </StackLayout>   
      
             <StackLayout class="input-field">
-                <TextField #password class="input" hint="Hasło" secure="true" [(ngModel)]="User.user.password"></TextField>
-                <StackLayout class="hr-light"></StackLayout>
+                <TextField #password class="input" hint="Hasło" secure="true" [(ngModel)]="user.password" (focus)="onPasswordFocus()" [ngClass]="{'color-danger': passwordErrors()}"></TextField>
+                <Label *ngIf="passwordErrors()" class="error-msg" [text]="getPasswordError()"></Label>
             </StackLayout>
 
             <StackLayout *ngIf="!isLoggingIn" class="input-field">
@@ -30,7 +30,7 @@
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
 
-            <Button [text]="isLoggingIn ? 'Zaloguj' : 'Rejestracja'" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+            <Button [text]="isLoggingIn ? 'Zaloguj' : 'Rejestracja'" [isEnabled]="isSubmitEnabled()" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
             
             <Label (tap)="toggleForm()" class="login-label">
                 <FormattedString>

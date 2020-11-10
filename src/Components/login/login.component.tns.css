@@ -12,18 +12,11 @@
   .bold-form {
     color: #555555;
   }
+
   .logo {
     margin-bottom: 20;
     height: 100;
   }
-  /* .header {
-    horizontal-align: center;
-    font-size: 25;
-    font-weight: 600;
-    margin-bottom: 70;
-    text-align: center;
-    color: #FFB0AC;
-  } */
 
   .input-field {
     margin-bottom: 0;
@@ -52,4 +45,13 @@
   }
   .bold {
     color: #000000;
+  }
+  .error-msg {
+    color: rgba(255, 0, 0, 0.6);
+    margin-left: 15s;
+  }
+  .color-danger {
+    placeholder-color: rgba(255, 0, 0, 0.6);
+    color: rgba(255, 0, 0, 0.6);
+    margin-bottom: 0;
   }

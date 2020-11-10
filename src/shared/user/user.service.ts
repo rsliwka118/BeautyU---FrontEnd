@@ -19,6 +19,10 @@ export class UserService {
         this.user.lastName = ""
     }
 
+    hasEmail() {
+        return this.user.email != '';
+    }
+
     // login() {
     //     return this.http.post(
     //         Config.apiAuthURL + "/login",
