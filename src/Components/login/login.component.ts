@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { Page } from "@nativescript/core/ui/page"
-import { User } from "../../shared/user/user.model";
-import { Config } from "../../shared/config";
+import { User } from "../../shared/user/user.model"
+import { Config } from "../../shared/config"
 import { ValidationService } from '../../shared/validation.service'
+import { ToastsService } from '../../shared/toasts.service'
+
 @Component({
   selector: 'ns-login',
   templateUrl: './login.component.html',
@@ -11,7 +13,8 @@ import { ValidationService } from '../../shared/validation.service'
 export class LoginComponent implements OnInit {
   
   user: User
-  
+  confirmPassword = ""
+
   isLoggingIn = true
   emailError = ""
   loginError = ""
@@ -20,14 +23,14 @@ export class LoginComponent implements OnInit {
   firstNameError = ""
   lastNameError = ""
  
-  emailFocus = false;
-  passwordFocus = false;
-  firstNameFocus = false;
-  lastNameFocus = false;
-  confirmPasswordFocus = false;
-  isAuthenticating = false;
+  emailFocus = false
+  passwordFocus = false
+  firstNameFocus = false
+  lastNameFocus = false
+  confirmPasswordFocus = false
+  isAuthenticating = false
 
-  constructor(private page: Page, public validService: ValidationService) {
+  constructor(private cdr: ChangeDetectorRef, private page: Page, public validService: ValidationService, public toast: ToastsService) {
     this.user = new User()
         this.user.email = ""
         this.user.password = ""
@@ -39,7 +42,21 @@ export class LoginComponent implements OnInit {
     this.page.actionBarHidden = true
   }
 
+  ngAfterContentInit() {
+    this.cdr.detectChanges();
+  }
+
   toggleForm() {
+    this.user.email = ""
+    this.user.firstName = ""
+    this.user.lastName = ""
+    this.user.password = ""
+    this.confirmPassword = ""
+    this.passwordError = ""
+    this.firstNameError = ""
+    this.lastNameError = ""
+    this.confirmPasswordError = ""
+
     this.isLoggingIn = !this.isLoggingIn
   }
 
@@ -65,7 +82,23 @@ export class LoginComponent implements OnInit {
     const errorMsg = !! this.passwordError
     if(!errorMsg) return false
 
-    const isValidPassword = this.user.password.length > 0
+    const isValidPassword = this.user.password.length > 0 && this.validService.isValidPassword(this.user.password)
+    let error = errorMsg || !isValidPassword
+
+    if(isValidPassword){
+
+      this.passwordError = ""
+      return false
+
+    }
+    return error
+  }
+
+  public confirmErrors(){
+    const errorMsg = !! this.confirmPasswordError
+    if(!errorMsg) return false
+
+    const isValidPassword = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.user.password)
     let error = errorMsg || !isValidPassword
 
     if(isValidPassword){
@@ -125,18 +158,28 @@ export class LoginComponent implements OnInit {
     }
 
     if (checkPassword) {
-        let length = this.user.password.length;
-        if (length == 0) {
-            this.passwordError = "Hasło nie może być puste";
-        } else {
+        let lengthPass = this.user.password.length;
+        
+        if (lengthPass != 0) {
+          if (this.validService.isValidPassword(this.user.password)){
             this.passwordError = "";
+          } else {
+            this.passwordError = "8-20 znaków, 1 duża litera, 1 znak specjalny";
+          }
+        } else {
+            this.passwordError = "Hasło nie może być puste";
         }
+        
+        if( this.validService.isValidConfirm(this.confirmPassword, this.user.password) ){
+          this.confirmPasswordError = "";
+        } else {
+          this.confirmPasswordError = "Hasła są różne";
+        }
+        
     }
   }
-
-
   private isValidForm() {
-    let isValid = !!this.emailError || !!this.passwordError;
+    let isValid = !!this.emailError || !!this.passwordError || !!this.firstNameError || !!this.lastNameError || !!this.confirmPasswordError;
     return !isValid;
     }
 
@@ -156,6 +199,10 @@ export class LoginComponent implements OnInit {
     return this.passwordError
   }
 
+  getConfirmPasswordError(){
+    return this.confirmPasswordError
+  }
+
   onEmailFocus() {
       this.emailFocus = true;
   }
@@ -173,6 +220,11 @@ export class LoginComponent implements OnInit {
       this.updateErrors(false);
   }
 
+  onConfirmFocus(){
+      this.confirmPasswordFocus = true;
+      this.updateErrors(false);
+  }
+
   isSubmitEnabled() {
     return !this.isAuthenticating && this.validService.isValidEmail(this.user.email);
   }
@@ -185,7 +237,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(){}
+  login(){
+    this.updateErrors(true);
+  }
 
   register(){
     this.updateErrors(true);
@@ -201,14 +255,19 @@ export class LoginComponent implements OnInit {
               lastName: this.user.lastName,
               password: this.user.password
           })
-      }).then((r) => r.json())
-          .then((response) => {
-              const result = response.json;
-              this.isAuthenticating = false;
-              this.isLoggingIn = false;
-          }).catch((e) => {
-            this.isAuthenticating = false;
-          });
+      }).then(res => {
+          if(res.status == 200){
+            this.toast.showToast('Zarejestrowano pomyślnie!')
+            this.isLoggingIn = true;
+          }
+          if(res.status == 400) this.toast.showToast('Konto o takim adresie email już istnieje.')
+          if(res.status == 401) this.toast.showToast('Wypełnij poprawnie pola')
+      })
+        .then(result => {   
+            
+        }).catch(error => {
+            console.error('Error:', error);
+      });
     }      
   }
 

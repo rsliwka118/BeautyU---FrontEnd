@@ -1,7 +1,7 @@
 export class User {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
     password: string;
     
     hasEmail() {
