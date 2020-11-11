@@ -1,4 +1,8 @@
 export class User {
+
+    accessToken: string
+    refreshToken: string
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -15,5 +19,4 @@ export class User {
     hasLastName() {
         return this.lastName != '';
     }
-      
 }
