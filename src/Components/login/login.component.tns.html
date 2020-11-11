@@ -26,7 +26,7 @@
             </StackLayout>
 
             <StackLayout *ngIf="!isLoggingIn" class="input-field">
-                <TextField #password class="input" hint="Potwierdź hasło" secure="true" [(ngModel)]="confirmPassword"  [ngClass]="{'color-danger': confirmErrors()}"></TextField>
+                <TextField #password class="input" hint="Potwierdź hasło" secure="true" [(ngModel)]="confirmPassword" (focus)="onConfirmFocus()" [ngClass]="{'color-danger': confirmErrors()}"></TextField>
                 <Label *ngIf="confirmErrors()" class="error-msg" [text]="getConfirmPasswordError()"></Label>>
             </StackLayout>
 

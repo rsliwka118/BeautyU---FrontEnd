@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   confirmPasswordFocus = false
   isAuthenticating = false
 
-  constructor(private cdr: ChangeDetectorRef, private page: Page, public validService: ValidationService, public toast: ToastsService) {
+  constructor(private page: Page, public validService: ValidationService, public toast: ToastsService) {
     this.user = new User()
         this.user.email = ""
         this.user.password = ""
@@ -40,10 +40,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void{
     this.page.actionBarHidden = true
-  }
-
-  ngAfterContentInit() {
-    this.cdr.detectChanges();
   }
 
   toggleForm() {
@@ -98,12 +94,12 @@ export class LoginComponent implements OnInit {
     const errorMsg = !! this.confirmPasswordError
     if(!errorMsg) return false
 
-    const isValidPassword = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.user.password)
-    let error = errorMsg || !isValidPassword
+    const isValidConfirm = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.user.password)
+    let error = errorMsg || !isValidConfirm
 
-    if(isValidPassword){
+    if(isValidConfirm){
 
-      this.passwordError = ""
+      this.confirmPasswordError = ""
       return false
 
     }
@@ -159,23 +155,27 @@ export class LoginComponent implements OnInit {
 
     if (checkPassword) {
         let lengthPass = this.user.password.length;
-        
+        let lengthConf = this.confirmPassword.length;
+
         if (lengthPass != 0) {
           if (this.validService.isValidPassword(this.user.password)){
             this.passwordError = "";
           } else {
-            this.passwordError = "8-20 znaków, 1 duża litera, 1 znak specjalny";
+            this.passwordError = this.isLoggingIn ? "" : "8-20 znaków, 1 duża litera, 1 znak specjalny";
           }
         } else {
             this.passwordError = "Hasło nie może być puste";
         }
         
-        if( this.validService.isValidConfirm(this.confirmPassword, this.user.password) ){
-          this.confirmPasswordError = "";
+        if (lengthConf != 0) {
+          if( this.validService.isValidConfirm(this.confirmPassword, this.user.password) ){
+            this.confirmPasswordError = "";
+          } else {
+            this.confirmPasswordError = "Hasła są różne";
+          }
         } else {
-          this.confirmPasswordError = "Hasła są różne";
+            this.confirmPasswordError = "Potwierdź swoje hasło";
         }
-        
     }
   }
   private isValidForm() {
@@ -270,5 +270,4 @@ export class LoginComponent implements OnInit {
       });
     }      
   }
-
 }
