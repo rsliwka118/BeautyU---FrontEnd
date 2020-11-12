@@ -5,6 +5,8 @@ import { Config } from "../../shared/config"
 import { ValidationService } from '../../shared/validation.service'
 import { ToastsService } from '../../shared/toasts.service'
 import { AuthService } from '../../shared/token/auth.service'
+import { RouterExtensions } from '@nativescript/angular'
+import { NgZone } from '@angular/core'
 
 @Component({
   selector: 'ns-login',
@@ -13,10 +15,8 @@ import { AuthService } from '../../shared/token/auth.service'
 })
 export class LoginComponent implements OnInit {
 
-  user: User
+ 
   confirmPassword = ""
-
-  isLoggingIn = true
   emailError = ""
   loginError = ""
   passwordError = ""
@@ -29,17 +29,10 @@ export class LoginComponent implements OnInit {
   firstNameFocus = false
   lastNameFocus = false
   confirmPasswordFocus = false
-  isAuthenticating = false
+ 
 
-  constructor(private page: Page, public validService: ValidationService, public toast: ToastsService) {
-    this.user = new User()
-    this.user.accessToken = ""
-    this.user.refreshToken = ""
-    this.user.id = ""
-    this.user.email = ""
-    this.user.password = ""
-    this.user.firstName = ""
-    this.user.lastName = ""
+  constructor(public auth: AuthService, private page: Page, public validService: ValidationService, public toast: ToastsService) {
+  
   }
 
   ngOnInit(): void {
@@ -47,17 +40,17 @@ export class LoginComponent implements OnInit {
   }
 
   toggleForm() {
-    this.user.email = ""
-    this.user.firstName = ""
-    this.user.lastName = ""
-    this.user.password = ""
+    this.auth.user.email = ""
+    this.auth.user.firstName = ""
+    this.auth.user.lastName = ""
+    this.auth.user.password = ""
     this.confirmPassword = ""
     this.passwordError = ""
     this.firstNameError = ""
     this.lastNameError = ""
     this.confirmPasswordError = ""
 
-    this.isLoggingIn = !this.isLoggingIn
+    this.auth.isLoggingIn = !this.auth.isLoggingIn
   }
 
   public emailErrors() {
@@ -65,7 +58,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.emailError
     if (!errorMsg) return false
 
-    const isValidEmail = this.user.hasEmail() && this.validService.isValidEmail(this.user.email)
+    const isValidEmail = this.auth.user.hasEmail() && this.validService.isValidEmail(this.auth.user.email)
     let error = errorMsg || !isValidEmail
 
     if (isValidEmail) {
@@ -81,7 +74,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.passwordError
     if (!errorMsg) return false
 
-    const isValidPassword = this.user.password.length > 0 && this.validService.isValidPassword(this.user.password)
+    const isValidPassword = this.auth.user.password.length > 0 && this.validService.isValidPassword(this.auth.user.password)
     let error = errorMsg || !isValidPassword
 
     if (isValidPassword) {
@@ -95,7 +88,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.confirmPasswordError
     if (!errorMsg) return false
 
-    const isValidConfirm = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.user.password)
+    const isValidConfirm = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.auth.user.password)
     let error = errorMsg || !isValidConfirm
 
     if (isValidConfirm) {
@@ -111,7 +104,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.firstNameError
     if (!errorMsg) return false
 
-    const isValidFirstName = this.user.firstName.length > 0
+    const isValidFirstName = this.auth.user.firstName.length > 0
     let error = errorMsg || !isValidFirstName
 
     if (isValidFirstName) {
@@ -127,7 +120,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.lastNameError
     if (!errorMsg) return false
 
-    const isValidLastName = this.user.lastName.length > 0
+    const isValidLastName = this.auth.user.lastName.length > 0
     let error = errorMsg || !isValidLastName
 
     if (isValidLastName) {
@@ -141,11 +134,11 @@ export class LoginComponent implements OnInit {
 
   updateErrors(checkPassword, checkConfirm) {
 
-    this.firstNameError = this.user.hasFirstName() ? "" : "Podaj imię"
-    this.lastNameError = this.user.hasLastName() ? "" : "Podaj nazwisko"
+    this.firstNameError = this.auth.user.hasFirstName() ? "" : "Podaj imię"
+    this.lastNameError = this.auth.user.hasLastName() ? "" : "Podaj nazwisko"
 
-    if (this.user.hasEmail()) {
-      if (this.validService.isValidEmail(this.user.email)) {
+    if (this.auth.user.hasEmail()) {
+      if (this.validService.isValidEmail(this.auth.user.email)) {
         this.emailError = "";
       } else {
         this.emailError = "Nieprawidłowy email"
@@ -155,13 +148,13 @@ export class LoginComponent implements OnInit {
     }
 
     if (checkPassword) {
-      let lengthPass = this.user.password.length
+      let lengthPass = this.auth.user.password.length
 
       if (lengthPass != 0) {
-        if (this.validService.isValidPassword(this.user.password)) {
+        if (this.validService.isValidPassword(this.auth.user.password)) {
           this.passwordError = ""
         } else {
-          this.passwordError = this.isLoggingIn ? "Nieprawidłowe hasło" : "8-20 znaków, 1 duża litera, 1 znak specjalny"
+          this.passwordError = this.auth.isLoggingIn ? "Nieprawidłowe hasło" : "8-20 znaków, 1 duża litera, 1 znak specjalny"
         }
       } else {
         this.passwordError = "Hasło nie może być puste"
@@ -170,7 +163,7 @@ export class LoginComponent implements OnInit {
         let lengthConf = this.confirmPassword.length
 
         if (lengthConf != 0) {
-          if (this.validService.isValidConfirm(this.confirmPassword, this.user.password)) {
+          if (this.validService.isValidConfirm(this.confirmPassword, this.auth.user.password)) {
             this.confirmPasswordError = ""
           } else {
             this.confirmPasswordError = "Hasła są różne"
@@ -184,7 +177,7 @@ export class LoginComponent implements OnInit {
   private isValidForm() {
     let isValid
 
-    if (!this.isLoggingIn) {
+    if (!this.auth.isLoggingIn) {
       isValid = !!this.emailError || !!this.passwordError || !!this.firstNameError || !!this.lastNameError || !!this.confirmPasswordError;
     } else {
       isValid = !!this.emailError || !!this.passwordError
@@ -235,73 +228,19 @@ export class LoginComponent implements OnInit {
   }
 
   isSubmitEnabled() {
-    return !this.isAuthenticating && this.validService.isValidEmail(this.user.email);
+    return this.validService.isValidEmail(this.auth.user.email);
   }
 
   submit() {
-    if (this.isLoggingIn) {
-      this.login()
-    } else {
-      this.register()
-    }
-  }
-
-  async login() {
-    this.updateErrors(true, false);
-
-    if (this.isValidForm()) {
-      const res = await fetch(Config.apiAuthURL + "/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: this.user.email,
-          password: this.user.password
-        })
-      })
-
-      if (res.status == 200) {
-        const content = await res.json()
-
-        this.user.accessToken = content.accessToken
-        this.user.refreshToken = content.refreshToken
-        this.user.id = content.id
-        this.user.firstName = content.firstName
-        this.user.lastName = content.lastName
-
-        console.log(this.user)
+    if(this.isValidForm()){
+      if (this.auth.isLoggingIn) {
+        this.updateErrors(true, false);
+        this.auth.login()
+      } else {
+        this.updateErrors(true, true);
+        this.auth.register()
       }
-      if (res.status == 400) this.toast.showToast('Nieznany adres email')
-      if (res.status == 401) this.toast.showToast('Niepoporawny login lub hasło')
     }
   }
 
-  register() {
-    this.updateErrors(true, true);
-
-    if (this.isValidForm()) {
-      fetch(Config.apiAuthURL + "/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          accountType: "Client",
-          email: this.user.email,
-          firstName: this.user.firstName,
-          lastName: this.user.lastName,
-          password: this.user.password
-        })
-      }).then(res => {
-        if (res.status == 200) {
-          this.toast.showToast('Zarejestrowano pomyślnie!')
-          this.isLoggingIn = true;
-        }
-        if (res.status == 400) this.toast.showToast('Konto o takim adresie email już istnieje.')
-        if (res.status == 401) this.toast.showToast('Wypełnij poprawnie pola')
-
-      })
-        .then(result => { })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
-  }
 }

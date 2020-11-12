@@ -4,6 +4,7 @@ import { NativeScriptFormsModule, NativeScriptModule } from "@nativescript/angul
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "../Components/login/login.component";
+import { BrowserComponent } from "../Components/browser/browser.component";
 import { ValidationService } from "../shared/validation.service";
 import { AuthService } from "../shared/token/auth.service";
 import { ToastsService } from "../shared/toasts.service";
@@ -21,7 +22,8 @@ import { HttpClientModule } from "@angular/common/http";
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        BrowserComponent
     ],
     providers: [
         ValidationService,
