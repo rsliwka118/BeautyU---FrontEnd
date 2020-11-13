@@ -9,11 +9,11 @@ import { AuthService } from '../shared/token/auth.service'
 })
 export class AppComponent {
 
-    constructor(private routerExtension: RouterExtensions) {
+    constructor(private routerExtension: RouterExtensions, public auth: AuthService) {
         if (getString("userID") === undefined){
             this.routerExtension.navigate(['/login'])
         }else{
-            this.routerExtension.navigate(['/browser'])
+            this.auth.getDetails()
         }
     }
 

@@ -2,6 +2,7 @@
     <FlexboxLayout class="page">
         <StackLayout class="form" width="70%">
             <Image class="logo" src="res://blogo"></Image>
+            <Label [text]="auth.user.firstName"></Label>
         </StackLayout>
         <Button text="Wyloguj" (tap)="auth.logout()" class="btn btn-primary m-t-20"></Button>
     </FlexboxLayout>
