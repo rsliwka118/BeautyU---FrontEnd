@@ -13,7 +13,7 @@ export class AppComponent {
         if (getString("userID") === undefined){
             this.routerExtension.navigate(['/login'])
         }else{
-            this.auth.getDetails()
+            this.auth.getDetails(true)
         }
     }
 

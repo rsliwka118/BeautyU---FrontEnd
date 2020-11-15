@@ -11,11 +11,12 @@ export class AuthService {
     user: User
 
     isLoggingIn = true
+    isAuthorized = false
 
     constructor(private zone: NgZone, private routerExtension: RouterExtensions, public toast: ToastsService) {
         this.user = new User()
-        this.user.email = ""
-        this.user.password = ""
+        this.user.email = "front@mail.com"
+        this.user.password = "1r2a3d4e5X!"
         this.user.firstName = ""
         this.user.lastName = ""
     }
@@ -31,16 +32,19 @@ export class AuthService {
       })
   
       if (res.status == 200) {
+
         const content = await res.json()
         
         setString("userID", content.id)
         setString("accessToken", content.accessToken)
         setString("refreshToken", content.refreshToken)
 
-        this.getDetails()
-
         this.toast.showToast('Zalogowano pomyślnie!')
+  
+        this.isAuthorized = true
 
+        this.getDetails(false)
+        
         this.zone.run(() => {
           this.routerExtension.navigate(['/browser'], { clearHistory: true })
         })
@@ -82,16 +86,17 @@ export class AuthService {
         body: JSON.stringify({ refreshToken: getString("refreshToken")})
       }).then(res => {
         if (res.status == 204){ 
-            this.toast.showToast('Wylogowano')   
-            
-            clear()
+          this.toast.showToast('Wylogowano')  
+          this.routerExtension.navigate(['/login'], { clearHistory: true })
+          
+          this.isAuthorized = false
         
-            this.user.email = ""
-            this.user.firstName = ""
-            this.user.lastName = ""
-            this.user.password = ""
-    
-            this.routerExtension.navigate(['/login'], { clearHistory: true })
+          this.user.email = ""
+          this.user.firstName = ""
+          this.user.lastName = ""
+          this.user.password = ""
+
+          clear()
         }   
       })
         .then(result => {})
@@ -100,7 +105,10 @@ export class AuthService {
         }); 
     }
 
-    async getDetails() {
+    async getDetails(checkToken) {
+      if(checkToken){
+        await this.checkToken()
+      }
       const res = await fetch(Config.apiAuthURL + "/details", {
         method: "POST",
         headers: { 
@@ -111,8 +119,9 @@ export class AuthService {
           userID: getString("userID"),
         })
       })
-  
+
       if (res.status == 200) {
+        this.isAuthorized = true
         const content = await res.json()
 
         this.user.firstName = content.firstName
@@ -121,11 +130,42 @@ export class AuthService {
         this.zone.run(() => {
           this.routerExtension.navigate(['/browser'], { clearHistory: true })
         })
-      } else {
+      } else if(res.status == 403) {
+          this.toast.showToast('Twoja sesja wygasła')
+          this.isAuthorized = false
+          this.zone.run(() => {
           this.routerExtension.navigate(['/login'], { clearHistory: true })
+        })
       }
-      
-    }
+    } 
 
-    getNewToken() { }
+    async checkToken() {
+      const res = await fetch(Config.apiAuthURL + "/checktoken", {
+        method: "GET",
+        headers: { 
+          "Content-Type": "application/json",
+          "authorization": getString("accessToken")
+        }
+      })
+      if(res.status != 200)
+        await this.refreshToken()
+      } 
+
+    async refreshToken() { 
+      const res = await fetch(Config.apiAuthURL + "/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({
+          token: getString("refreshToken")
+        })
+      })
+      
+      if(res.status == 200){
+        const content = await res.json()
+        setString("accessToken", content.accessToken)
+      } else {
+        this.isAuthorized = false
+        this.routerExtension.navigate(['/login'], { clearHistory: true })
+      }
+    }
 }

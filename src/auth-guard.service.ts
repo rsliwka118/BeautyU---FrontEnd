@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: RouterExtensions, private auth: AuthService) { }
 
     canActivate() {
-        if (this.auth.isLoggingIn) {
+        if (this.auth.isAuthorized) {
 
             return true;
         } else {
