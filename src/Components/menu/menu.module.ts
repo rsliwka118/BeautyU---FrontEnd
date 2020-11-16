@@ -21,7 +21,25 @@ import { MenuComponent } from "./menu.component";
                          outlet: "browserTab",
                          component: NSEmptyOutletComponent,
                          loadChildren: () => import("../browser/browser.module").then((m) => m.BrowserModule)
-                     }
+                     },
+                     {
+                        path: "visits",
+                        outlet: "visitsTab",
+                        component: NSEmptyOutletComponent,
+                        loadChildren: () => import("../visits/visits.module").then((m) => m.VisitsModule)
+                    },
+                    {
+                        path: "fav",
+                        outlet: "favTab",
+                        component: NSEmptyOutletComponent,
+                        loadChildren: () => import("../fav/fav.module").then((m) => m.FavModule)
+                    },
+                    {
+                        path: "account",
+                        outlet: "accountTab",
+                        component: NSEmptyOutletComponent,
+                        loadChildren: () => import("../account/account.module").then((m) => m.AccountModule)
+                    }
                 ]   
            }
         ])

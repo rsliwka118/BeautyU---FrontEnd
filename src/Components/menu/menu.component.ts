@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.routerExtension.navigate([{ outlets: { browserTab: ["browser"], } }], { relativeTo: this.activeRoute });
+    this.routerExtension.navigate([{ outlets: { browserTab: ["browser"], visitsTab: ["visits"], favTab: ["fav"], accountTab: ["account"] } }], { relativeTo: this.activeRoute });
   }
 
 }
