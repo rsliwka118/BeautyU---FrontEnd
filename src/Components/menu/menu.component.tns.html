@@ -1,20 +1,20 @@
 <BottomNavigation>
-    <TabStrip>
+    <TabStrip id="navigation">
         <TabStripItem class="navigation__item">
-            <Label text="Browser"></Label>
-            <Image src="font://&#xf015;" class="fas t-36"></Image>
+            <Label text="Szukaj"></Label>
+            <Image src="res://search_ico"></Image>
         </TabStripItem>
         <TabStripItem class="navigation__item">
-            <Label text="Home"></Label>
-            <Image src="font://&#xf1ea;" class="far t-36"></Image>
+            <Label text="Wizyty"></Label>
+            <Image src="res://calendar_ico"></Image>
         </TabStripItem>
         <TabStripItem class="navigation__item">
-            <Label text="Search"></Label>
-            <Image src="font://&#xf002;" class="fas t-36"></Image>
+            <Label text="Ulubione"></Label>
+            <Image src="res://fav_icon"></Image>
         </TabStripItem>
         <TabStripItem class="navigation__item">
-            <Label text="Fav"></Label>
-            <Image src="font://&#xf002;" class="fas t-36"></Image>
+            <Label text="Konto"></Label>
+            <Image src="res://acc_ico"></Image>
         </TabStripItem>
     </TabStrip>
 
@@ -23,14 +23,14 @@
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="browserrTab" actionBarVisibility="never"></page-router-outlet>
+        <page-router-outlet name="visitsTab" actionBarVisibility="never"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="browserrrTab" actionBarVisibility="never"></page-router-outlet>
+        <page-router-outlet name="favTab" actionBarVisibility="never"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="browserrrrTab" actionBarVisibility="never"></page-router-outlet>
+        <page-router-outlet name="accountTab" actionBarVisibility="never"></page-router-outlet>
     </TabContentItem>
 </BottomNavigation>

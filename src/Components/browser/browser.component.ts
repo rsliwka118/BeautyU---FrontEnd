@@ -10,12 +10,11 @@ import { AuthService } from '../../shared/token/auth.service'
 export class BrowserComponent implements OnInit {
 
   constructor(public auth: AuthService, private page: Page) {
-    console.log("WORK")
+
   }
 
   ngOnInit(): void {
-  //  this.page.actionBarHidden = true
-      console.log("WORK")
+
   }
 
 }

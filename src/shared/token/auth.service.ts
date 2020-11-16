@@ -45,7 +45,7 @@ export class AuthService {
 
         this.getDetails(false)
         this.zone.run(() => {
-        this.routerExtension.navigate(['/tabs'], { clearHistory: true })
+        this.routerExtension.navigate(['/menu'], { clearHistory: true })
         })
       }
       if (res.status == 400) this.toast.showToast('Nieznany adres email')
@@ -127,7 +127,7 @@ export class AuthService {
         this.user.lastName = content.lastName
 
         this.zone.run(() => {
-        this.routerExtension.navigate(['/tabs'], { clearHistory: true })
+        this.routerExtension.navigate(['/menu'], { clearHistory: true })
         })
       } else if(res.status == 403) {
           this.toast.showToast('Twoja sesja wygasła')

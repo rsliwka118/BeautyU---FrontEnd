@@ -39,6 +39,7 @@
     "@nativescript/theme": "~2.3.0",
     "nativescript-app-sync": "^2.0.0",
     "nativescript-emulator-reload": "^1.2.0",
+    "nativescript-fontawesome": "^1.0.0",
     "nativescript-liveedit": "^2.3.0",
     "nativescript-livesync": "^1.4.1",
     "nativescript-sha": "^1.0.4",

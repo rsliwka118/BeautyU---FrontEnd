@@ -17,7 +17,7 @@ const routes: Routes = [
         canActivate: [LoginGuard],
     },
     {
-        path: "tabs",
+        path: "menu",
         loadChildren: () => import("../Components/menu/menu.module").then((m) => m.MenuModule),
         canActivate: [AuthGuard],
     }
