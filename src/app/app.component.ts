@@ -11,8 +11,12 @@ export class AppComponent {
 
     constructor(private routerExtension: RouterExtensions, public auth: AuthService) {
         if (getString("userID") === undefined){
+            auth.isAuthorized = false
             this.routerExtension.navigate(['/login'])
-        }else{
+        }
+        else{
+            auth.isAuthorized = true
+            this.routerExtension.navigate(['/tabs'])
             this.auth.getDetails(true)
         }
     }

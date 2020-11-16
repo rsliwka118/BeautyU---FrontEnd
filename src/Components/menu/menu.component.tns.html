@@ -1,0 +1,36 @@
+<BottomNavigation>
+    <TabStrip>
+        <TabStripItem class="navigation__item">
+            <Label text="Browser"></Label>
+            <Image src="font://&#xf015;" class="fas t-36"></Image>
+        </TabStripItem>
+        <TabStripItem class="navigation__item">
+            <Label text="Home"></Label>
+            <Image src="font://&#xf1ea;" class="far t-36"></Image>
+        </TabStripItem>
+        <TabStripItem class="navigation__item">
+            <Label text="Search"></Label>
+            <Image src="font://&#xf002;" class="fas t-36"></Image>
+        </TabStripItem>
+        <TabStripItem class="navigation__item">
+            <Label text="Fav"></Label>
+            <Image src="font://&#xf002;" class="fas t-36"></Image>
+        </TabStripItem>
+    </TabStrip>
+
+    <TabContentItem>
+        <page-router-outlet name="browserTab" actionBarVisibility="never"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="browserrTab" actionBarVisibility="never"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="browserrrTab" actionBarVisibility="never"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="browserrrrTab" actionBarVisibility="never"></page-router-outlet>
+    </TabContentItem>
+</BottomNavigation>

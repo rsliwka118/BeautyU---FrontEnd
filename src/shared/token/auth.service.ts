@@ -11,12 +11,12 @@ export class AuthService {
     user: User
 
     isLoggingIn = true
-    isAuthorized = false
+    isAuthorized:boolean
 
     constructor(private zone: NgZone, private routerExtension: RouterExtensions, public toast: ToastsService) {
         this.user = new User()
         this.user.email = "front@mail.com"
-        this.user.password = "1r2a3d4e5X!"
+        this.user.password = ""
         this.user.firstName = ""
         this.user.lastName = ""
     }
@@ -44,9 +44,8 @@ export class AuthService {
         this.isAuthorized = true
 
         this.getDetails(false)
-        
         this.zone.run(() => {
-          this.routerExtension.navigate(['/browser'], { clearHistory: true })
+        this.routerExtension.navigate(['/tabs'], { clearHistory: true })
         })
       }
       if (res.status == 400) this.toast.showToast('Nieznany adres email')
@@ -87,10 +86,10 @@ export class AuthService {
       }).then(res => {
         if (res.status == 204){ 
           this.toast.showToast('Wylogowano')  
-          this.routerExtension.navigate(['/login'], { clearHistory: true })
-          
           this.isAuthorized = false
-        
+
+          this.routerExtension.navigate(['/login'], { clearHistory: true })
+                           
           this.user.email = ""
           this.user.firstName = ""
           this.user.lastName = ""
@@ -128,7 +127,7 @@ export class AuthService {
         this.user.lastName = content.lastName
 
         this.zone.run(() => {
-          this.routerExtension.navigate(['/browser'], { clearHistory: true })
+        this.routerExtension.navigate(['/tabs'], { clearHistory: true })
         })
       } else if(res.status == 403) {
           this.toast.showToast('Twoja sesja wygasła')

@@ -5,15 +5,15 @@ import { getString } from "@nativescript/core/application-settings";
 import { AuthService } from './shared/token/auth.service'
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
     constructor(private router: RouterExtensions, private auth: AuthService) { }
 
     canActivate() {
-        if (this.auth.isAuthorized) {
+        if (!this.auth.isAuthorized) {
 
             return true;
         } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/tabs']);
             
             return false;
         }
