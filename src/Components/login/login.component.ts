@@ -2,9 +2,9 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { Page } from "@nativescript/core/ui/page"
 import { User } from "../../shared/user/user.model"
 import { Config } from "../../shared/config"
-import { ValidationService } from '../../shared/validation.service'
+import { ValidationService } from '../../shared/auth/validation.service'
 import { ToastsService } from '../../shared/toasts.service'
-import { AuthService } from '../../shared/auth.service'
+import { AuthService } from '../../shared/auth/auth.service'
 import { RouterExtensions } from '@nativescript/angular'
 import { NgZone } from '@angular/core'
 

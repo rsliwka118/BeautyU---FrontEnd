@@ -1,15 +1,15 @@
 import { Component } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
 import { getString } from "@nativescript/core/application-settings";
-import { AuthService } from '../shared/auth.service'
-
+import { AuthService } from '../shared/auth/auth.service'
+import { HttpLoaderService } from '../shared/http/http-loader.service'
 @Component({
     selector: "ns-app",
     templateUrl: "./app.component.html"
 })
 export class AppComponent {
 
-    constructor(private routerExtension: RouterExtensions, public auth: AuthService) {
+    constructor(private routerExtension: RouterExtensions, public auth: AuthService, public loaderService: HttpLoaderService) {
         if (getString("userID") === undefined){
             auth.isAuthorized = false
             this.routerExtension.navigate(['/login'])

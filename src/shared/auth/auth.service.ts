@@ -1,12 +1,14 @@
 import { Injectable, NgZone } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
 import { getBoolean, setBoolean,  getNumber, setNumber, getString, setString, hasKey, remove, clear} from "@nativescript/core/application-settings";
-import { ToastsService } from "./toasts.service";
-import { User } from "./user/user.model";
-import { Config } from "./config"
-import { HttpPostService } from "./http/http-post.service";
+import { ToastsService } from "../toasts.service";
+import { User } from "../user/user.model";
+import { Config } from "../config"
+import { HttpPostService } from "../http/http-post.service";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class AuthService {
     
     user: User

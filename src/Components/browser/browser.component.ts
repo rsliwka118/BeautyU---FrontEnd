@@ -1,6 +1,10 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, Injectable, OnInit } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
-import { AuthService } from '../../shared/auth.service'
+import { AuthService } from '../../shared/auth/auth.service'
+
+@Injectable({
+  providedIn: "root"
+})
 
 @Component({
   selector: 'ns-browser',

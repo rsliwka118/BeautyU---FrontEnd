@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
-import { AuthService } from '../../shared/auth.service'
+import { AuthService } from '../../shared/auth/auth.service'
 
 @Component({
   selector: 'ns-fav',
