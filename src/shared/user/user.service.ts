@@ -19,46 +19,4 @@ export class UserService {
         this.user.lastName = ""
     }
 
-    hasEmail() {
-        return this.user.email != '';
-    }
-
-    // login() {
-    //     return this.http.post(
-    //         Config.apiAuthURL + "/login",
-    //         JSON.stringify({
-    //             username: this.user.email,
-    //             password: this.user.password
-    //         }),
-    //         { headers: this.getCommonheaders() }
-    //     ).pipe(
-    //         tap(data => {
-    //             Config.token = (<any>data)._kmd.authtoken
-    //         }),
-    //         catchError(this.handleErrors)
-    //     );
-    // }
-    login(){}
-
-    register(){
-        fetch(Config.apiAuthURL + "/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                accountType: "Client",
-                email: this.user.email,
-                firstName: this.user.firstName,
-                lastName: this.user.lastName,
-                password: this.user.password
-            })
-        }).then((r) => r.json())
-            .then((response) => {
-                const result = response.json;
-            }).catch((e) => {});
-    }
-
-    // handleErrors(error: Response) {
-    //     console.log(JSON.stringify(error));
-    //     return throwError(error);
-    // }
 }

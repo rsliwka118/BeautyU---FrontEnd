@@ -1,19 +1,25 @@
 import { Injectable, NgZone } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
 import { getBoolean, setBoolean,  getNumber, setNumber, getString, setString, hasKey, remove, clear} from "@nativescript/core/application-settings";
-import { ToastsService } from "../toasts.service";
-import { User } from "../user/user.model";
-import { Config } from "../../shared/config"
+import { ToastsService } from "./toasts.service";
+import { User } from "./user/user.model";
+import { Config } from "./config"
+import { HttpPostService } from "./http/http-post.service";
 
 @Injectable()
 export class AuthService {
     
     user: User
-
+    message: string
     isLoggingIn = true
     isAuthorized:boolean
 
-    constructor(private zone: NgZone, private routerExtension: RouterExtensions, public toast: ToastsService) {
+    constructor(
+      private zone: NgZone, 
+      private routerExtension: RouterExtensions, 
+      private toast: ToastsService,
+      private postService: HttpPostService
+      ) {
         this.user = new User()
         this.user.email = "front@mail.com"
         this.user.password = ""
@@ -21,37 +27,62 @@ export class AuthService {
         this.user.lastName = ""
     }
 
-    async login() {
-      const res = await fetch(Config.apiAuthURL + "/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: this.user.email,
-          password: this.user.password
-        })
-      })
+    // async login() {
+    //   const res = await fetch(Config.apiAuthURL + "/login", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       email: this.user.email,
+    //       password: this.user.password
+    //     })
+    //   })
   
-      if (res.status == 200) {
+    //   if (res.status == 200) {
 
-        const content = await res.json()
+    //     const content = await res.json()
         
-        setString("userID", content.id)
-        setString("accessToken", content.accessToken)
-        setString("refreshToken", content.refreshToken)
+    //     setString("userID", content.id)
+    //     setString("accessToken", content.accessToken)
+    //     setString("refreshToken", content.refreshToken)
 
+    //     this.toast.showToast('Zalogowano pomyślnie!')
+  
+    //     this.isAuthorized = true
+
+    //     this.getDetails(false)
+    //     this.zone.run(() => {
+    //     this.routerExtension.navigate(['/menu'], { clearHistory: true })
+    //     })
+    //   }
+    //   if (res.status == 400) this.toast.showToast('Nieznany adres email')
+    //   if (res.status == 401) this.toast.showToast('Niepoporawny login lub hasło')
+    // }
+    login() {
+      this.postService
+      .postData(Config.apiAuthURL + "/login", { email: this.user.email, password: this.user.password })
+      .subscribe(res => {
+        
+        let result = (<any>res)
+
+        setString("userID", result.id)
+        setString("accessToken", result.accessToken)
+        setString("refreshToken", result.refreshToken)
+        
         this.toast.showToast('Zalogowano pomyślnie!')
   
         this.isAuthorized = true
 
         this.getDetails(false)
         this.zone.run(() => {
-        this.routerExtension.navigate(['/menu'], { clearHistory: true })
+          this.routerExtension.navigate(['/menu'], { clearHistory: true })
         })
-      }
-      if (res.status == 400) this.toast.showToast('Nieznany adres email')
-      if (res.status == 401) this.toast.showToast('Niepoporawny login lub hasło')
+
+      }, error => {
+          console.log("ERROR: ", error)
+      });
+      
     }
-    
+
     register() {
       fetch(Config.apiAuthURL + "/register", {
           method: "POST",

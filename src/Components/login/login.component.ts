@@ -4,7 +4,7 @@ import { User } from "../../shared/user/user.model"
 import { Config } from "../../shared/config"
 import { ValidationService } from '../../shared/validation.service'
 import { ToastsService } from '../../shared/toasts.service'
-import { AuthService } from '../../shared/token/auth.service'
+import { AuthService } from '../../shared/auth.service'
 import { RouterExtensions } from '@nativescript/angular'
 import { NgZone } from '@angular/core'
 

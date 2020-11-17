@@ -1,6 +1,10 @@
 @import "~@nativescript/theme/css/core.css";
 @import "~@nativescript/theme/css/default.css";
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 Button.-primary {
     font-size: 18;
 }

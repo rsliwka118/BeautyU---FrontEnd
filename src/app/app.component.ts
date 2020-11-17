@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
 import { getString } from "@nativescript/core/application-settings";
-import { AuthService } from '../shared/token/auth.service'
+import { AuthService } from '../shared/auth.service'
 
 @Component({
     selector: "ns-app",
