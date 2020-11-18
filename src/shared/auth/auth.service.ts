@@ -5,6 +5,7 @@ import { ToastsService } from "../toasts.service";
 import { User } from "../user/user.model";
 import { Config } from "../config"
 import { HttpPostService } from "../http/http-post.service";
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -61,7 +62,7 @@ export class AuthService {
     // }
     login() {
       this.postService
-      .postData(Config.apiAuthURL + "/login", { email: this.user.email, password: this.user.password })
+      .postData(Config.apiAuthURL + "/login", { email: this.user.email, password: this.user.password }, false)
       .subscribe(res => {
         
         let result = (<any>res)
@@ -80,35 +81,29 @@ export class AuthService {
         })
 
       }, error => {
-          console.log("ERROR: ", error)
+        this.toast.showToast(error.error) 
       });
       
     }
 
     register() {
-      fetch(Config.apiAuthURL + "/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+      this.postService
+      .postData(Config.apiAuthURL + "/register", 
+        {
           accountType: "Client",
           email: this.user.email,
           firstName: this.user.firstName,
           lastName: this.user.lastName,
           password: this.user.password
-          })
-      }).then(res => {
-          if (res.status == 200){ 
-              this.toast.showToast('Zarejestrowano pomyślnie!')
-              this.isLoggingIn = true
-          }   
-          else if (res.status == 400) this.toast.showToast('Konto o takim adresie email już istnieje.')
-          else if (res.status == 401) this.toast.showToast('Wypełnij poprawnie pola')
-          
-          })
-          .then(result => {})
-          .catch(error => {
-          console.error('Error:', error);
-          });    
+        }, false)
+      .subscribe(res => {
+         
+          this.toast.showToast('Zarejestrowano pomyślnie!')
+          this.isLoggingIn = true
+         
+        }, error => {
+          this.toast.showToast(error.error)   
+        });
     }
 
     logout(){
