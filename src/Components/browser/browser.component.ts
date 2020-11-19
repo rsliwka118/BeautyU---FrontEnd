@@ -20,14 +20,14 @@ class DataItem {
 export class BrowserComponent implements OnInit {
 
   searchPhrase: string;
-  public myItems: Array<DataItem>;
+  public salons: Array<DataItem>;
   private counter: number;
 
   constructor(public auth: AuthService, private page: Page) {
-    this.myItems = [];
+    this.salons = [];
     this.counter = 0;
-    for (var i = 0; i < 50; i++) {
-        this.myItems.push(new DataItem(i, "data item " + i));
+    for (var i = 0; i < 10; i++) {
+        this.salons.push(new DataItem(i, "data item " + i));
         this.counter = i;
     }
   }

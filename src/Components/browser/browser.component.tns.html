@@ -1,16 +1,28 @@
+<ActionBar>
+    <StackLayout orientation="horizontal">
+      <Image src="res://logo_bar" class="action-image"></Image>
+    </StackLayout>
+</ActionBar>
 <FlexboxLayout class="page">    
     <StackLayout class="content">
-        <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
-        textFieldHintColor="#A8A8A8"
-        [text]="searchPhrase" (textChange)="onTextChanged($event)" 
-        (clear)="onClear($event)" (submit)="onSubmit($event)">
-        </SearchBar>
-        <Label class="list-title" text="Salony"></Label>
-        <ListView class="list" [items]="myItems" (itemTap)="onItemTap($event)">
-            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                <StackLayout [class.odd]="odd" [class.even]="even">
-                    <Label [text]='"index: " + i'></Label>
-                    <Label [text]='"[" + item.id +"] " + item.name'></Label>
+        <StackLayout class="search">
+            <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
+            [text]="searchPhrase" (textChange)="onTextChanged($event)" 
+            (clear)="onClear($event)" (submit)="onSubmit($event)">
+            </SearchBar>
+        </StackLayout>
+        <StackLayout class="list-title">
+            <Label class="list-title-header" text="Salony w twoim mieście"></Label>
+            <Label class="list-title-city" text="Zielona Góra"></Label>
+        </StackLayout>
+        <ListView class="list" separatorColor="transparent" [items]="salons" (itemTap)="onItemTap($event)">
+            <ng-template   let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <StackLayout orientation="vertical">
+                    <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                        <Image class="salon-thumb" src="res://placeholder" stretch="aspectFill" height="180"></Image>
+                        <Label [text]='"index: " + i'></Label>
+                        <Label [text]='"[" + item.id +"] " + item.name'></Label>
+                    </StackLayout>
                 </StackLayout>
             </ng-template>
         </ListView>

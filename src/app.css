@@ -12,3 +12,8 @@ Button.-primary {
 .activity-indicator{
   color: #AF83A5;
 }
+
+.action-image {
+  width: 80;
+  vertical-align: center;
+}
