@@ -14,7 +14,7 @@ import { HttpInterceptorService } from "../shared/http/http-interceptor.service"
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthGuard } from "../auth-guard.service";
 import { LoginGuard } from "../login-guard.service";
-
+import { SalonService } from "../shared/salon/salon.service";
 
 @NgModule({
     bootstrap: [
@@ -38,6 +38,7 @@ import { LoginGuard } from "../login-guard.service";
         },
         ValidationService,
         AuthService,
+        SalonService,
         HttpPostService,
         HttpGetService,
         HttpDeleteService,

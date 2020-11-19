@@ -13,15 +13,18 @@
         </StackLayout>
         <StackLayout class="list-title">
             <Label class="list-title-header" text="Salony w twoim mieście"></Label>
-            <Label class="list-title-city" text="Zielona Góra"></Label>
+            <StackLayout orientation="horizontal">
+                <Label class="list-title-city" text="Zielona Góra"></Label>
+                <Image src="res://location_icon" class="location"></Image>
+            </StackLayout>
         </StackLayout>
-        <ListView class="list" separatorColor="transparent" [items]="salons" (itemTap)="onItemTap($event)">
-            <ng-template   let-item="item" let-i="index" let-odd="odd" let-even="even">
+        <ListView class="list" separatorColor="transparent" [items]="salon.salons" (itemTap)="onItemTap($event)">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <StackLayout orientation="vertical">
                     <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
                         <Image class="salon-thumb" src="res://placeholder" stretch="aspectFill" height="180"></Image>
-                        <Label [text]='"index: " + i'></Label>
-                        <Label [text]='"[" + item.id +"] " + item.name'></Label>
+                        <Label [text]='item.name'></Label>
+                        <Label [text]='item.type'></Label>
                     </StackLayout>
                 </StackLayout>
             </ng-template>
