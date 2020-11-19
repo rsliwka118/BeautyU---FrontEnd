@@ -1,23 +1,30 @@
 .page {
-    align-items: center;
-    flex-direction: column;
-    background-color: #F5F5F5;
-  }
-
-.search-bar {
-    margin-top: 60;
-    font-size: 15;
-    textFieldHintColor: #A8A8A8; /*nie działa*/
-    border-radius: 50;
-    android-elevation:1;
+  background-color: #F5F5F5;
 }
 
-.btn-primary {
-    height: 50;
-    margin: 30 5 15 5;
-    background-color:#AF83A5;
-    color: white;
-    /* border-radius: 5; */
-    font-size: 20;
-    font-weight: 200;
-  }
+.content {
+  orientation: vertical;
+  background-color: #F5F5F5;
+  margin-left: 30;
+  margin-right: 30;
+  width: auto; 
+  height: auto;
+}
+
+.search {
+}
+.search-bar {
+  margin: 100 0 50 0;
+  font-size: 15;
+  android-elevation: 1;
+}
+
+.list-title{
+  height: 50;
+  font-size: 20;
+}
+
+.list{
+  height: 650;
+   /* padding-top: 20; */
+}

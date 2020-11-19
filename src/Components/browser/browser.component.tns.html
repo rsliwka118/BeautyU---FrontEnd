@@ -1,9 +1,18 @@
-    <FlexboxLayout class="page">
+<FlexboxLayout class="page">    
+    <StackLayout class="content">
         <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
         textFieldHintColor="#A8A8A8"
         [text]="searchPhrase" (textChange)="onTextChanged($event)" 
         (clear)="onClear($event)" (submit)="onSubmit($event)">
         </SearchBar>
-        
-    </FlexboxLayout>
-
+        <Label class="list-title" text="Salony"></Label>
+        <ListView class="list" [items]="myItems" (itemTap)="onItemTap($event)">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <StackLayout [class.odd]="odd" [class.even]="even">
+                    <Label [text]='"index: " + i'></Label>
+                    <Label [text]='"[" + item.id +"] " + item.name'></Label>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>
+</FlexboxLayout>
