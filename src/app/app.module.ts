@@ -8,6 +8,8 @@ import { ValidationService } from "../shared/auth/validation.service";
 import { AuthService } from "../shared/auth/auth.service";
 import { ToastsService } from "../shared/toasts.service";
 import { HttpPostService } from "../shared/http/http-post.service";
+import { HttpGetService } from "../shared/http/http-get.service";
+import { HttpDeleteService } from "../shared/http/http-delete.service";
 import { HttpInterceptorService } from "../shared/http/http-interceptor.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthGuard } from "../auth-guard.service";
@@ -37,6 +39,8 @@ import { LoginGuard } from "../login-guard.service";
         ValidationService,
         AuthService,
         HttpPostService,
+        HttpGetService,
+        HttpDeleteService,
         ToastsService,
         [AuthGuard],
         [LoginGuard]

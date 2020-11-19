@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [NativeScriptRouterModule.forRoot(routes, { enableTracing: true })],
+    imports: [NativeScriptRouterModule.forRoot(routes, { enableTracing: false })],
     exports: [NativeScriptRouterModule]
 })
 export class AppRoutingModule { }

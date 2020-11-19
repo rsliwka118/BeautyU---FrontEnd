@@ -16,7 +16,7 @@ export class AppComponent {
         }
         else{
             auth.isAuthorized = true
-            this.routerExtension.navigate(['/tabs'])
+            this.routerExtension.navigate(['/menu'])
             this.auth.getDetails(true)
         }
     }

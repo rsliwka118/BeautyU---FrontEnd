@@ -1,7 +1,9 @@
     <FlexboxLayout class="page">
-        <StackLayout class="form" width="70%">
-            <Image class="logo" src="res://blogo"></Image>
-        </StackLayout>
-        <Button text="Browser" (tap)="auth.logout()" class="btn btn-primary m-t-20"></Button>
+        <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
+        textFieldHintColor="#A8A8A8"
+        [text]="searchPhrase" (textChange)="onTextChanged($event)" 
+        (clear)="onClear($event)" (submit)="onSubmit($event)">
+        </SearchBar>
+        
     </FlexboxLayout>
 

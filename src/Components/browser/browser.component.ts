@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
 import { AuthService } from '../../shared/auth/auth.service'
+import { SearchBar } from "@nativescript/core/ui/search-bar"
 
 @Injectable({
   providedIn: "root"
@@ -13,12 +14,23 @@ import { AuthService } from '../../shared/auth/auth.service'
 })
 export class BrowserComponent implements OnInit {
 
-  constructor(public auth: AuthService, private page: Page) {
+  constructor(public auth: AuthService, private page: Page) {}
+  searchPhrase: string;
 
+  onSubmit(args) {
+      const searchBar = args.object as SearchBar;
+      console.log(`Searching for ${searchBar.text}`);
   }
 
-  ngOnInit(): void {
-
+  onTextChanged(args) {
+      const searchBar = args.object as SearchBar;
+      console.log(`Input changed! New value: ${searchBar.text}`);
   }
+
+  onClear(args) {
+      const searchBar = args.object as SearchBar;
+      console.log(`Clear event raised`);
+  }
+  ngOnInit(): void {}
 
 }

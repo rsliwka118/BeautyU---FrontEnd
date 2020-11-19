@@ -6,6 +6,8 @@ import { User } from "../user/user.model";
 import { Config } from "../config"
 import { HttpPostService } from "../http/http-post.service";
 import { tap } from "rxjs/operators";
+import { HttpGetService } from "../http/http-get.service";
+import { HttpDeleteService } from "../http/http-delete.service";
 
 @Injectable({
   providedIn: "root"
@@ -15,13 +17,16 @@ export class AuthService {
     user: User
     message: string
     isLoggingIn = true
-    isAuthorized:boolean
+    isAuthorized: boolean
+    hasExpired: boolean
 
     constructor(
       private zone: NgZone, 
       private routerExtension: RouterExtensions, 
       private toast: ToastsService,
-      private postService: HttpPostService
+      private postService: HttpPostService,
+      private getService: HttpGetService,
+      private deleteService: HttpDeleteService
       ) {
         this.user = new User()
         this.user.email = "front@mail.com"
@@ -30,36 +35,6 @@ export class AuthService {
         this.user.lastName = ""
     }
 
-    // async login() {
-    //   const res = await fetch(Config.apiAuthURL + "/login", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       email: this.user.email,
-    //       password: this.user.password
-    //     })
-    //   })
-  
-    //   if (res.status == 200) {
-
-    //     const content = await res.json()
-        
-    //     setString("userID", content.id)
-    //     setString("accessToken", content.accessToken)
-    //     setString("refreshToken", content.refreshToken)
-
-    //     this.toast.showToast('Zalogowano pomyślnie!')
-  
-    //     this.isAuthorized = true
-
-    //     this.getDetails(false)
-    //     this.zone.run(() => {
-    //     this.routerExtension.navigate(['/menu'], { clearHistory: true })
-    //     })
-    //   }
-    //   if (res.status == 400) this.toast.showToast('Nieznany adres email')
-    //   if (res.status == 401) this.toast.showToast('Niepoporawny login lub hasło')
-    // }
     login() {
       this.postService
       .postData(Config.apiAuthURL + "/login", { email: this.user.email, password: this.user.password }, false)
@@ -82,7 +57,7 @@ export class AuthService {
 
       }, error => {
         this.toast.showToast(error.error) 
-      });
+      })
       
     }
 
@@ -103,16 +78,14 @@ export class AuthService {
          
         }, error => {
           this.toast.showToast(error.error)   
-        });
+        })
     }
 
     logout(){
-      fetch(Config.apiAuthURL + "/logout", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ refreshToken: getString("refreshToken")})
-      }).then(res => {
-        if (res.status == 204){ 
+      this.deleteService
+      .deleteData(Config.apiAuthURL + "/logout", true)
+      .subscribe(res => {
+
           this.toast.showToast('Wylogowano')  
           this.isAuthorized = false
 
@@ -123,15 +96,14 @@ export class AuthService {
           this.user.lastName = ""
           this.user.password = ""
 
-          clear()
-        }   
+          clear()  
+      }, error => {
+        this.toast.showToast(error.error)   
       })
-        .then(result => {})
-        .catch(error => {
-        console.error('Error:', error);
-        }); 
+        
     }
 
+    //FETCH will be changed to http 
     async getDetails(checkToken) {
       if(checkToken){
         await this.checkToken()
@@ -143,7 +115,9 @@ export class AuthService {
           "authorization": getString("accessToken")
         },
         body: JSON.stringify({
-          userID: getString("userID"),
+          data: {
+            userID: getString("userID"),
+          }
         })
       })
 
@@ -183,7 +157,9 @@ export class AuthService {
         method: "POST",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify({
-          token: getString("refreshToken")
+          data: {
+            token: getString("refreshToken")
+          }
         })
       })
       
@@ -195,4 +171,67 @@ export class AuthService {
         this.routerExtension.navigate(['/login'], { clearHistory: true })
       }
     }
-}
+    
+    // Fetch to HTTP. async problem
+
+    // async getDetails(checkToken) {
+      
+    //   console.log("1 " +getString("accessToken"))
+      
+    //   await this.refreshToken()
+    //   console.log("2 " +getString("accessToken"))
+    //   this.details()
+      
+  
+    // }      
+
+    // details(){
+    //   console.log("2 " +getString("accessToken"))
+    //   this.postService
+    //   .postData(Config.apiAuthURL + "/details", { userID: getString("userID") }, true)
+    //   .subscribe(res => {
+    //     console.log("details done")
+    //     let result = (<any>res)
+    //     this.isAuthorized = true
+    //     this.user.firstName = result.firstName
+    //     this.user.lastName = result.lastName
+
+    //     this.zone.run(() => {
+    //     this.routerExtension.navigate(['/menu'], { clearHistory: true })
+    //     })
+    //   }, error => { 
+    //     console.log("details error")
+    //       this.toast.showToast('Twoja sesja wygasła')
+    //       this.isAuthorized = false
+    //       this.zone.run(() => {
+    //         this.routerExtension.navigate(['/login'], { clearHistory: true })
+    //       })
+    //   })
+    // }
+    // async checkToken() {
+    //   this.getService
+    //   .getData(Config.apiAuthURL + "/checktoken", true)
+    //   .subscribe(res => {
+    //     console.log("check done")
+    //     //this.hasExpired = false
+    //   }, error => {
+    //     console.log("check refresh")
+    //     //this.hasExpired = true
+    //     //this.refreshToken()
+    //   })
+    // }
+
+    // async refreshToken() { 
+    //   this.postService
+    //   .postData(Config.apiAuthURL + "/token", {token: getString("refreshToken")}, false)
+    //   .subscribe(res => {
+    //     let result = (<any>res)
+    //     console.log("refresh done "+result.accessToken)
+    //     setString("accessToken", result.accessToken)
+    //   }, error => {
+    //     console.log("refresh denied")
+    //     this.isAuthorized = false
+    //     this.routerExtension.navigate(['/login'], { clearHistory: true })
+    //   })
+    // }
+  }

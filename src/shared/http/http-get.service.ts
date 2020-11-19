@@ -3,16 +3,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { getString } from "@nativescript/core/application-settings";
 
 @Injectable()
-export class HttpPostService {
+export class HttpGetService {
 
     constructor(private http: HttpClient) { }
 
-    postData(url: string, data: any, auth: boolean) {
-        let options = this.createRequestOptions(auth);
-        return this.http.post(url, { data }, { headers: options });
+    getData(url: string, auth: boolean) {
+        let headers = this.createRequestHeader(auth);
+        return this.http.get(url, { headers: headers });
     }
 
-    private createRequestOptions( auth: boolean ) {
+    private createRequestHeader(auth: boolean) {
+
         let headers: HttpHeaders
         
         if(!auth){
@@ -25,6 +26,7 @@ export class HttpPostService {
                 "authorization": getString("accessToken")
             }); 
         }
+
         return headers;
     }
 }
