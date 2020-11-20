@@ -1,16 +1,16 @@
 export class Salon {
-
+    
     id: string;
     ownerID: string;
     name: string;
     type: string;
     describe: string;
     hours: string;
-    location: Location[];
-    service: Service[];
-    rate: Rate[];
-    
-}
+    locations: Location[];
+    services: Service[];
+    rates: Rate[];
+
+}   
 
 class Location {
     
@@ -32,7 +32,7 @@ class Service {
 
 }
 
-class Rate {
+export class Rate {
 
     id: string;
     rate: number;

@@ -23,8 +23,23 @@
                 <StackLayout orientation="vertical">
                     <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
                         <Image class="salon-thumb" src="res://placeholder" stretch="aspectFill" height="180"></Image>
-                        <Label [text]='item.name'></Label>
-                        <Label [text]='item.type'></Label>
+                        <GridLayout rows="auto" columns="*">
+                                
+                                <StackLayout row="0" horizontalAlignment="left" orientation="vertical">
+                                    <Label class="salon-name" [text]='item.name'></Label>
+                                    <Label class="salon-type" [text]='item.type'></Label>
+                                </StackLayout>
+                                <StackLayout row="0" horizontalAlignment="right" orientation="vertical" class="rate">
+                                    <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
+                                </StackLayout>
+                            
+                        </GridLayout>
+                        <!-- <AbsoluteLayout >
+                            <Label [text]='item.name' left="10" top="10"></Label>
+                            <Label [text]='salon.rateAVG(item.rates)' left="110" top="10"></Label>
+                            <Label text="Ocena" left="110" top="110"></Label>
+                            <Label [text]='item.type' left="10" top="110" ></Label>
+                          </AbsoluteLayout> -->
                     </StackLayout>
                 </StackLayout>
             </ng-template>

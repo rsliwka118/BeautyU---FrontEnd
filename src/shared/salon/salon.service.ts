@@ -4,7 +4,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { HttpGetService } from "../../shared/http/http-get.service";
 
-import { Salon } from "./salon.model";
+import { Rate, Salon } from "./salon.model";
 import { Config } from "../config";
 
 @Injectable({
@@ -16,7 +16,6 @@ export class SalonService {
 
     constructor( private http: HttpClient, private getService: HttpGetService ) { 
         this.getSalon()
-        
     }
 
     getSalon(){
@@ -25,10 +24,21 @@ export class SalonService {
         .subscribe(res => {
           let result = (<any>res)
           this.salons = result
-          console.log(this.salons[1].name)
         }, error => {
           console.log(error.error)
         })
         
       }
+
+    public rateAVG(rates: Rate[]){
+    
+        let sum = 0
+        
+        for( var i = 0; i < rates.length; i++ ){
+            sum += Number(rates[i].rate)
+        }
+        var avg = sum/rates.length
+
+        return avg
+    }
 }
