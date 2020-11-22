@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
+import { AccountService } from "../../shared/auth/account.service"
 import { AuthService } from '../../shared/auth/auth.service'
 
 @Component({
@@ -9,7 +10,10 @@ import { AuthService } from '../../shared/auth/auth.service'
 })
 export class AccountComponent implements OnInit {
 
-  constructor(public auth: AuthService, private page: Page) {
+  constructor(
+    public auth: AuthService, 
+    public account: AccountService,
+    private page: Page) {
 
   }
 

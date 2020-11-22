@@ -15,7 +15,7 @@ export class SalonService {
     salons: Array<Salon>
 
     constructor( private http: HttpClient, private getService: HttpGetService ) { 
-        this.getSalon()
+        // this.getSalon()
     }
 
     getSalon(){

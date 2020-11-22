@@ -1,12 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { Page } from "@nativescript/core/ui/page"
-import { User } from "../../shared/user/user.model"
-import { Config } from "../../shared/config"
 import { ValidationService } from '../../shared/auth/validation.service'
 import { ToastsService } from '../../shared/toasts.service'
 import { AuthService } from '../../shared/auth/auth.service'
-import { RouterExtensions } from '@nativescript/angular'
-import { NgZone } from '@angular/core'
+import { AccountService } from '../../shared/auth/account.service'
+import { UserService } from '../../shared/user/user.service'
 
 @Component({
   selector: 'ns-login',
@@ -31,7 +29,14 @@ export class LoginComponent implements OnInit {
   confirmPasswordFocus = false
  
 
-  constructor(public auth: AuthService, private page: Page, public validService: ValidationService, public toast: ToastsService) {
+  constructor(
+    public auth: AuthService,
+    public account: AccountService, 
+    public userService: UserService,
+    private page: Page, 
+    public validService: ValidationService, 
+    public toast: ToastsService
+    ) {
   
   }
 
@@ -40,17 +45,17 @@ export class LoginComponent implements OnInit {
   }
 
   toggleForm() {
-    this.auth.user.email = ""
-    this.auth.user.firstName = ""
-    this.auth.user.lastName = ""
-    this.auth.user.password = ""
+    this.userService.user.email = ""
+    this.userService.user.firstName = ""
+    this.userService.user.lastName = ""
+    this.userService.user.password = ""
     this.confirmPassword = ""
     this.passwordError = ""
     this.firstNameError = ""
     this.lastNameError = ""
     this.confirmPasswordError = ""
 
-    this.auth.isLoggingIn = !this.auth.isLoggingIn
+    this.account.isLoggingIn = !this.account.isLoggingIn
   }
 
   public emailErrors() {
@@ -58,7 +63,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.emailError
     if (!errorMsg) return false
 
-    const isValidEmail = this.auth.user.hasEmail() && this.validService.isValidEmail(this.auth.user.email)
+    const isValidEmail = this.userService.user.hasEmail() && this.validService.isValidEmail(this.userService.user.email)
     let error = errorMsg || !isValidEmail
 
     if (isValidEmail) {
@@ -74,7 +79,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.passwordError
     if (!errorMsg) return false
 
-    const isValidPassword = this.auth.user.password.length > 0 && this.validService.isValidPassword(this.auth.user.password)
+    const isValidPassword = this.userService.user.password.length > 0 && this.validService.isValidPassword(this.userService.user.password)
     let error = errorMsg || !isValidPassword
 
     if (isValidPassword) {
@@ -88,7 +93,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.confirmPasswordError
     if (!errorMsg) return false
 
-    const isValidConfirm = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.auth.user.password)
+    const isValidConfirm = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.userService.user.password)
     let error = errorMsg || !isValidConfirm
 
     if (isValidConfirm) {
@@ -104,7 +109,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.firstNameError
     if (!errorMsg) return false
 
-    const isValidFirstName = this.auth.user.firstName.length > 0
+    const isValidFirstName = this.userService.user.firstName.length > 0
     let error = errorMsg || !isValidFirstName
 
     if (isValidFirstName) {
@@ -120,7 +125,7 @@ export class LoginComponent implements OnInit {
     const errorMsg = !!this.lastNameError
     if (!errorMsg) return false
 
-    const isValidLastName = this.auth.user.lastName.length > 0
+    const isValidLastName = this.userService.user.lastName.length > 0
     let error = errorMsg || !isValidLastName
 
     if (isValidLastName) {
@@ -134,11 +139,11 @@ export class LoginComponent implements OnInit {
 
   updateErrors(checkPassword, checkConfirm) {
 
-    this.firstNameError = this.auth.user.hasFirstName() ? "" : "Podaj imię"
-    this.lastNameError = this.auth.user.hasLastName() ? "" : "Podaj nazwisko"
+    this.firstNameError = this.userService.user.hasFirstName() ? "" : "Podaj imię"
+    this.lastNameError = this.userService.user.hasLastName() ? "" : "Podaj nazwisko"
 
-    if (this.auth.user.hasEmail()) {
-      if (this.validService.isValidEmail(this.auth.user.email)) {
+    if (this.userService.user.hasEmail()) {
+      if (this.validService.isValidEmail(this.userService.user.email)) {
         this.emailError = "";
       } else {
         this.emailError = "Nieprawidłowy email"
@@ -148,13 +153,13 @@ export class LoginComponent implements OnInit {
     }
 
     if (checkPassword) {
-      let lengthPass = this.auth.user.password.length
+      let lengthPass = this.userService.user.password.length
 
       if (lengthPass != 0) {
-        if (this.validService.isValidPassword(this.auth.user.password)) {
+        if (this.validService.isValidPassword(this.userService.user.password)) {
           this.passwordError = ""
         } else {
-          this.passwordError = this.auth.isLoggingIn ? "Nieprawidłowe hasło" : "8-20 znaków, 1 duża litera, 1 znak specjalny"
+          this.passwordError = this.account.isLoggingIn ? "Nieprawidłowe hasło" : "8-20 znaków, 1 duża litera, 1 znak specjalny"
         }
       } else {
         this.passwordError = "Hasło nie może być puste"
@@ -163,7 +168,7 @@ export class LoginComponent implements OnInit {
         let lengthConf = this.confirmPassword.length
 
         if (lengthConf != 0) {
-          if (this.validService.isValidConfirm(this.confirmPassword, this.auth.user.password)) {
+          if (this.validService.isValidConfirm(this.confirmPassword, this.userService.user.password)) {
             this.confirmPasswordError = ""
           } else {
             this.confirmPasswordError = "Hasła są różne"
@@ -177,7 +182,7 @@ export class LoginComponent implements OnInit {
   private isValidForm() {
     let isValid
 
-    if (!this.auth.isLoggingIn) {
+    if (!this.account.isLoggingIn) {
       isValid = !!this.emailError || !!this.passwordError || !!this.firstNameError || !!this.lastNameError || !!this.confirmPasswordError;
     } else {
       isValid = !!this.emailError || !!this.passwordError
@@ -228,17 +233,17 @@ export class LoginComponent implements OnInit {
   }
 
   isSubmitEnabled() {
-    return this.validService.isValidEmail(this.auth.user.email);
+    return this.validService.isValidEmail(this.userService.user.email);
   }
 
   submit() {
     if(this.isValidForm()){
-      if (this.auth.isLoggingIn) {
+      if (this.account.isLoggingIn) {
         this.updateErrors(true, false);
-        this.auth.login()
+        this.account.login()
       } else {
         this.updateErrors(true, true);
-        this.auth.register()
+        this.account.register()
       }
     }
   }

@@ -4,38 +4,38 @@
             <Image class="logo" src="res://blogo"></Image>
 
             <StackLayout class="input-field">
-                <TextField class="input" hint="Email" [(ngModel)]="auth.user.email" keyboardType="email" autocorrect="false" autocapitalizationType="none" (focus)="onEmailFocus()" [ngClass]="{'color-danger': emailErrors()}"></TextField>
+                <TextField class="input" hint="Email" [(ngModel)]="userService.user.email" keyboardType="email" autocorrect="false" autocapitalizationType="none" (focus)="onEmailFocus()" [ngClass]="{'color-danger': emailErrors()}"></TextField>
                 <Label *ngIf="emailErrors()" class="error-msg" [text]="getEmailError()"></Label>
             </StackLayout>
 
-            <StackLayout *ngIf="!auth.isLoggingIn" orientation="horizontal">
+            <StackLayout *ngIf="!account.isLoggingIn" orientation="horizontal">
                 <StackLayout class="input-field" width="50%">
-                    <TextField class="input" hint="Imię" [(ngModel)]="auth.user.firstName" (focus)="onFirstNameFocus()" [ngClass]="{'color-danger': firstNameErrors()}"></TextField>
+                    <TextField class="input" hint="Imię" [(ngModel)]="userService.user.firstName" (focus)="onFirstNameFocus()" [ngClass]="{'color-danger': firstNameErrors()}"></TextField>
                     <Label *ngIf="firstNameErrors()" class="error-msg" [text]="getFirstNameError()"></Label>
                 </StackLayout>
 
                 <StackLayout class="input-field" width="50%">
-                    <TextField class="input" hint="Nazwisko" [(ngModel)]="auth.user.lastName" (focus)="onLastNameFocus()" [ngClass]="{'color-danger': lastNameErrors()}"></TextField>
+                    <TextField class="input" hint="Nazwisko" [(ngModel)]="userService.user.lastName" (focus)="onLastNameFocus()" [ngClass]="{'color-danger': lastNameErrors()}"></TextField>
                     <Label *ngIf="lastNameErrors()" class="error-msg" [text]="getLastNameError()"></Label>
                 </StackLayout>
             </StackLayout>   
 
             <StackLayout class="input-field">
-                <TextField #password class="input" hint="Hasło" secure="true" [(ngModel)]="auth.user.password" (focus)="onPasswordFocus()" [ngClass]="{'color-danger': passwordErrors()}"></TextField>
+                <TextField #password class="input" hint="Hasło" secure="true" [(ngModel)]="userService.user.password" (focus)="onPasswordFocus()" [ngClass]="{'color-danger': passwordErrors()}"></TextField>
                 <Label *ngIf="passwordErrors()" class="error-msg" [text]="getPasswordError()"></Label>
             </StackLayout>
 
-            <StackLayout *ngIf="!auth.isLoggingIn" class="input-field">
+            <StackLayout *ngIf="!account.isLoggingIn" class="input-field">
                 <TextField #password class="input" hint="Potwierdź hasło" secure="true" [(ngModel)]="confirmPassword" (focus)="onConfirmFocus()" [ngClass]="{'color-danger': confirmErrors()}"></TextField>
                 <Label *ngIf="confirmErrors()" class="error-msg" [text]="getConfirmPasswordError()"></Label>>
             </StackLayout>
 
-            <Button [text]="auth.isLoggingIn ? 'Zaloguj' : 'Rejestracja'" [isEnabled]="isSubmitEnabled()" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+            <Button [text]="account.isLoggingIn ? 'Zaloguj' : 'Rejestracja'" [isEnabled]="isSubmitEnabled()" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
             
             <Label (tap)="toggleForm()" class="login-label">
                 <FormattedString>
-                    <Span [text]="auth.isLoggingIn ? 'Nie masz konta? ' : 'Masz konto? '"></Span>
-                    <Span [text]="auth.isLoggingIn ? 'Utwórz je!' : 'Logowanie'" class="bold-form"></Span>
+                    <Span [text]="account.isLoggingIn ? 'Nie masz konta? ' : 'Masz konto? '"></Span>
+                    <Span [text]="account.isLoggingIn ? 'Utwórz je!' : 'Logowanie'" class="bold-form"></Span>
                 </FormattedString>
             </Label>
         </StackLayout>
