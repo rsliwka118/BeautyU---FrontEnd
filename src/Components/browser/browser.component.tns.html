@@ -1,48 +1,44 @@
-<ActionBar>
+<ActionBar flat="true" class="bar">
     <StackLayout orientation="horizontal">
       <Image src="res://logo_bar" class="action-image"></Image>
     </StackLayout>
 </ActionBar>
 <FlexboxLayout class="page">    
     <StackLayout class="content">
+        <Image src="res://search_icon" class="search-image"></Image>
         <StackLayout class="search">
-            <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
-            [text]="searchPhrase" (textChange)="onTextChanged($event)" 
-            (clear)="onClear($event)" (submit)="onSubmit($event)">
-            </SearchBar>
+                <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
+                [text]="searchPhrase" (textChange)="onTextChanged($event)" 
+                (clear)="onClear($event)" (submit)="onSubmit($event)">
+                </SearchBar>
         </StackLayout>
         <StackLayout class="list-title">
-            <Label class="list-title-header" text="Salony w twoim mieście"></Label>
-            <StackLayout orientation="horizontal">
+            <Label class="list-title-header" text="Usługa"></Label>
+            <!-- <StackLayout orientation="horizontal">
                 <Label class="list-title-city" text="Zielona Góra"></Label>
                 <Image src="res://location_icon" class="location"></Image>
-            </StackLayout>
+            </StackLayout> -->
         </StackLayout>
-        <ListView class="list" separatorColor="transparent" [items]="salon.salons" (itemTap)="onItemTap($event)">
+
+
+
+        <!-- <ListView class="list" separatorColor="transparent" [items]="salon.salons" (itemTap)="onItemTap($event)">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <StackLayout orientation="vertical">
                     <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
                         <Image class="salon-thumb" src="res://placeholder" stretch="aspectFill" height="180"></Image>
                         <GridLayout rows="auto" columns="*">
-                                
-                                <StackLayout row="0" horizontalAlignment="left" orientation="vertical">
-                                    <Label class="salon-name" [text]='item.name'></Label>
-                                    <Label class="salon-type" [text]='item.type'></Label>
-                                </StackLayout>
-                                <StackLayout row="0" horizontalAlignment="right" orientation="vertical" class="rate">
-                                    <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
-                                </StackLayout>
-                            
+                            <StackLayout row="0" horizontalAlignment="left" orientation="vertical">
+                                <Label class="salon-name" [text]='item.name'></Label>
+                                <Label class="salon-type" [text]='item.type'></Label>
+                            </StackLayout>
+                            <StackLayout row="0" horizontalAlignment="right" orientation="vertical" class="rate">
+                                <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
+                            </StackLayout>  
                         </GridLayout>
-                        <!-- <AbsoluteLayout >
-                            <Label [text]='item.name' left="10" top="10"></Label>
-                            <Label [text]='salon.rateAVG(item.rates)' left="110" top="10"></Label>
-                            <Label text="Ocena" left="110" top="110"></Label>
-                            <Label [text]='item.type' left="10" top="110" ></Label>
-                          </AbsoluteLayout> -->
                     </StackLayout>
                 </StackLayout>
             </ng-template>
-        </ListView>
+        </ListView> -->
     </StackLayout>
 </FlexboxLayout>

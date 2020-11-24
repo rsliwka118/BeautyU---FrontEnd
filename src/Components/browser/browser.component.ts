@@ -7,10 +7,7 @@ import { HttpGetService } from "../../shared/http/http-get.service";
 import { Config } from "../../shared/config";
 import { SalonService } from "../../shared/salon/salon.service";
 import { Salon } from "src/shared/salon/salon.model";
-
-class DataItem {
-  constructor(public id: number, public name: string) { }
-}
+import { ListView } from "@nativescript/core";
 
 @Injectable({
   providedIn: "root"
@@ -24,13 +21,14 @@ class DataItem {
 })
 export class BrowserComponent implements OnInit {
 
-  searchPhrase: string;
-   public salons: Array<Salon>;
+  searchPhrase: string
+  public salons: Array<Salon>
+  public list: ListView
 
   constructor(public auth: AuthService, private page: Page, public salon: SalonService) {
-    
   }
   
+
   //Search bar
   onSubmit(args) {
       const searchBar = args.object as SearchBar;
@@ -46,7 +44,9 @@ export class BrowserComponent implements OnInit {
       const searchBar = args.object as SearchBar;
       console.log(`Clear event raised`);
   }
-  ngOnInit(): void {
+
+  ngOnInit() {
+    this.salon.getSalon()
   }
   
   //List

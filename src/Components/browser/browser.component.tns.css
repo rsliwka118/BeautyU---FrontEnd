@@ -1,7 +1,13 @@
+.bar {
+  background: transparent;
+}
 .page {
   background-color: #F5F5F5;
 }
-
+.search-image{
+  height: 200;
+  margin: 50 0 0 0;
+}
 .content {
   orientation: vertical;
   background-color: #F5F5F5;
@@ -22,7 +28,7 @@
   border-radius: 5;
   border-width: 0 0 1.5 0;
   border-color: #cfabc7; 
-  margin: 50 10 50 10;
+  margin: 0 10 50 10;
 }
 .list-title{
   height: 70;

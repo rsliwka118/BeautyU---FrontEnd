@@ -80,8 +80,7 @@ export class AccountService {
       this.deleteService
       .deleteData(Config.apiAuthURL + "/logout", true)
       .subscribe(res => {
-
-          this.toast.showToast('Wylogowano')  
+  
           this.auth.isAuthorized = false
 
           this.routerExtension.navigate(['/login'], { clearHistory: true })

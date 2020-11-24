@@ -1,12 +1,12 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptFormsModule, NativeScriptModule } from "@nativescript/angular";
+import { NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule } from "@nativescript/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "../components/login/login.component";
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AuthGuard } from "../auth-guard.service";
 import { LoginGuard } from "../login-guard.service";
@@ -22,15 +22,16 @@ import { HttpPostService } from "../shared/http/http-post.service";
 import { HttpGetService } from "../shared/http/http-get.service";
 import { HttpDeleteService } from "../shared/http/http-delete.service";
 import { HttpInterceptorService } from "../shared/http/http-interceptor.service";
+import { AuthInterceptor } from "../shared/http/auth-interceptor.service";
 
 @NgModule({
     bootstrap: [
         AppComponent
     ],
     imports: [
+        NativeScriptHttpClientModule,
         NativeScriptModule,
         NativeScriptFormsModule,
-        HttpClientModule,
         AppRoutingModule
     ],
     declarations: [
@@ -40,9 +41,15 @@ import { HttpInterceptorService } from "../shared/http/http-interceptor.service"
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
             useClass: HttpInterceptorService,
             multi: true
         },
+        
         ValidationService,
         AuthService,
         AccountService,

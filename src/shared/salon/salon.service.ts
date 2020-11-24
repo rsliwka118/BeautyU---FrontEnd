@@ -7,15 +7,15 @@ import { HttpGetService } from "../../shared/http/http-get.service";
 import { Rate, Salon } from "./salon.model";
 import { Config } from "../config";
 
+
 @Injectable({
     providedIn: "root"
 })
 export class SalonService {
 
     salons: Array<Salon>
-
+    
     constructor( private http: HttpClient, private getService: HttpGetService ) { 
-        // this.getSalon()
     }
 
     getSalon(){

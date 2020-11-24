@@ -27,13 +27,12 @@ export class AuthService {
       private deleteService: HttpDeleteService
       ) {}
 
-    async getDetails(checkToken) {
-      
-      console.log("2 " +getString("accessToken"))
+    getDetails(checkToken) {
+
       this.postService
       .postData(Config.apiAuthURL + "/details", { userID: getString("userID") }, true)
       .subscribe(res => {
-        console.log("details done")
+        
         let result = (<any>res)
         this.isAuthorized = true
         this.userService.user.firstName = result.firstName
@@ -43,40 +42,23 @@ export class AuthService {
         this.routerExtension.navigate(['/menu'], { clearHistory: true })
         })
       }, error => { 
-        console.log("details error")
-          this.toast.showToast('Twoja sesja wygasła')
-          this.isAuthorized = false
-          this.zone.run(() => {
-            this.routerExtension.navigate(['/login'], { clearHistory: true })
-          })
+        console.log(error)
       })
   
     }      
 
-    // async checkToken() {
-    //   this.getService
-    //   .getData(Config.apiAuthURL + "/checktoken", true)
-    //   .subscribe(res => {
-    //     console.log("check done")
-    //     //this.hasExpired = false
-    //   }, error => {
-    //     console.log("check refresh")
-    //     //this.hasExpired = true
-    //     //this.refreshToken()
-    //   })
-    // }
-
-    // async refreshToken() { 
-    //   this.postService
-    //   .postData(Config.apiAuthURL + "/token", {token: getString("refreshToken")}, false)
-    //   .subscribe(res => {
-    //     let result = (<any>res)
-    //     console.log("refresh done "+result.accessToken)
-    //     setString("accessToken", result.accessToken)
-    //   }, error => {
-    //     console.log("refresh denied")
-    //     this.isAuthorized = false
-    //     this.routerExtension.navigate(['/login'], { clearHistory: true })
-    //   })
-    // }
+    refreshToken(){
+  
+      return this.postService
+      .postData(Config.apiAuthURL + "/token", {token: getString("refreshToken")}, false)
+     
   }
+    getToken() {
+      return getString("accessToken")
+    }
+
+    setToken(token) {
+      setString("accessToken", token)
+    }
+
+}
