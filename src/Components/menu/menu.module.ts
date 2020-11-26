@@ -1,5 +1,7 @@
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule, NativeScriptRouterModule, NSEmptyOutletComponent } from "@nativescript/angular";
+import { HttpInterceptorService } from "../../shared/http/http-interceptor.service";
 
 import { MenuComponent } from "./menu.component";
 
@@ -44,6 +46,7 @@ import { MenuComponent } from "./menu.component";
            }
         ])
     ],
+    
     declarations: [
         MenuComponent
     ],

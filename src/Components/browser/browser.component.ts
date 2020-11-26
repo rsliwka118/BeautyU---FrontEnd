@@ -5,13 +5,20 @@ import { SearchBar } from "@nativescript/core/ui/search-bar"
 import { HttpPostService } from "../../shared/http/http-post.service";
 import { HttpGetService } from "../../shared/http/http-get.service";
 import { Config } from "../../shared/config";
-import { SalonService } from "../../shared/salon/salon.service";
-import { Salon } from "src/shared/salon/salon.model";
-import { ListView } from "@nativescript/core";
+import { Categories, DataItem, SalonService } from "../../shared/salon/salon.service";
+import { Salon } from "../../shared/salon/salon.model";
+import { ListView, ObservableArray } from "@nativescript/core";
+import { HttpLoaderService } from "../../shared/http/http-loader.service";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
+import { catchError, first, map, switchMap, take } from "rxjs/operators";
+import { MenuComponent } from "../menu/menu.component";
 
 @Injectable({
   providedIn: "root"
 })
+
+
 
 @Component({
   selector: 'ns-browser',
@@ -22,11 +29,18 @@ import { ListView } from "@nativescript/core";
 export class BrowserComponent implements OnInit {
 
   searchPhrase: string
-  public salons: Array<Salon>
-  public list: ListView
 
-  constructor(public auth: AuthService, private page: Page, public salon: SalonService) {
-  }
+  //public salons: Array<Salon>
+  //public list: ListView
+
+  items$: Observable<DataItem[]>;
+  _categories: ObservableArray<Categories>
+
+  constructor(
+    public auth: AuthService, 
+    private page: Page, 
+    public salon: SalonService,
+    private route: ActivatedRoute) { }
   
 
   //Search bar
@@ -45,13 +59,23 @@ export class BrowserComponent implements OnInit {
       console.log(`Clear event raised`);
   }
 
-  ngOnInit() {
-    this.salon.getSalon()
-  }
-  
-  //List
-  public onItemTap(args) {
-   // console.log("------------------------ ItemTapped: " + args.index);
- 
-  }
+//RadList
+  get categories(): ObservableArray<Categories> {
+    return this._categories;
 }
+
+  // //List
+  // public onItemTap(args) {
+  //  // console.log("------------------------ ItemTapped: " + args.index);
+ 
+  // }
+  
+  ngOnInit(): void {
+
+    this._categories = new ObservableArray(this.salon.getCategories())
+    
+    //console.log(this.route.snapshot.data)      
+        
+    }
+}
+

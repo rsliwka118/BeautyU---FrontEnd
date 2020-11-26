@@ -43,7 +43,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
       if (this.refreshTokenInProgress) {
            return this.refreshTokenSubject.pipe(
-              delay(1),
+              delay(0),
               filter(result => result !== null),
               take(1),
               switchMap(() => next.handle(this.addAuthenticationToken(request))))

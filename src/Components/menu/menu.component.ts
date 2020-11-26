@@ -5,6 +5,7 @@ import { Page } from "@nativescript/core/ui/page"
 import { AuthService } from '../../shared/auth/auth.service'
 import { RouterExtensions } from "@nativescript/angular";
 import { ActivatedRoute } from "@angular/router";
+import { HttpLoaderService } from "../../shared/http/http-loader.service";
 
 @Component({
   selector: 'ns-menu',
@@ -13,7 +14,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public auth: AuthService, private page: Page, private routerExtension: RouterExtensions, private activeRoute: ActivatedRoute) {
+  constructor(public auth: AuthService, private page: Page, private routerExtension: RouterExtensions, private activeRoute: ActivatedRoute, public loaderService: HttpLoaderService) {
  
   }
 

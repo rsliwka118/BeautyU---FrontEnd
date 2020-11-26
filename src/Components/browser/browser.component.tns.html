@@ -19,9 +19,34 @@
                 <Image src="res://location_icon" class="location"></Image>
             </StackLayout> -->
         </StackLayout>
-
-
-
+        <ScrollView orientation ="horizontal">
+            <StackLayout orientation ="horizontal" class="scroll-menu">
+                <StackLayout class="scroll-item">
+                    <Label class="categories-title" text="Fryzjer"></Label>
+                    <Image class="categries-photo" borderRadius="8" src="res://hair_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item">
+                    <Label class="categories-title" text="Barber"></Label>
+                    <Image class="categries-photo" borderRadius="8" src="res://barber_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item">
+                    <Label class="categories-title" text="Makijaż"></Label>
+                    <Image class="categries-photo" borderRadius="8" src="res://makeup_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item">
+                    <Label class="categories-title" text="Paznokcie"></Label>
+                    <Image class="categries-photo" borderRadius="8" src="res://nails_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item">
+                    <Label class="categories-title" text="Masaż"></Label>
+                    <Image class="categries-photo" borderRadius="8" src="res://massage_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item">
+                    <Label class="categories-title" text="Depilacja"></Label>
+                    <Image class="categries-photo" borderRadius="8" src="res://depilation_icon"></Image>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>    
         <!-- <ListView class="list" separatorColor="transparent" [items]="salon.salons" (itemTap)="onItemTap($event)">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <StackLayout orientation="vertical">

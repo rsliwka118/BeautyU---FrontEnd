@@ -1,5 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule } from "@nativescript/angular";
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -23,6 +24,7 @@ import { HttpGetService } from "../shared/http/http-get.service";
 import { HttpDeleteService } from "../shared/http/http-delete.service";
 import { HttpInterceptorService } from "../shared/http/http-interceptor.service";
 import { AuthInterceptor } from "../shared/http/auth-interceptor.service";
+import { BrowserResolverService } from "../components/browser/browser.resolver";
 
 @NgModule({
     bootstrap: [
@@ -30,6 +32,7 @@ import { AuthInterceptor } from "../shared/http/auth-interceptor.service";
     ],
     imports: [
         NativeScriptHttpClientModule,
+        NativeScriptUIListViewModule,
         NativeScriptModule,
         NativeScriptFormsModule,
         AppRoutingModule
@@ -49,7 +52,7 @@ import { AuthInterceptor } from "../shared/http/auth-interceptor.service";
             useClass: HttpInterceptorService,
             multi: true
         },
-        
+        BrowserResolverService,
         ValidationService,
         AuthService,
         AccountService,

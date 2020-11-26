@@ -83,3 +83,21 @@
   border-radius: 100;
   background-color: #AF83A5;
 }
+
+.scroll-menu{
+  margin: 0 0 10 0
+}
+
+.categories-title{
+  font-size: 20;
+  color: #AF83A5;
+}
+
+.categories-photo{
+  border-radius: 50;
+  width: 100;
+}
+
+.scroll-item{
+  margin: 0 5 0 5;
+}
