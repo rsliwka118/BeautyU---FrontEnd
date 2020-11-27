@@ -26,6 +26,9 @@ import { HttpInterceptorService } from "../shared/http/http-interceptor.service"
 import { AuthInterceptor } from "../shared/http/auth-interceptor.service";
 import { BrowserComponent } from "../components/browser/browser.component";
 import { MenuComponent } from "../components/menu/menu.component";
+import { VisitsComponent } from "../components/visits/visits.component";
+import { FavComponent } from "../components/fav/fav.component";
+import { AccountComponent } from "../components/account/account.component";
 
 @NgModule({
     bootstrap: [
@@ -41,7 +44,11 @@ import { MenuComponent } from "../components/menu/menu.component";
     declarations: [
         AppComponent,
         LoginComponent,
-        MenuComponent
+        MenuComponent,
+        BrowserComponent,
+        VisitsComponent,
+        FavComponent,
+        AccountComponent
     ],
     providers: [
         {
