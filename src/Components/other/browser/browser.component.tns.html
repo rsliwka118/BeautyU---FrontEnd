@@ -21,7 +21,7 @@
         </StackLayout>
         <ScrollView orientation ="horizontal">
             <StackLayout orientation ="horizontal" class="scroll-menu">
-                <StackLayout class="scroll-item">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick()">
                     <Label class="categories-title" text="Fryzjer"></Label>
                     <Image class="categries-photo" borderRadius="8" src="res://hair_icon"></Image>
                 </StackLayout>

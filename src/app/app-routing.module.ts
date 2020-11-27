@@ -1,14 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule, NSEmptyOutletComponent } from "@nativescript/angular";
-import { LoginComponent } from "../components/login/login.component";
+import { LoginComponent } from "../components/main/login/login.component";
 import { AuthGuard } from "../auth-guard.service";
 import { LoginGuard } from "../login-guard.service";
-import { MenuComponent } from "../components/menu/menu.component";
-import { BrowserComponent } from "../components/browser/browser.component";
-import { VisitsComponent } from "../components/visits/visits.component";
-import { FavComponent } from "../components/fav/fav.component";
-import { AccountComponent } from "../components/account/account.component";
+import { MenuComponent } from "../components/other/menu/menu.component";
+import { BrowserComponent } from "../components/other/browser/browser.component";
+import { VisitsComponent } from "../components/other/visits/visits.component";
+import { FavComponent } from "../components/other/fav/fav.component";
+import { AccountComponent } from "../components/other/account/account.component";
+import { CategoryComponent } from '../components/other/category/category.component';
 
 const routes: Routes = [
     {
@@ -27,32 +28,37 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: 
         [
-           {
-               path: "browser",
-               outlet: "browserTab",
-               component: BrowserComponent,
-           },
-           {
-              path: "visits",
-              outlet: "visitsTab",
-              component: VisitsComponent,
-           },
-           {
-              path: "fav",
-              outlet: "favTab",
-              component: FavComponent,
-           },
-           {
-              path: "account",
-              outlet: "accountTab",
-              component: AccountComponent,
-           }
+            {
+                path: "category",
+                component: CategoryComponent
+            },
+            {
+                path: "browser",
+                component: BrowserComponent,
+            },
+            {
+                path: "visits",
+                component: VisitsComponent
+            },
+            {
+                path: "fav",
+                component: FavComponent
+            },
+            {
+                path: "account",
+                component: AccountComponent
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'browser'
+            }
        ]   
     }
 ];
 
 @NgModule({
-    imports: [NativeScriptRouterModule.forRoot(routes, { enableTracing: false })],
+    imports: [NativeScriptRouterModule.forRoot(routes, { enableTracing: true })],
     exports: [NativeScriptRouterModule]
 })
 export class AppRoutingModule { }

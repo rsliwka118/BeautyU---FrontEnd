@@ -5,7 +5,7 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "../components/login/login.component";
+import { LoginComponent } from "../components/main/login/login.component";
 
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
@@ -24,11 +24,12 @@ import { HttpGetService } from "../shared/http/http-get.service";
 import { HttpDeleteService } from "../shared/http/http-delete.service";
 import { HttpInterceptorService } from "../shared/http/http-interceptor.service";
 import { AuthInterceptor } from "../shared/http/auth-interceptor.service";
-import { BrowserComponent } from "../components/browser/browser.component";
-import { MenuComponent } from "../components/menu/menu.component";
-import { VisitsComponent } from "../components/visits/visits.component";
-import { FavComponent } from "../components/fav/fav.component";
-import { AccountComponent } from "../components/account/account.component";
+import { BrowserComponent } from "../components/other/browser/browser.component";
+import { MenuComponent } from "../components/other/menu/menu.component";
+import { VisitsComponent } from "../components/other/visits/visits.component";
+import { FavComponent } from "../components/other/fav/fav.component";
+import { AccountComponent } from "../components/other/account/account.component";
+import { CategoryComponent } from "../components/other/category/category.component";
 
 @NgModule({
     bootstrap: [
@@ -48,7 +49,8 @@ import { AccountComponent } from "../components/account/account.component";
         BrowserComponent,
         VisitsComponent,
         FavComponent,
-        AccountComponent
+        AccountComponent,
+        CategoryComponent
     ],
     providers: [
         {
