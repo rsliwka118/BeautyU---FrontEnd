@@ -30,6 +30,7 @@ import { VisitsComponent } from "../components/other/visits/visits.component";
 import { FavComponent } from "../components/other/fav/fav.component";
 import { AccountComponent } from "../components/other/account/account.component";
 import { CategoryComponent } from "../components/other/category/category.component";
+import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
 
 @NgModule({
     bootstrap: [
@@ -50,7 +51,8 @@ import { CategoryComponent } from "../components/other/category/category.compone
         VisitsComponent,
         FavComponent,
         AccountComponent,
-        CategoryComponent
+        CategoryComponent,
+        SalonDetailsComponent
     ],
     providers: [
         {

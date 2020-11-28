@@ -5,7 +5,7 @@ import { SearchBar } from "@nativescript/core/ui/search-bar"
 import { HttpPostService } from "../../../shared/http/http-post.service";
 import { HttpGetService } from "../../../shared/http/http-get.service";
 import { Config } from "../../../shared/config";
-import { Categories, DataItem, SalonService } from "../../../shared/salon/salon.service";
+import { SalonService } from "../../../shared/salon/salon.service";
 import { Salon } from "../../../shared/salon/salon.model";
 import { ListView, ObservableArray } from "@nativescript/core";
 import { HttpLoaderService } from "../../../shared/http/http-loader.service";

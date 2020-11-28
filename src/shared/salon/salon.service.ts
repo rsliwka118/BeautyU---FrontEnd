@@ -9,16 +9,6 @@ import { ObservableArray } from "@nativescript/core";
 import { getString } from "@nativescript/core/application-settings";
 import { RouterExtensions } from "@nativescript/angular";
 
-export class DataItem {
-    title: string;
-    body: string;
-}
-
-export class Categories {
-    title: string
-    photo: string
-}
-
 @Injectable({
     providedIn: "root"
 })
@@ -70,6 +60,15 @@ export class SalonService {
         }
 
         return this.http.get(Config.apiAppURL + "/previews/" + typeUrl, {headers: headers})
+    }
+
+    public getSalon(id: string){
+        let headers = new HttpHeaders({
+            "Content-Type": "application/json",
+            "authorization": getString("accessToken")
+            })
+            
+        return this.http.get(Config.apiAppURL + "/salons/" + id, {headers: headers})
     }
 
     public checkRoute(names: Array<string>): boolean {

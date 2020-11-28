@@ -10,6 +10,7 @@ import { VisitsComponent } from "../components/other/visits/visits.component";
 import { FavComponent } from "../components/other/fav/fav.component";
 import { AccountComponent } from "../components/other/account/account.component";
 import { CategoryComponent } from '../components/other/category/category.component';
+import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
 
 const routes: Routes = [
     {
@@ -31,6 +32,10 @@ const routes: Routes = [
             {
                 path: "category",
                 component: CategoryComponent
+            },
+            {
+                path: "details/:id",
+                component: SalonDetailsComponent
             },
             {
                 path: "browser",
