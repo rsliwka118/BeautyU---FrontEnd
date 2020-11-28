@@ -1,66 +1,30 @@
+<ActionBar flat="true" class="bar">
+    <StackLayout orientation="horizontal">
+      <Image src="res://logo_bar" class="action-image"></Image>
+    </StackLayout>
+</ActionBar>
+
 <DockLayout>
-    <GridLayout dock="bottom" rows="*" columns="*, *, *, *" height="60">
-        <StackLayout col="0" row="0" [nsRouterLink]="['/menu/browser']">
-            <Label text="Szukaj"></Label>
-            <Image src="res://search_ico"></Image>
+    <GridLayout class="bottom-navigation" dock="bottom" rows="*" columns="*, *, *, *" height="65">
+        <StackLayout class="tab" col="0" row="0" [nsRouterLink]="['/menu/browser']" 
+        [className]="salon.checkRoute(['category', 'browser']) ? 'tab-active' : 'tab'">
+            <Image class="tab-icon" [attr.src]="salon.checkRoute(['category', 'browser']) ? 'res://a_search_ico' : 'res://search_ico'"></Image>
+            <Label class="tab-text" text="Szukaj"></Label>
         </StackLayout>
-        <StackLayout col="1" row="0" [nsRouterLink]="['/menu/visits']">
-            <Label text="Wizyty"></Label>
-            <Image src="res://calendar_ico"></Image>
+        <StackLayout class="tab" col="1" row="0" [nsRouterLink]="['/menu/visits']" [className]="salon.checkRoute(['visits']) ? 'tab-active' : 'tab'">
+            <Image class="tab-icon" [attr.src]="salon.checkRoute(['visits']) ? 'res://a_calendar_ico' : 'res://calendar_ico'"></Image>
+            <Label class="tab-text" text="Wizyty"></Label>
         </StackLayout>
-        <StackLayout col="2" row="0" [nsRouterLink]="['/menu/fav']">
-            <Label text="Ulubione"></Label>
-            <Image src="res://fav_icon"></Image>
+        <StackLayout class="tab" col="2" row="0" [nsRouterLink]="['/menu/fav']" [className]="salon.checkRoute(['fav']) ? 'tab-active' : 'tab'">
+            <Image class="tab-icon" [attr.src]="salon.checkRoute(['fav']) ? 'res://a_fav_icon' : 'res://fav_icon'"></Image>
+            <Label class="tab-text" text="Ulubione"></Label>
         </StackLayout>
-        <StackLayout col="3" row="0" [nsRouterLink]="['/menu/account']">
-            <Label text="Konto"></Label>
-            <Image src="res://acc_ico"></Image>
+        <StackLayout class="tab" col="3" row="0" [nsRouterLink]="['/menu/account']" [className]="salon.checkRoute(['account']) ? 'tab-active' : 'tab'">
+            <Image class="tab-icon" [attr.src]="salon.checkRoute(['account']) ? 'res://a_acc_ico' : 'res://acc_ico'"></Image>
+            <Label class="tab-text" text="Konto"></Label>
         </StackLayout>
-        
     </GridLayout>
     <ScrollView orientation ="vertical">
         <router-outlet></router-outlet>
     </ScrollView>
 </DockLayout>
-
-<!-- <BottomNavigation>
-    <Label style="background-color: red; width: 200px; height: 200px;">FSDFSDFSD</Label>
-</BottomNavigation> -->
-<!-- <BottomNavigation>
-   <TabStrip id="navigation">
-        <TabStripItem class="navigation__item">
-            <Label text="Szukaj"></Label>
-            <Image src="res://search_ico"></Image>
-        </TabStripItem>
-        <TabStripItem class="navigation__item">
-            <Label text="Wizyty"></Label>
-            <Image src="res://calendar_ico"></Image>
-        </TabStripItem>
-        <TabStripItem class="navigation__item">
-            <Label text="Ulubione"></Label>
-            <Image src="res://fav_icon"></Image>
-        </TabStripItem>
-        <TabStripItem class="navigation__item">
-            <Label text="Konto"></Label>
-            <Image src="res://acc_ico"></Image>
-        </TabStripItem>
-    </TabStrip>
-
-    
-
-    <TabContentItem>
-        <page-router-outlet name="browserTab"></page-router-outlet>
-    </TabContentItem>
-
-    <TabContentItem>
-        <page-router-outlet name="visitsTab"></page-router-outlet>
-    </TabContentItem>
-
-    <TabContentItem>
-        <page-router-outlet name="favTab"></page-router-outlet>
-    </TabContentItem>
-
-    <TabContentItem>
-        <page-router-outlet name="accountTab"></page-router-outlet>
-    </TabContentItem>
-</BottomNavigation> -->

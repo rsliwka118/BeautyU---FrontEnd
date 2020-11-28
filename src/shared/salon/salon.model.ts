@@ -1,4 +1,4 @@
-export class Salon {
+export interface Salon {
     
     id: string;
     ownerID: string;
@@ -12,7 +12,7 @@ export class Salon {
 
 }   
 
-class Location {
+interface Location {
     
     id: string;
     city: string;
@@ -23,7 +23,7 @@ class Location {
 
 }
 
-class Service {
+interface Service {
 
     id: string;
     offerTitle: string;
@@ -32,7 +32,7 @@ class Service {
 
 }
 
-export class Rate {
+export interface Rate {
 
     id: string;
     rate: number;

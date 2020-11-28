@@ -6,6 +6,7 @@ import { AuthService } from '../../../shared/auth/auth.service'
 import { RouterExtensions } from "@nativescript/angular";
 import { ActivatedRoute } from "@angular/router";
 import { HttpLoaderService } from "../../../shared/http/http-loader.service";
+import { SalonService } from "../../../shared/salon/salon.service";
 
 @Component({
   selector: 'ns-menu',
@@ -14,15 +15,10 @@ import { HttpLoaderService } from "../../../shared/http/http-loader.service";
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public auth: AuthService, private page: Page, private router: RouterExtensions, private activeRoute: ActivatedRoute, public loaderService: HttpLoaderService) {
- 
+  constructor(public salon: SalonService, public auth: AuthService, private page: Page, public router: RouterExtensions, public activeRoute: ActivatedRoute, public loaderService: HttpLoaderService) {
+    this.page.actionBarHidden = true;
   }
 
-  onTabClick(route) {
-    this.router.navigate(['/menu/visits'])
-  }
-  ngOnInit() {
-    //this.router.navigate([{ outlets: { browserTab: ["browser"], visitsTab: ["visits"], favTab: ["fav"], accountTab: ["account"] } }], { relativeTo: this.activeRoute });
-  }
 
+  ngOnInit() { }
 }

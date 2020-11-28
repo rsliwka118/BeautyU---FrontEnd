@@ -1,6 +1,5 @@
 <GridLayout>
-    <page-router-outlet actionBarVisibility="never"></page-router-outlet>
-
+    <page-router-outlet></page-router-outlet>
     <GridLayout *ngIf="loaderService.isLoading$ | async" backgroundColor="#33252525" (tap)="true">
         <ActivityIndicator width="60" height="60" busy="true" class="activity-indicator"></ActivityIndicator>
     </GridLayout>

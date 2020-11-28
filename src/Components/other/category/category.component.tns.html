@@ -1,9 +1,24 @@
-<ActionBar>
-    <StackLayout orientation="horizontal">
-      <Label text="CATEGORIA"></Label>
+<FlexboxLayout height="100%" class="page">
+    <StackLayout>
+        <Label class="list-title" [text]="salon.category"></Label>  
+        <ListView class="list" separatorColor="transparent" [items]="this.salons" (itemTap)="onItemTap($event)">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <AbsoluteLayout>
+                    <StackLayout orientation="vertical" width="350">
+                        <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                            <Image class="salon-thumb" src="res://placeholder_barber" stretch="aspectFill" height="180"></Image>
+                            <GridLayout rows="auto" columns="*">
+                                <StackLayout row="0" horizontalAlignment="left" orientation="vertical">
+                                    <Label class="salon-name" [text]='item.name'></Label>
+                                    <Label class="salon-type" [text]='item.location.city'></Label>
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label left="300" class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
+                </AbsoluteLayout>
+            </ng-template>
+        </ListView>
     </StackLayout>
-</ActionBar>
-<FlexboxLayout class="page">
-    <Button text="Wyloguj" (tap)="account.logout()" class="btn btn-primary m-t-20"></Button>
 </FlexboxLayout>
 

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
+import { Page } from "@nativescript/core";
 import { getString } from "@nativescript/core/application-settings";
 import { AuthService } from '../shared/auth/auth.service'
 import { HttpLoaderService } from '../shared/http/http-loader.service'
@@ -10,6 +11,7 @@ import { HttpLoaderService } from '../shared/http/http-loader.service'
 export class AppComponent {
 
     constructor(private routerExtension: RouterExtensions, public auth: AuthService, public loaderService: HttpLoaderService) {
+
         if (getString("userID") === undefined){
             auth.isAuthorized = false
             this.routerExtension.navigate(['/login'])

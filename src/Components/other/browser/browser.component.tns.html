@@ -1,8 +1,3 @@
-<ActionBar flat="true" class="bar">
-    <StackLayout orientation="horizontal">
-      <Image src="res://logo_bar" class="action-image"></Image>
-    </StackLayout>
-</ActionBar>
 <FlexboxLayout class="page">    
     <StackLayout class="content">
         <Image src="res://search_icon" class="search-image"></Image>
@@ -21,49 +16,31 @@
         </StackLayout>
         <ScrollView orientation ="horizontal">
             <StackLayout orientation ="horizontal" class="scroll-menu">
-                <StackLayout class="scroll-item" (tap)="this.onTabClick()">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick('Fryzjer')">
                     <Label class="categories-title" text="Fryzjer"></Label>
-                    <Image class="categries-photo" borderRadius="8" src="res://hair_icon"></Image>
+                    <Image class="categories-photo" src="res://hair_icon"></Image>
                 </StackLayout>
-                <StackLayout class="scroll-item">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick('Barber')">
                     <Label class="categories-title" text="Barber"></Label>
-                    <Image class="categries-photo" borderRadius="8" src="res://barber_icon"></Image>
+                    <Image class="categories-photo" src="res://barber_icon"></Image>
                 </StackLayout>
-                <StackLayout class="scroll-item">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick('Makijaż')">
                     <Label class="categories-title" text="Makijaż"></Label>
-                    <Image class="categries-photo" borderRadius="8" src="res://makeup_icon"></Image>
+                    <Image class="categories-photo" src="res://makeup_icon"></Image>
                 </StackLayout>
-                <StackLayout class="scroll-item">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick('Paznokcie')">
                     <Label class="categories-title" text="Paznokcie"></Label>
-                    <Image class="categries-photo" borderRadius="8" src="res://nails_icon"></Image>
+                    <Image class="categories-photo" src="res://nails_icon"></Image>
                 </StackLayout>
-                <StackLayout class="scroll-item">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick('Masaż')">
                     <Label class="categories-title" text="Masaż"></Label>
-                    <Image class="categries-photo" borderRadius="8" src="res://massage_icon"></Image>
+                    <Image class="categories-photo" src="res://massage_icon"></Image>
                 </StackLayout>
-                <StackLayout class="scroll-item">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick('Depilacja')">
                     <Label class="categories-title" text="Depilacja"></Label>
-                    <Image class="categries-photo" borderRadius="8" src="res://depilation_icon"></Image>
+                    <Image class="categories-photo" src="res://depilation_icon"></Image>
                 </StackLayout>
             </StackLayout>
         </ScrollView>    
-        <!-- <ListView class="list" separatorColor="transparent" [items]="salon.salons" (itemTap)="onItemTap($event)">
-            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                <StackLayout orientation="vertical">
-                    <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
-                        <Image class="salon-thumb" src="res://placeholder" stretch="aspectFill" height="180"></Image>
-                        <GridLayout rows="auto" columns="*">
-                            <StackLayout row="0" horizontalAlignment="left" orientation="vertical">
-                                <Label class="salon-name" [text]='item.name'></Label>
-                                <Label class="salon-type" [text]='item.type'></Label>
-                            </StackLayout>
-                            <StackLayout row="0" horizontalAlignment="right" orientation="vertical" class="rate">
-                                <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
-                            </StackLayout>  
-                        </GridLayout>
-                    </StackLayout>
-                </StackLayout>
-            </ng-template>
-        </ListView> -->
     </StackLayout>
 </FlexboxLayout>

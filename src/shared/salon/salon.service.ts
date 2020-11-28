@@ -7,6 +7,7 @@ import { Rate, Salon } from "./salon.model";
 import { Config } from "../config";
 import { ObservableArray } from "@nativescript/core";
 import { getString } from "@nativescript/core/application-settings";
+import { RouterExtensions } from "@nativescript/angular";
 
 export class DataItem {
     title: string;
@@ -24,11 +25,19 @@ export class Categories {
 export class SalonService {
 
 
-    constructor( private http: HttpClient, private getService: HttpGetService ) { 
+    constructor( private http: HttpClient, private getService: HttpGetService, private router: RouterExtensions) { 
+      this.category = "adada"
     }
 
-    public getItems(): Observable<DataItem[]> {
-        return this.http.get<DataItem[]>("https://jsonplaceholder.typicode.com/posts")
+    category: string;
+
+    public getSalons() {
+      let headers = new HttpHeaders({
+        "Content-Type": "application/json",
+        "authorization": getString("accessToken")
+    })
+
+        return this.http.get(Config.apiAppURL + "/salons", {headers: headers});
     }
     
     public getCategories(): Categories[] {
@@ -61,6 +70,14 @@ export class SalonService {
           ]
     }
 
+    public checkRoute(names: Array<string>): boolean {
+      for(let i = 0;i < names.length; i++){
+            if(this.router.router.url.includes(names[i])) {
+                    return true;
+            }
+      }
+      return false;
+   }
 
     public rateAVG(rates: Rate[]){
     

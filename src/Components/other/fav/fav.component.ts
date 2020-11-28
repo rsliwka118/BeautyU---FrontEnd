@@ -14,7 +14,7 @@ export class FavComponent implements OnInit {
     public auth: AuthService,
     public account: AccountService, 
     private page: Page) {
-
+      this.page.actionBarHidden = false;
   }
 
   ngOnInit(): void {

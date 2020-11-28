@@ -42,46 +42,41 @@ export class BrowserComponent implements OnInit {
     private page: Page, 
     public salon: SalonService,
     private activatedRoute: ActivatedRoute,
-    private router: RouterExtensions) { }
+    private router: RouterExtensions) { 
+      this.page.actionBarHidden = false;
+    }
   
 
   //Search bar
   onSubmit(args) {
-      const searchBar = args.object as SearchBar;
-      console.log(`Searching for ${searchBar.text}`);
+      const searchBar = args.object as SearchBar
+      console.log(`Searching for ${searchBar.text}`)
   }
 
   onTextChanged(args) {
-      const searchBar = args.object as SearchBar;
-      console.log(`Input changed! New value: ${searchBar.text}`);
+      const searchBar = args.object as SearchBar
+      console.log(`Input changed! New value: ${searchBar.text}`)
   }
 
   onClear(args) {
-      const searchBar = args.object as SearchBar;
-      console.log(`Clear event raised`);
+      const searchBar = args.object as SearchBar
+      console.log(`Clear event raised`)
   }
 
 //RadList
   get categories(): ObservableArray<Categories> {
     return this._categories;
 }
-
-  // //List
-  // public onItemTap(args) {
-  //  // console.log("------------------------ ItemTapped: " + args.index);
- 
-  // }
   
-  onTabClick() {
-    console.log(this.router.router.url);
-    this.router.navigate(['/menu/category']);
+  onTabClick(category: string) {
+    this.salon.category = category
+    this.router.navigate(['/menu/category'])
   }
 
   ngOnInit(): void {
 
-    this._categories = new ObservableArray(this.salon.getCategories());
-    
-    //console.log(this.route.snapshot.data)      
+    this._categories = new ObservableArray(this.salon.getCategories())
+     
         
     }
 }

@@ -17,3 +17,7 @@ Button.-primary {
   width: 80;
   vertical-align: center;
 }
+
+.bar {
+  background: transparent;
+}

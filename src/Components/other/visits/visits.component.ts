@@ -14,6 +14,7 @@ export class VisitsComponent implements OnInit {
     public auth: AuthService, 
     public account: AccountService,
     private page: Page) {
+      this.page.actionBarHidden = false;
 
   }
 
