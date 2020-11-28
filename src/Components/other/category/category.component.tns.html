@@ -1,7 +1,7 @@
 <FlexboxLayout height="100%" class="page">
     <StackLayout>
         <Label class="list-title" [text]="salon.category"></Label>  
-        <ListView class="list" separatorColor="transparent" [items]="this.salons" (itemTap)="onItemTap($event)">
+        <ListView *ngIf="!isEmpty" class="list" separatorColor="transparent" [items]="this.salons" (itemTap)="onItemTap($event)">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <AbsoluteLayout>
                     <StackLayout orientation="vertical" width="350">
@@ -19,6 +19,10 @@
                 </AbsoluteLayout>
             </ng-template>
         </ListView>
+        <StackLayout *ngIf="isEmpty" class="not-found">
+            <Image src="res://notfound_icon" ></Image>
+            <Label verticalAligment="center" class="not-found-text" text="Brak wyników"></Label>
+        </StackLayout>
     </StackLayout>
 </FlexboxLayout>
 

@@ -1,13 +1,8 @@
-export interface Salon {
+export interface Preview {
     
     id: string;
-    ownerID: string;
     name: string;
-    type: string;
-    describe: string;
-    hours: string;
     location: Location;
-    services: Service[];
     rates: Rate[];
 
 }   
@@ -20,15 +15,6 @@ interface Location {
     street: string;
     houseNumber: string;
     apartmentNumber: string;
-
-}
-
-interface Service {
-
-    id: string;
-    offerTitle: string;
-    price: string;
-    time: string;
 
 }
 

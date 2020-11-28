@@ -16,19 +16,24 @@ export class CategoryComponent implements OnInit {
     public auth: AuthService, 
     public account: AccountService,
     private page: Page,
-    private salon: SalonService) {
+    public salon: SalonService) {
       this.page.actionBarHidden = false;
   }
   public salons: Array<Salon>;
-  
+  _isEmpty = false;
+
   public onItemTap(args) {
     console.log("------------------------ ItemTapped: " + args.index);
-   
+  }
+
+  get isEmpty() {
+    return this._isEmpty
   }
 
   ngOnInit(): void {
-    this.salon.getSalons().subscribe( (res: any) => {
+    this.salon.getPreview().subscribe( (res: any) => {
       this.salons = res.salons;
+      this._isEmpty = ( res.salons.length <= 0 ) ? true : false 
     });
   }
 

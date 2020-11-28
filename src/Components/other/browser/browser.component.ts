@@ -19,8 +19,6 @@ import { RouterExtensions } from "@nativescript/angular";
   providedIn: "root"
 })
 
-
-
 @Component({
   selector: 'ns-browser',
   templateUrl: './browser.component.html',
@@ -31,11 +29,6 @@ export class BrowserComponent implements OnInit {
 
   searchPhrase: string
 
-  //public salons: Array<Salon>
-  //public list: ListView
-
-  items$: Observable<DataItem[]>;
-  _categories: ObservableArray<Categories>
 
   constructor(
     public auth: AuthService, 
@@ -62,22 +55,13 @@ export class BrowserComponent implements OnInit {
       const searchBar = args.object as SearchBar
       console.log(`Clear event raised`)
   }
-
-//RadList
-  get categories(): ObservableArray<Categories> {
-    return this._categories;
-}
   
-  onTabClick(category: string) {
-    this.salon.category = category
+  onTabClick(type: number) {
+    this.salon.type = type
     this.router.navigate(['/menu/category'])
   }
 
   ngOnInit(): void {
-
-    this._categories = new ObservableArray(this.salon.getCategories())
-     
-        
     }
 }
 

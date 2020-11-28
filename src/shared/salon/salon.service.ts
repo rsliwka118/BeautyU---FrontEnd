@@ -26,48 +26,50 @@ export class SalonService {
 
 
     constructor( private http: HttpClient, private getService: HttpGetService, private router: RouterExtensions) { 
-      this.category = "adada"
+      this.category = ""
     }
 
     category: string;
+    type: number;
 
-    public getSalons() {
-      let headers = new HttpHeaders({
+    public getPreview() {
+        let typeUrl: string
+        let headers = new HttpHeaders({
         "Content-Type": "application/json",
         "authorization": getString("accessToken")
-    })
+        })
 
-        return this.http.get(Config.apiAppURL + "/salons", {headers: headers});
-    }
-    
-    public getCategories(): Categories[] {
-        let categories
-        return categories = [
-            {
-              title: "Fryzjer",
-              photo: "res://hair_icon"
-            },
-            {
-              title: "Barber",
-              photo: "res://barber_icon"
-            },
-            {
-              title: "Makijaż",
-              photo: "res://makeup_icon"
-            },
-            {
-              title: "Masaż",
-              photo: "res://massage_icon"
-            },
-            {
-              title: "Paznokcie",
-              photo: "res://nails_icon"
-            },
-            {
-              title: "Depilacja",
-              photo: "res://depilation_icon"
-            }
-          ]
+        switch (this.type) {
+          case 0:
+              typeUrl = "hairdresser"
+              this.category = "Fryzjer"
+              break
+          case 1:
+              typeUrl = "barber"
+              this.category = "Barber"
+              break
+          case 2:
+              typeUrl = "beautician"
+              this.category = "Makijaż"
+              break
+          case 3:
+              typeUrl = "nails"
+              this.category = "Paznokcie"
+              break
+          case 4:
+              typeUrl = "massager"
+              this.category = "Masaż"
+              break
+          case 5:
+              typeUrl = "depilation"
+              this.category = "Depilacja"
+              break
+          default:
+              console.log("incorrect type")
+              break
+        }
+
+        return this.http.get(Config.apiAppURL + "/previews/" + typeUrl, {headers: headers})
     }
 
     public checkRoute(names: Array<string>): boolean {
