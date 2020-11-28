@@ -21,7 +21,7 @@ export class SalonService {
 
     category: string;
     type: number;
-
+    
     public getPreview() {
         let typeUrl: string
         let headers = new HttpHeaders({
