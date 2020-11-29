@@ -56,7 +56,7 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'browser'
+                redirectTo: 'details/0c84ca9d-9583-4936-8958-69e804ea5710' //redirectTo: 'browser'
             }
        ]   
     }

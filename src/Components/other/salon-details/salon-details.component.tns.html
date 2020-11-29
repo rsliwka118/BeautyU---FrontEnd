@@ -1,5 +1,45 @@
 <FlexboxLayout height="100%" class="page">
-    <Label [text]="salon.name"></Label>
+    <StackLayout class="salon-item">
+        <Image class="salon-thumb" src="res://placeholder_barber" stretch="aspectFill" height="180"></Image>
+        <GridLayout rows="auto" columns="*">
+            <StackLayout row="0" col="0" horizontalAlignment="left" orientation="vertical">
+                <Label class="salon-name" [text]='salon.name'></Label>
+                <Label textWrap="true" class="salon-type" [text]='salonService.getLocation(salon.location)'></Label>
+            </StackLayout>
+            <StackLayout row="0" col="1" horizontalAlignment="right">
+                <Label [text]='salonService.rateAVG(salon.rates)' class="salon-rate"></Label>
+            </StackLayout>
+        </GridLayout>
+        <StackLayout orientation="vertical">
+            <Label class="salon-description-title" text="Opis"></Label>
+            <Label textWrap="true" class="salon-type" [text]='salon.describe'></Label>
+        </StackLayout>
+    </StackLayout>
+
+    <ScrollView scrollBarIndicatorVisible="false" orientation ="horizontal">
+        <StackLayout orientation ="horizontal" class="hours-list">
+            <!-- <StackLayout class="hour">
+                <Label class="hours-day" text="PN"></Label>
+                <StackLayout *ngIf="!(hours[0][0] == '-')">
+                    <Label class="hours-text" [text]="hours[0][0]"></Label>
+                    <Label class="hours-text" text="-"></Label>
+                    <Label class="hours-text" [text]="hours[0][1]"></Label>
+                </StackLayout>
+                <Label *ngIf="(hours[0][0] == '-')" text="Zamknięte"></Label>
+            </StackLayout> -->
+            <StackLayout *ngFor="let hour of hours; let i = index">
+                <StackLayout [className]="(hour[0] == '-') ? 'hour close' : 'hour open'">
+                    <Label class="hours-day" [text]="days[i]"></Label>
+                        <StackLayout *ngIf="!(hour[0] == '-')">
+                            <Label class="hours-text" [text]="hour[0]"></Label>
+                            <Label class="hours-text" text="-"></Label>
+                            <Label class="hours-text" [text]="hour[1]"></Label>
+                        </StackLayout>
+                    <Label *ngIf="(hour[0] == '-')"></Label>
+                </StackLayout>    
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>        
 </FlexboxLayout>
 
 <!-- <FlexboxLayout height="100%" class="page">

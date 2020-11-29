@@ -6,7 +6,7 @@ export interface Salon {
     type: string;
     describe: string;
     hours: string;
-    locations: Location[];
+    location: Location;
     services: Service[];
     rates: Rate[];
 

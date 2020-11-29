@@ -14,9 +14,11 @@ import { ActivatedRoute } from "@angular/router";
 export class SalonDetailsComponent implements OnInit {
 
   public salon: Salon
-  private sub: any;
-  id: string;
+  public hours
+  private sub: any
+  id: string
 
+  public days = ["PN","WT","ŚR","CZW","PT","SO","ND"]
   constructor(
     public auth: AuthService, 
     public account: AccountService,
@@ -30,13 +32,14 @@ export class SalonDetailsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']
       this.salonService.getSalon(this.id).subscribe( (res: any) => {
-        this.salon = res; 
+        this.salon = res
+        this.hours = this.salonService.getHours(this.salon.hours)
       })
    })
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.sub.unsubscribe()
   }
 
 }

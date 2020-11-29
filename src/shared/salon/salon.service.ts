@@ -72,22 +72,42 @@ export class SalonService {
     }
 
     public checkRoute(names: Array<string>): boolean {
-      for(let i = 0;i < names.length; i++){
-            if(this.router.router.url.includes(names[i])) {
-                    return true;
-            }
-      }
-      return false;
+        for(let i = 0;i < names.length; i++){
+                if(this.router.router.url.includes(names[i])) {
+                        return true;
+                }
+        }
+        return false;
    }
+
+   public getLocation(loc): string{
+        let _location = 
+        loc.city + ", ul. " + 
+        loc.street + " " +
+        loc.houseNumber +
+        (loc.apartmentNumber==="" ? "" : "/" + loc.apartmentNumber)
+        
+        return _location
+    }
+    
+    public getHours(hours){
+        let hrs = hours.split('#')
+
+        for(let i=0; i < hrs.length; i++){
+            hrs[i]=hrs[i].split('&')
+        }
+
+        return hrs
+    }
 
     public rateAVG(rates: Rate[]){
     
         let sum = 0
         
-        for( var i = 0; i < rates.length; i++ ){
+        for( let i = 0; i < rates.length; i++ ){
             sum += Number(rates[i].rate)
         }
-        var avg = sum/rates.length
+        let avg = sum/rates.length
 
         return avg
     }
