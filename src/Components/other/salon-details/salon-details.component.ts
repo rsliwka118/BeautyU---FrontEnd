@@ -4,7 +4,7 @@ import { SalonService } from "../../../shared/salon/salon.service";
 import { AccountService } from "../../../shared/auth/account.service"
 import { AuthService } from '../../../shared/auth/auth.service'
 import { Salon } from "../../../shared/salon/salon.model";
-import { ListView, ObservableArray } from "@nativescript/core";
+import { EventData, ListView, ObservableArray, Switch } from "@nativescript/core";
 import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'ns-salon-details',
@@ -37,6 +37,11 @@ export class SalonDetailsComponent implements OnInit {
       })
    })
   }
+
+  onCheckedChange(args: EventData) {
+    let sw = args.object as Switch;
+    let isChecked = sw.checked; // boolean
+}
 
   ngOnDestroy() {
     this.sub.unsubscribe()

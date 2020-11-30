@@ -8,6 +8,7 @@ import { Config } from "../config";
 import { ObservableArray } from "@nativescript/core";
 import { getString } from "@nativescript/core/application-settings";
 import { RouterExtensions } from "@nativescript/angular";
+import { openUrl } from "@nativescript/core/utils";
 
 @Injectable({
     providedIn: "root"
@@ -15,7 +16,7 @@ import { RouterExtensions } from "@nativescript/angular";
 export class SalonService {
 
 
-    constructor( private http: HttpClient, private getService: HttpGetService, private router: RouterExtensions) { 
+    constructor( private http: HttpClient, private getService: HttpGetService, private router: RouterExtensions,) { 
       this.category = ""
     }
 
@@ -71,6 +72,8 @@ export class SalonService {
         return this.http.get(Config.apiAppURL + "/salons/" + id, {headers: headers})
     }
 
+    
+
     public checkRoute(names: Array<string>): boolean {
         for(let i = 0;i < names.length; i++){
                 if(this.router.router.url.includes(names[i])) {
@@ -98,6 +101,25 @@ export class SalonService {
         }
 
         return hrs
+    }
+
+    public getServiceInfo(service): string{
+        let info = service.price +"zł | "+service.time+"min"
+        return info
+    }
+
+    public openMap(location) {
+        let splitCity = location.city.split(' ')
+        let city = ""
+        let url
+
+        for(let i=0; i < splitCity.length; i++){
+            city += "+" + splitCity[i]
+        }
+
+        url = location.street + "+" + location.houseNumber + "+" + location.code + city
+
+        openUrl( "https://www.google.pl/maps/place/" + url )
     }
 
     public rateAVG(rates: Rate[]){

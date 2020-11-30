@@ -26,6 +26,9 @@
 }
 
 .salon-rate{
+  text-align: center;
+  width: 66;
+  height: 66;
   font-size: 25;
   color: white;
   /* horizontal-align: right; */

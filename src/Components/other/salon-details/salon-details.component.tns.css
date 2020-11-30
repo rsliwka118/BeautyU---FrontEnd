@@ -2,7 +2,19 @@
   align-items: center;
   flex-direction: column;
   background-color: #F5F5F5;
-  padding: 0 20 0 20;
+}
+
+.margin{
+  margin: 0 10 0 10;
+}
+
+.btn-primary {
+  height: 50;
+  width: 200;
+  background-color:#AF83A5;
+  color: white;
+  /* border-radius: 5; */
+  font-size: 20;
 }
 
 .salon-item{
@@ -30,10 +42,13 @@
 }
 
 .salon-rate{
+  text-align: center;
+  width: 66;
+  height: 66;
   font-size: 25;
   color: white;
   /* horizontal-align: right; */
-  padding: 10;
+  padding: 15;
   margin-top: 10;
   border-radius: 100;
   background-color: #e09ad0;
@@ -65,14 +80,14 @@
 }
 
 .hour{
-  padding: 2 10 10 10;
+  padding: 2 10 2 10;
   border-radius: 5;
   border-width: 0 0 1 0;
   border-color: #cccccc;
   text-align: center;
-  margin: 0 5 0 5;
-  width: 80;
-  height: 150;
+  margin: 0 2 0 2;
+  width: 70;
+  height: 100;
 }
 
 .open{
@@ -91,4 +106,46 @@
 .hours-text{
   font-size: 20;
   color: #A8A8A8;
+}
+
+.services-list{
+  margin-bottom: 50;
+  height: 100%;
+}
+
+.services-item{
+  padding: 5;
+  border-radius: 5;
+  border-width: 0 0 1 0;
+  border-color: #cccccc;
+  background-color: white;
+  margin: 0 0 5 0;
+}
+
+.services-title{
+  font-size: 30;
+  color: #AF83A5;
+  text-align: center;
+  margin-top: 20;
+}
+
+.services-name{
+  font-size: 15;
+  color: #747474;
+}
+
+.services-info{
+  font-size: 25;
+  color: #e09ad0;
+}
+
+Switch{
+  margin: 0;
+}
+
+.map{
+  text-align: center;
+  height: 200;
+  width: 100%;
+  padding: 0 0 0 -20; 
 }
