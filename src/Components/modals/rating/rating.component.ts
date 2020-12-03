@@ -6,11 +6,31 @@ import { ModalDialogParams } from "@nativescript/angular";
     templateUrl: './rating.component.html',
     styleUrls: ['./rating.component.css']
 })
+
 export class RatingComponent implements OnInit {
 
-    constructor(private params: ModalDialogParams) {}
+    private rate: number
+    public isSelect: boolean[]
+
+    constructor(private params: ModalDialogParams) {
+        this.rate = 0;
+        this.isSelect = [false,false,false,false,false]
+    }
 
     ngOnInit() {}
+
+    addRate(rate: number){
+        this.isSelect = [false,false,false,false,false]
+
+        for(let i = 0; i <= rate; i++){
+            this.isSelect[i] = true
+        }
+        this.rate = rate + 1
+    }
+
+    sendRate(){
+        console.log(this.rate)
+    }
 
     close() {
         this.params.closeCallback();

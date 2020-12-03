@@ -1,0 +1,46 @@
+.modal{
+    padding: 10;
+}
+
+.star{
+   font-size: 40;
+   margin: 5 0 10 0;
+}
+
+.title{
+    font-size: 25;
+    color: #AF83A5;
+}
+
+.selected{
+    color: #e09ad0;
+}
+
+.unselected{
+    color: #cccccc;
+}
+
+.btn{
+    font-size: 15;
+    height: 40;
+    width: 100;
+    margin: 2;
+    padding: 5;
+    border-width: 1;
+    border-radius: 2;
+}
+
+.send{  
+  color: white;
+  background-color: #e09ad0;;
+
+}
+
+.close{
+    border-color: #e09ad0;
+    color: #e09ad0;
+}
+
+.buttons{
+    margin-bottom: 0;
+}

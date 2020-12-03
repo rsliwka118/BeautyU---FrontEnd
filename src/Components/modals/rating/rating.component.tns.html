@@ -1,4 +1,14 @@
-<StackLayout class="p-20">
-    <Label class="h2 text-center" text="This is a modal page." textWrap="true"></Label>
-    <Button class="btn btn-outline" text="Close Modal" (tap)="close()"></Button>
-</StackLayout>
+<DockLayout class="modal">
+    <Label class="title" horizontalAlignment="center" dock="top" text="Oceń salon!"></Label>
+    <StackLayout horizontalAlignment="center" dock="top" class="star" orientation="horizontal" >
+        <Label text="★" (tap)="addRate(0)" [ngClass]="this.isSelect[0] ? 'selected' : 'unselected'"></Label>
+        <Label text="★" (tap)="addRate(1)" [ngClass]="this.isSelect[1] ? 'selected' : 'unselected'"></Label>
+        <Label text="★" (tap)="addRate(2)" [ngClass]="this.isSelect[2] ? 'selected' : 'unselected'"></Label>
+        <Label text="★" (tap)="addRate(3)" [ngClass]="this.isSelect[3] ? 'selected' : 'unselected'"></Label>
+        <Label text="★" (tap)="addRate(4)" [ngClass]="this.isSelect[4] ? 'selected' : 'unselected'"></Label>
+    </StackLayout>
+    <StackLayout horizontalAlignment="center" dock="bottom" class="buttons" orientation="horizontal">
+        <Button class="btn send" text="Oceń" (tap)="sendRate()"></Button>
+        <Button class="btn close" text="Anuluj" (tap)="close()"></Button>
+    </StackLayout>
+</DockLayout>
