@@ -7,16 +7,8 @@ import { Rate, Salon } from "./salon.model";
 import { Config } from "../config";
 import { ObservableArray } from "@nativescript/core";
 import { getString } from "@nativescript/core/application-settings";
-
-export class DataItem {
-    title: string;
-    body: string;
-}
-
-export class Categories {
-    title: string
-    photo: string
-}
+import { RouterExtensions } from "@nativescript/angular";
+import { openUrl } from "@nativescript/core/utils";
 
 @Injectable({
     providedIn: "root"
@@ -24,52 +16,120 @@ export class Categories {
 export class SalonService {
 
 
-    constructor( private http: HttpClient, private getService: HttpGetService ) { 
+    constructor( private http: HttpClient, private getService: HttpGetService, private router: RouterExtensions,) { 
+      this.category = ""
     }
 
-    public getItems(): Observable<DataItem[]> {
-        return this.http.get<DataItem[]>("https://jsonplaceholder.typicode.com/posts")
+    category: string;
+    type: number;
+    
+    public getPreview() {
+        let typeUrl: string
+        let headers = new HttpHeaders({
+        "Content-Type": "application/json",
+        "authorization": getString("accessToken")
+        })
+
+        switch (this.type) {
+          case 0:
+              typeUrl = "hairdresser"
+              this.category = "Fryzjer"
+              break
+          case 1:
+              typeUrl = "barber"
+              this.category = "Barber"
+              break
+          case 2:
+              typeUrl = "beautician"
+              this.category = "Makijaż"
+              break
+          case 3:
+              typeUrl = "nails"
+              this.category = "Paznokcie"
+              break
+          case 4:
+              typeUrl = "massager"
+              this.category = "Masaż"
+              break
+          case 5:
+              typeUrl = "depilation"
+              this.category = "Depilacja"
+              break
+          default:
+              console.log("incorrect type")
+              break
+        }
+
+        return this.http.get(Config.apiAppURL + "/previews/" + typeUrl, {headers: headers})
+    }
+
+    public getSalon(id: string){
+        let headers = new HttpHeaders({
+            "Content-Type": "application/json",
+            "authorization": getString("accessToken")
+            })
+            
+        return this.http.get(Config.apiAppURL + "/salons/" + id, {headers: headers})
+    }
+
+    
+
+    public checkRoute(names: Array<string>): boolean {
+        for(let i = 0;i < names.length; i++){
+                if(this.router.router.url.includes(names[i])) {
+                        return true;
+                }
+        }
+        return false;
+   }
+
+   public getLocation(loc): string{
+        let _location = 
+        loc.city + ", ul. " + 
+        loc.street + " " +
+        loc.houseNumber +
+        (loc.apartmentNumber==="" ? "" : "/" + loc.apartmentNumber)
+        
+        return _location
     }
     
-    public getCategories(): Categories[] {
-        let categories
-        return categories = [
-            {
-              title: "Fryzjer",
-              photo: "res://hair_icon"
-            },
-            {
-              title: "Barber",
-              photo: "res://barber_icon"
-            },
-            {
-              title: "Makijaż",
-              photo: "res://makeup_icon"
-            },
-            {
-              title: "Masaż",
-              photo: "res://massage_icon"
-            },
-            {
-              title: "Paznokcie",
-              photo: "res://nails_icon"
-            },
-            {
-              title: "Depilacja",
-              photo: "res://depilation_icon"
-            }
-          ]
+    public getHours(hours){
+        let hrs = hours.split('#')
+
+        for(let i=0; i < hrs.length; i++){
+            hrs[i]=hrs[i].split('&')
+        }
+
+        return hrs
     }
 
+    public getServiceInfo(service): string{
+        let info = service.price +"zł | "+service.time+"min"
+        return info
+    }
+
+    public openMap(location) {
+        let splitCity = location.city.split(' ')
+        let city = ""
+        let url
+
+        for(let i=0; i < splitCity.length; i++){
+            city += "+" + splitCity[i]
+        }
+
+        url = location.street + "+" + location.houseNumber + "+" + location.code + city
+
+        openUrl( "https://www.google.pl/maps/place/" + url )
+    }
 
     public rateAVG(rates: Rate[]){
     
         let sum = 0
         
-        for( var i = 0; i < rates.length; i++ ){
+        for( let i = 0; i < rates.length; i++ ){
             sum += Number(rates[i].rate)
         }
-        var avg = sum/rates.length
+        let avg = sum/rates.length
 
         return avg
     }

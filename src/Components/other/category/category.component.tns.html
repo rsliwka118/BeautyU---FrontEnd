@@ -1,0 +1,28 @@
+<FlexboxLayout height="100%" class="page">
+    <StackLayout>
+        <Label class="list-title" [text]="salon.category"></Label>  
+        <ListView *ngIf="!isEmpty" class="list" separatorColor="transparent" [items]="this.salons">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <AbsoluteLayout (tap)="onItemTap(item.id)">
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                            <Image class="salon-thumb" src="res://placeholder_barber" stretch="aspectFill" height="180"></Image>
+                            <GridLayout rows="auto" columns="*">
+                                <StackLayout row="0" horizontalAlignment="left" orientation="vertical">
+                                    <Label class="salon-name" [text]='item.name'></Label>
+                                    <Label class="salon-type" [text]='item.location.city'></Label>
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
+                </AbsoluteLayout>
+            </ng-template>
+        </ListView>
+        <StackLayout *ngIf="isEmpty" class="not-found">
+            <Image src="res://notfound_icon" ></Image>
+            <Label verticalAligment="center" class="not-found-text" text="Brak wyników"></Label>
+        </StackLayout>
+    </StackLayout>
+</FlexboxLayout>
+

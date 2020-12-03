@@ -1,0 +1,46 @@
+<FlexboxLayout class="page">    
+    <StackLayout class="content">
+        <Image src="res://search_icon" class="search-image"></Image>
+        <StackLayout class="search">
+                <SearchBar class="search-bar" hint="Wpisz nazwę salonu..."
+                [text]="searchPhrase" (textChange)="onTextChanged($event)" 
+                (clear)="onClear($event)" (submit)="onSubmit($event)">
+                </SearchBar>
+        </StackLayout>
+        <StackLayout class="list-title">
+            <Label class="list-title-header" text="Usługa"></Label>
+            <!-- <StackLayout orientation="horizontal">
+                <Label class="list-title-city" text="Zielona Góra"></Label>
+                <Image src="res://location_icon" class="location"></Image>
+            </StackLayout> -->
+        </StackLayout>
+        <ScrollView scrollBarIndicatorVisible="false" orientation ="horizontal">
+            <StackLayout orientation ="horizontal" class="scroll-menu">
+                <StackLayout class="scroll-item" (tap)="this.onTabClick(0)">
+                    <Label class="categories-title" text="Fryzjer"></Label>
+                    <Image class="categories-photo" src="res://hair_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item" (tap)="this.onTabClick(1)">
+                    <Label class="categories-title" text="Barber"></Label>
+                    <Image class="categories-photo" src="res://barber_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item" (tap)="this.onTabClick(2)">
+                    <Label class="categories-title" text="Makijaż"></Label>
+                    <Image class="categories-photo" src="res://makeup_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item" (tap)="this.onTabClick(3)">
+                    <Label class="categories-title" text="Paznokcie"></Label>
+                    <Image class="categories-photo" src="res://nails_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item" (tap)="this.onTabClick(4)">
+                    <Label class="categories-title" text="Masaż"></Label>
+                    <Image class="categories-photo" src="res://massage_icon"></Image>
+                </StackLayout>
+                <StackLayout class="scroll-item" (tap)="this.onTabClick(5)">
+                    <Label class="categories-title" text="Depilacja"></Label>
+                    <Image class="categories-photo" src="res://depilation_icon"></Image>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>    
+    </StackLayout>
+</FlexboxLayout>

@@ -45,6 +45,7 @@
     "nativescript-sha": "^1.0.4",
     "nativescript-toast": "^2.0.0",
     "nativescript-ui-listview": "^9.0.4",
+    "nativescript-utils": "^1.0.83",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.6.0",
     "tslint": "^6.1.3",

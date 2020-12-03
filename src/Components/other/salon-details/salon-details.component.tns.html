@@ -1,0 +1,60 @@
+<FlexboxLayout height="100%" class="page">
+    <AbsoluteLayout>
+        <Label style="width: 50; height: 50; color:red;"></Label>
+    </AbsoluteLayout>
+    <ScrollView scrollBarIndicatorVisible="false" orientation ="vertical">
+        <StackLayout>
+            <StackLayout class="salon-item margin">
+                <Image class="salon-thumb" src="res://placeholder_barber" stretch="aspectFill" height="180"></Image>
+                <GridLayout rows="auto" columns="*">
+                    <StackLayout row="0" col="0" horizontalAlignment="left" orientation="vertical">
+                        <StackLayout orientation="vertical">
+                            <Label class="salon-name" [text]='salon.name'></Label>
+                            <Label textWrap="true" class="salon-type" [text]='salonService.getLocation(salon.location)'></Label>
+                        </StackLayout>
+                            <StackLayout style="margin-top: 10" orientation="vertical">
+                            <Label class="salon-description-title" text="Opis"></Label>
+                            <Label textWrap="true" class="salon-type" [text]='salon.describe'></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout row="0" col="1" horizontalAlignment="right">
+                        <Label [text]='salonService.rateAVG(salon.rates)' class="salon-rate"></Label>
+                        <Button text="Oceń" class="btn-rate"></Button>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+            <ScrollView orientation ="horizontal">
+                <StackLayout orientation ="horizontal" class="hours-list margin">
+                    <StackLayout *ngFor="let hour of hours; let i = index">
+                        <StackLayout [className]="(hour[0] == '-') ? 'hour close' : 'hour open'">
+                            <Label class="hours-day" [text]="days[i]"></Label>
+                                <StackLayout *ngIf="!(hour[0] == '-')">
+                                    <Label class="hours-text" [text]="hour[0]"></Label>
+                                    <Label class="hours-text" [text]="hour[1]"></Label>
+                                </StackLayout>
+                            <Label *ngIf="(hour[0] == '-')"></Label>
+                        </StackLayout>    
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout class="margin">
+                <Label class="services-title" text="Usługi"></Label>
+                <StackLayout *ngFor="let service of this.salon.services">
+                    <DockLayout class="services-item">
+                        <GridLayout dock="left" columns="auto" rows="*,*">
+                            <Label row="0" col="0" [text]="service.offerTitle" class="services-name" ></Label>
+                            <Label row="1" col="0" [text]="salonService.getServiceInfo(service)" class="services-info" ></Label>
+                        </GridLayout>
+                        <Switch dock="right" color="#AF83A5" offBackgroundColor="#666666" backgroundColor="#e09ad0" checked="false" (checkedChange)="onCheckedChange($event)"></Switch>
+                    </DockLayout>    
+                </StackLayout>    
+            </StackLayout>
+            <AbsoluteLayout height="200" class="map">
+                <Image width="100%" src="res://map_icon"></Image>
+                <GridLayout width="100%" height="100%">
+                    <Button (tap)="salonService.openMap(this.salon.location)" class="btn-primary" text="Sprawdź na mapie"></Button>
+                </GridLayout>
+            </AbsoluteLayout>
+        </StackLayout>  
+    </ScrollView>     
+</FlexboxLayout>
