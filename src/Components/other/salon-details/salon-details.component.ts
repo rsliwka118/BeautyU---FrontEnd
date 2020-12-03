@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, ViewContainerRef } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
 import { SalonService } from "../../../shared/salon/salon.service";
 import { AccountService } from "../../../shared/auth/account.service"
@@ -6,6 +6,9 @@ import { AuthService } from '../../../shared/auth/auth.service'
 import { Salon } from "../../../shared/salon/salon.model";
 import { EventData, ListView, ObservableArray, Switch } from "@nativescript/core";
 import { ActivatedRoute } from "@angular/router";
+import { ModalDialogOptions, ModalDialogService } from "@nativescript/angular";
+
+import { RatingComponent } from "../../modals/rating/rating.component";
 
 @Component({
   selector: 'ns-salon-details',
@@ -25,6 +28,8 @@ export class SalonDetailsComponent implements OnInit {
     public account: AccountService,
     private route: ActivatedRoute,
     private page: Page,
+    private modalService: ModalDialogService,
+    private viewContainerRef: ViewContainerRef,
     public salonService: SalonService) {
       this.page.actionBarHidden = false;
   }
@@ -42,6 +47,15 @@ export class SalonDetailsComponent implements OnInit {
   onCheckedChange(args: EventData) {
     let sw = args.object as Switch;
     let isChecked = sw.checked; // boolean
+  }
+
+  rate(){
+    const options: ModalDialogOptions = {
+      viewContainerRef: this.viewContainerRef,
+      fullscreen: false,
+      context: {}
+    }
+    this.modalService.showModal(RatingComponent, options);
   }
 
   ngOnDestroy() {
