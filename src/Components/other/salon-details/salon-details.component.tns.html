@@ -18,7 +18,7 @@
                         </StackLayout>
                     </StackLayout>
                     <StackLayout row="0" col="1" horizontalAlignment="right">
-                        <Label [text]='salonService.rateAVG(salon.rates)' class="salon-rate"></Label>
+                        <Label [text]="salonService.rateAVG(salon.rates)" class="salon-rate"></Label>
                         <Button text="Oceń" class="btn-rate" (tap)="rate()"></Button>
                     </StackLayout>
                 </GridLayout>

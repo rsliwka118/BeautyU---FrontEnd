@@ -131,6 +131,6 @@ export class SalonService {
         }
         let avg = sum/rates.length
 
-        return avg
+        return avg.toFixed(1)
     }
 }

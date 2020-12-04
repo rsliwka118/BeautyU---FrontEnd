@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalDialogParams } from "@nativescript/angular";
+import { ModalDialogParams, RouterExtensions } from "@nativescript/angular";
+import { getString } from "@nativescript/core/application-settings";
+import { Config } from "../../../shared/config";
+import { HttpPostService } from "../../../shared/http/http-post.service";
+import { ToastsService } from "../../../shared/toasts.service";
 
 @Component({
     selector: 'ns-rating',
@@ -12,7 +16,12 @@ export class RatingComponent implements OnInit {
     private rate: number
     public isSelect: boolean[]
 
-    constructor(private params: ModalDialogParams) {
+    constructor(
+        private params: ModalDialogParams, 
+        private postService: HttpPostService, 
+        private toast: ToastsService,
+        private router: RouterExtensions
+        ) {
         this.rate = 0;
         this.isSelect = [false,false,false,false,false]
     }
@@ -26,10 +35,23 @@ export class RatingComponent implements OnInit {
             this.isSelect[i] = true
         }
         this.rate = rate + 1
+        
     }
 
     sendRate(){
-        console.log(this.rate)
+        
+        let salonID = this.router.router.url.replace('/menu/details/','')
+        
+        this.postService
+        .postData(Config.apiAppURL + "/rate/"+ salonID , { id: getString("userID"), rate: this.rate}, true)
+        .subscribe(res => {
+            let response = <any>res
+            this.toast.showToast(response.message)
+        }, error => {
+            this.toast.showToast(error.error) 
+        })
+        
+        this.close()
     }
 
     close() {
