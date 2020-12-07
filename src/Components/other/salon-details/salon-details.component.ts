@@ -38,7 +38,8 @@ export class SalonDetailsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']
       this.salonService.getSalon(this.id).subscribe( (res: any) => {
-        this.salon = res
+        this.salon = res.salon
+        this.salon.services = res.services
         this.hours = this.salonService.getHours(this.salon.hours)
       })
    })

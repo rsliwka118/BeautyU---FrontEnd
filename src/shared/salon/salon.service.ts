@@ -9,6 +9,9 @@ import { ObservableArray } from "@nativescript/core";
 import { getString } from "@nativescript/core/application-settings";
 import { RouterExtensions } from "@nativescript/angular";
 import { openUrl } from "@nativescript/core/utils";
+import { HttpPostService } from "../http/http-post.service";
+import { ToastsService } from "../toasts.service";
+import { HttpDeleteService } from "../http/http-delete.service";
 
 @Injectable({
     providedIn: "root"
@@ -16,12 +19,20 @@ import { openUrl } from "@nativescript/core/utils";
 export class SalonService {
 
 
-    constructor( private http: HttpClient, private getService: HttpGetService, private router: RouterExtensions,) { 
+    constructor( 
+        private http: HttpClient, 
+        private getService: HttpGetService,
+        private deleteService: HttpDeleteService, 
+        private postService: HttpPostService, 
+        private router: RouterExtensions,
+        private toast: ToastsService
+        ) { 
       this.category = ""
     }
 
-    category: string;
-    type: number;
+    category: string
+    type: number
+    
     
     public getPreview() {
         let typeUrl: string
@@ -72,7 +83,41 @@ export class SalonService {
         return this.http.get(Config.apiAppURL + "/salons/" + id, {headers: headers})
     }
 
-    
+    public fav(salonId: string){
+
+        this.postService
+        .postData(Config.apiAppURL + "/fav/"+ getString("userID") , { id: salonId }, true)
+        .subscribe(res => {
+            let response = <any>res
+            this.toast.showToast(response.message)
+        }, error => {
+            this.toast.showToast(error.error) 
+        })
+        
+    }
+
+    public unfav(salonId: string){
+        this.http
+        .delete(Config.apiAppURL + "/fav/"+ getString("userID"), 
+        { headers: { 
+            "Content-Type": "application/json",
+            "authorization": getString("accessToken"),
+            "salonId": salonId
+        }})
+        .subscribe(res => {
+            let response = <any>res
+            this.toast.showToast(response.message)
+        }, error => {
+            this.toast.showToast(error.error) 
+        })
+    }
+
+    public isFav(salonId: string, favs: string[]): boolean {
+
+        const res = favs.includes(salonId)
+
+        return res
+    }
 
     public checkRoute(names: Array<string>): boolean {
         for(let i = 0;i < names.length; i++){
@@ -81,9 +126,9 @@ export class SalonService {
                 }
         }
         return false;
-   }
+    }
 
-   public getLocation(loc): string{
+    public getLocation(loc): string{
         let _location = 
         loc.city + ", ul. " + 
         loc.street + " " +
@@ -124,6 +169,11 @@ export class SalonService {
 
     public rateAVG(rates: Rate[]){
     
+        if(rates.length === 0){
+            
+            return "-"
+        }
+        
         let sum = 0
         
         for( let i = 0; i < rates.length; i++ ){
