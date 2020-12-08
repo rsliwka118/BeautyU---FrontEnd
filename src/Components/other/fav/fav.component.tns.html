@@ -1,7 +1,29 @@
-<FlexboxLayout class="page">
-    <StackLayout class="form" width="70%">
-        <Image class="logo" src="res://blogo"></Image>
-    </StackLayout>
-    <Button text="Fav" (tap)="account.logout()" class="btn btn-primary m-t-20"></Button>
+<FlexboxLayout height="100%" class="page">
+    <GridLayout rows="auto,auto">
+        <Label row="0" horizontalAlignment="left" class="list-title" text="Ulubione"></Label>
+        <ListView row="1" height="650" *ngIf="isEmpty" class="list" separatorColor="transparent" [items]="this.favs">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <AbsoluteLayout>
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                            <Image (tap)="salon.onItemTap(item.id)" class="salon-thumb" src="res://placeholder_barber" stretch="aspectFill" height="180"></Image>
+                            <DockLayout>
+                                <StackLayout (tap)="salon.onItemTap(item.id)" dock="left" orientation="vertical">
+                                    <Label class="salon-name" [text]='item.name'></Label>
+                                    <Label class="salon-type" [text]='item.location.city'></Label>
+                                </StackLayout>
+                                <Image (tap)="salon.onFavTap(item.id, item.isFav); item.isFav = !item.isFav" dock="right" horizontalAlignment="right" class="fav-btn" [attr.src]="item.isFav ? 'res://unfav_btn' : 'res://fav_btn'"></Image>
+                            </DockLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
+                </AbsoluteLayout>
+            </ng-template>
+        </ListView>
+        <StackLayout *ngIf="!isEmpty" class="not-found">
+            <Image class="nofav-icon" src="res://notfav_icon"></Image>
+            <Label class="not-found-text" text="Polub salony!"></Label>
+        </StackLayout>
+    </GridLayout>
 </FlexboxLayout>
 

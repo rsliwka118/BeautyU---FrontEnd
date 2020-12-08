@@ -32,7 +32,7 @@ export class SalonService {
 
     category: string
     type: number
-    
+    public favList = []
     
     public getPreview() {
         let typeUrl: string
@@ -82,7 +82,7 @@ export class SalonService {
             
         return this.http.get(Config.apiAppURL + "/salons/" + id, {headers: headers})
     }
-
+    
     public fav(salonId: string){
 
         this.postService
@@ -90,6 +90,7 @@ export class SalonService {
         .subscribe(res => {
             let response = <any>res
             this.toast.showToast(response.message)
+            this.addToFavArray(salonId)
         }, error => {
             this.toast.showToast(error.error) 
         })
@@ -98,24 +99,30 @@ export class SalonService {
 
     public unfav(salonId: string){
         this.http
-        .delete(Config.apiAppURL + "/fav/"+ getString("userID"), 
+        .delete(Config.apiAppURL + "/fav/" + getString("userID") + "/" + salonId, 
         { headers: { 
             "Content-Type": "application/json",
-            "authorization": getString("accessToken"),
-            "salonId": salonId
-        }})
+            "authorization": getString("accessToken")
+            }
+        })
         .subscribe(res => {
             let response = <any>res
             this.toast.showToast(response.message)
+            this.removeFromFavArray(salonId)
         }, error => {
             this.toast.showToast(error.error) 
         })
     }
 
+    public getFav(){
+        return this.postService
+        .postData(Config.apiAppURL + "/myfavs/"+ getString("userID"), { favList: this.favList }, true)
+        
+    }
+
     public isFav(salonId: string, favs: string[]): boolean {
 
         const res = favs.includes(salonId)
-
         return res
     }
 
@@ -128,7 +135,7 @@ export class SalonService {
         return false;
     }
 
-    public getLocation(loc): string{
+    public getLocation(loc): string {
         let _location = 
         loc.city + ", ul. " + 
         loc.street + " " +
@@ -138,7 +145,7 @@ export class SalonService {
         return _location
     }
     
-    public getHours(hours){
+    public getHours(hours) {
         let hrs = hours.split('#')
 
         for(let i=0; i < hrs.length; i++){
@@ -148,7 +155,7 @@ export class SalonService {
         return hrs
     }
 
-    public getServiceInfo(service): string{
+    public getServiceInfo(service): string {
         let info = service.price +"zł | "+service.time+"min"
         return info
     }
@@ -167,7 +174,7 @@ export class SalonService {
         openUrl( "https://www.google.pl/maps/place/" + url )
     }
 
-    public rateAVG(rates: Rate[]){
+    public rateAVG(rates: Rate[]) {
     
         if(rates.length === 0){
             
@@ -176,11 +183,55 @@ export class SalonService {
         
         let sum = 0
         
-        for( let i = 0; i < rates.length; i++ ){
+        for( let i = 0; i < rates.length; i++ ) {
             sum += Number(rates[i].rate)
         }
         let avg = sum/rates.length
 
         return avg.toFixed(1)
     }
+
+    public onItemTap(id) {
+
+        this.router.navigate(['/menu/details', id])
+
+    }
+
+    public onFavTap(salonId: string, isFav) {
+        console.log("-----FAV "+salonId)
+        if(isFav) this.unfav(salonId)
+        else this.fav(salonId)
+
+    }
+
+    public createFavArray(fav:any) {
+
+        this.favList = []
+
+        for(let i=0; i<fav.length; i++){
+          this.favList[i] = fav[i].salon
+        }
+    
+    }
+    
+    private removeFromFavArray(salonId: string){
+
+        const index = this.favList.indexOf(salonId);
+        if (index > -1) {
+            this.favList.splice(index, 1);
+        }
+    }
+
+    private addToFavArray(salonId: string){
+        this.favList.push(salonId)
+    }
+
+    public setFav(salons) {
+
+        for(let i=0; i<salons.length; i++){
+            salons[i].isFav = this.isFav(salons[i].id, this.favList)
+        }
+
+    }
+    
 }

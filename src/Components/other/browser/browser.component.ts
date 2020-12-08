@@ -60,8 +60,12 @@ export class BrowserComponent implements OnInit {
     this.salon.type = type
     this.router.navigate(['/menu/category'])
   }
-
+  
   ngOnInit(): void {
+    var searchBar = this.page.getViewById('search-bar');
+    if (searchBar.android) {
+        searchBar.android.clearFocus();
     }
+  }
 }
 
