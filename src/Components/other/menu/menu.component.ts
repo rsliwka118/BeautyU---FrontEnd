@@ -16,6 +16,7 @@ import { LocationComponent } from "../../../components/modals/location/location.
 export class MenuComponent implements OnInit {
 
   constructor(
+    private routerExtension: RouterExtensions,
     public salon: SalonService, 
     private location: Location, 
     public auth: AuthService, 
@@ -32,6 +33,5 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }

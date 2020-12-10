@@ -64,6 +64,6 @@
 
 StackLayout:pressed{
     animation-name: up;
-    animation-duration: .4s;
+    animation-duration: .2s;
     animation-fill-mode: forwards;
 }

@@ -15,8 +15,7 @@ export class AppComponent {
         private routerExtension: RouterExtensions, 
         public auth: AuthService, 
         public loaderService: HttpLoaderService,
-        private modalService: ModalDialogService,
-        private viewContainerRef: ViewContainerRef,) {
+        ) {
 
         if (getString("userID") === undefined){
             auth.isAuthorized = false
@@ -25,21 +24,11 @@ export class AppComponent {
         else{
             auth.isAuthorized = true
             this.auth.getDetails(true)
-            this.routerExtension.navigate(['/menu'])
         }
-    }
-
-    location(){
-        const options: ModalDialogOptions = {
-          viewContainerRef: this.viewContainerRef,
-          fullscreen: true,
-          context: {}
-        }
-        this.modalService.showModal(LocationComponent, options);
     }
 
     ngOnInit(): void{
-       this.location()
+        
     }
 
 }

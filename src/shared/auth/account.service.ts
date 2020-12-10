@@ -46,9 +46,6 @@ export class AccountService {
         this.auth.isAuthorized = true
 
         this.auth.getDetails(false)
-        this.zone.run(() => {
-          this.routerExtension.navigate(['/menu'], { clearHistory: true })
-        })
 
       }, error => {
         this.toast.showToast(error.error) 

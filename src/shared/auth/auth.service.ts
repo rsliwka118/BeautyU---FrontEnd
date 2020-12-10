@@ -17,6 +17,7 @@ export class AuthService {
     
     isAuthorized: boolean
     hasExpired: boolean
+    isNew: number
 
     constructor(
       private zone: NgZone,
@@ -44,10 +45,14 @@ export class AuthService {
         fav = result.favorites
         this.salon.createFavArray(fav)
         this.location.cities = result.cities
+        this.isNew = result.user.isNew.data[0]
 
-        this.zone.run(() => {
-        this.routerExtension.navigate(['/menu'], { clearHistory: true })
-        })
+        if(this.isNew){
+          this.routerExtension.navigate(['/menu']);
+        } else {
+            this.routerExtension.navigate(['/settings'])
+        }
+       
       }, error => { 
         console.log(error)
       })

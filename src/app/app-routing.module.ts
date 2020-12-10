@@ -11,6 +11,7 @@ import { FavComponent } from "../components/other/fav/fav.component";
 import { AccountComponent } from "../components/other/account/account.component";
 import { CategoryComponent } from '../components/other/category/category.component';
 import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
+import { LocationComponent } from "../components/modals/location/location.component";
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
         path: "login", 
         component: LoginComponent, 
         canActivate: [LoginGuard],
+    },
+    { 
+        path: "settings", 
+        component: LocationComponent
     },
     {
         path: "menu",

@@ -1,10 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalDialogParams} from "@nativescript/angular";
+import { ModalDialogParams, RouterExtensions} from "@nativescript/angular";
 import { ToastsService } from "../../../shared/toasts.service";
 import { LocationService } from "../../../shared/location/location.service"
 import { UserService } from "../../../shared/user/user.service";
 import { EventData, Image, Label, Page, StackLayout, TouchGestureEventData } from "@nativescript/core";
 import { HomeViewModel } from "../../../shared/home-view-model"
+import { typeSourceSpan } from "@angular/compiler";
+import { AuthService } from "../../../shared/auth/auth.service";
+import { getString, setString } from "@nativescript/core/application-settings";
+import { HttpPostService } from "../../../shared/http/http-post.service";
+import { Config } from "../../../shared/config";
 
 @Component({
     selector: 'ns-location',
@@ -15,22 +20,28 @@ import { HomeViewModel } from "../../../shared/home-view-model"
 export class LocationComponent implements OnInit {
 
     private rate: number
+    private city: string
+    private accountType: string
     public isSelect: boolean[]
     public showWelcome: boolean
     public showAccountType: boolean
     public showLocation: boolean
 
     constructor(
-        private params: ModalDialogParams, 
+        private auth: AuthService,
+        private routerExtension: RouterExtensions,
         private toast: ToastsService,
+        private post: HttpPostService,
+        private page: Page,
         public userService: UserService,
         public location: LocationService,
         ) {
+            this.page.actionBarHidden = true
     }
 
     ngOnInit() {
-        this.showWelcome = false
-        this.showAccountType = true
+        this.showWelcome = true
+        this.showAccountType = false
         this.showLocation = false
     }
 
@@ -63,12 +74,22 @@ export class LocationComponent implements OnInit {
     }
 
     public setAccountType(type: string){
+        this.accountType = type
         this.next(2)
     }
 
-    public setLocation(){
-        
-        this.close()
+    public setLocation(city: string){
+        this.city = city
+        this.sendSettings()
+        this.routerExtension.navigate(['/menu'])
+    }
+
+    private sendSettings(){
+
+        this.post.postData(Config.apiAuthURL + "/settings/"+getString("userID"), {accountType: this.accountType, city: this.city}, true)
+            .subscribe( (res: any) => {
+                this.toast.showToast(res.message)
+            })
     }
 
     onTouch(args: TouchGestureEventData) {
@@ -82,8 +103,4 @@ export class LocationComponent implements OnInit {
                 break;
         }
     }    
-
-    close() {
-        this.params.closeCallback();
-    }
 }
