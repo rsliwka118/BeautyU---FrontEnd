@@ -1,7 +1,7 @@
 <FlexboxLayout height="100%" class="page">
-    <GridLayout rows="auto,auto">
-        <Label row="0" horizontalAlignment="left" class="list-title" text="Ulubione"></Label>
-        <ListView row="1" height="650" *ngIf="isEmpty" class="list" separatorColor="transparent" [items]="this.favs">
+    <StackLayout>
+        <Label horizontalAlignment="left" class="list-title" text="Ulubione"></Label>
+        <ListView *ngIf="isEmpty" class="list" separatorColor="transparent" [items]="this.favs">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <AbsoluteLayout>
                     <StackLayout orientation="vertical">
@@ -24,6 +24,6 @@
             <Image class="nofav-icon" src="res://notfav_icon"></Image>
             <Label class="not-found-text" text="Polub salony!"></Label>
         </StackLayout>
-    </GridLayout>
+    </StackLayout>
 </FlexboxLayout>
 

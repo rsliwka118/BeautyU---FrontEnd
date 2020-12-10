@@ -1,13 +1,12 @@
-import { Component, OnInit } from "@angular/core"
-import { BottomNavigation } from "@nativescript/core";
-import { getRootView } from "@nativescript/core/application";
+import { Component, OnInit, ViewContainerRef } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
 import { AuthService } from '../../../shared/auth/auth.service'
-import { RouterExtensions } from "@nativescript/angular";
+import { ModalDialogOptions, ModalDialogService, RouterExtensions } from "@nativescript/angular";
 import { ActivatedRoute } from "@angular/router";
 import { HttpLoaderService } from "../../../shared/http/http-loader.service";
 import { SalonService } from "../../../shared/salon/salon.service";
 import { Location } from '@angular/common';
+import { LocationComponent } from "../../../components/modals/location/location.component";
 
 @Component({
   selector: 'ns-menu',
@@ -16,7 +15,15 @@ import { Location } from '@angular/common';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public salon: SalonService, private location: Location, public auth: AuthService, private page: Page, public router: RouterExtensions, public activeRoute: ActivatedRoute, public loaderService: HttpLoaderService) {
+  constructor(
+    public salon: SalonService, 
+    private location: Location, 
+    public auth: AuthService, 
+    private page: Page, 
+    public router: RouterExtensions, 
+    public activeRoute: ActivatedRoute, 
+    public loaderService: HttpLoaderService
+    ) {
     this.page.actionBarHidden = true;
   }
 
@@ -25,5 +32,6 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 }

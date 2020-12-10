@@ -32,6 +32,7 @@ import { AccountComponent } from "../components/other/account/account.component"
 import { CategoryComponent } from "../components/other/category/category.component";
 import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
 import { RatingComponent } from "../components/modals/rating/rating.component";
+import { LocationComponent } from "../components/modals/location/location.component";
 
 @NgModule({
     bootstrap: [
@@ -54,7 +55,8 @@ import { RatingComponent } from "../components/modals/rating/rating.component";
         AccountComponent,
         CategoryComponent,
         SalonDetailsComponent,
-        RatingComponent
+        RatingComponent,
+        LocationComponent
     ],
     providers: [
         {

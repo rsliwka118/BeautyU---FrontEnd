@@ -1,12 +1,11 @@
 .page {
-  align-items: center;
   flex-direction: column;
   background-color: #F5F5F5;
   padding-left: 10;
 }
 
 .not-found{
-  padding: 200 20 20 20
+  padding: 100 20 20 20;
 }
 
 .not-found-text{

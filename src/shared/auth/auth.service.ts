@@ -9,7 +9,7 @@ import { HttpGetService } from "../http/http-get.service";
 import { HttpDeleteService } from "../http/http-delete.service";
 import { UserService } from "../user/user.service";
 import { SalonService } from "../salon/salon.service";
-
+import { LocationService } from "../location/location.service"
 @Injectable({
   providedIn: "root"
 })
@@ -26,7 +26,8 @@ export class AuthService {
       private salon: SalonService,
       private postService: HttpPostService,
       private getService: HttpGetService,
-      private deleteService: HttpDeleteService
+      private deleteService: HttpDeleteService,
+      private location: LocationService
       ) {}
 
     getDetails(checkToken) {
@@ -42,6 +43,7 @@ export class AuthService {
         this.userService.user.lastName = result.user.lastName
         fav = result.favorites
         this.salon.createFavArray(fav)
+        this.location.cities = result.cities
 
         this.zone.run(() => {
         this.routerExtension.navigate(['/menu'], { clearHistory: true })

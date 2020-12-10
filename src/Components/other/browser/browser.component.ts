@@ -66,6 +66,7 @@ export class BrowserComponent implements OnInit {
     if (searchBar.android) {
         searchBar.android.clearFocus();
     }
+    
   }
 }
 
