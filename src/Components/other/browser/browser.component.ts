@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Injectable, OnInit } from "@angular/core"
+import { ChangeDetectionStrategy, Component, Injectable, OnInit, ViewContainerRef } from "@angular/core"
 import { Page } from "@nativescript/core/ui/page"
 import { AuthService } from '../../../shared/auth/auth.service'
 import { SearchBar } from "@nativescript/core/ui/search-bar"
@@ -13,8 +13,9 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, first, map, switchMap, take } from "rxjs/operators";
 import { MenuComponent } from "../menu/menu.component";
-import { RouterExtensions } from "@nativescript/angular";
+import { ModalDialogOptions, ModalDialogService, RouterExtensions } from "@nativescript/angular";
 import { LocationService } from "../../../shared/location/location.service";
+import { SearchComponent } from "../../../components/modals/search/search.component";
 
 @Injectable({
   providedIn: "root"
@@ -28,9 +29,6 @@ import { LocationService } from "../../../shared/location/location.service";
 })
 export class BrowserComponent implements OnInit {
 
-  searchPhrase: string
-
-
   constructor(
     public auth: AuthService, 
     private page: Page, 
@@ -41,33 +39,26 @@ export class BrowserComponent implements OnInit {
       this.page.actionBarHidden = false;
     }
   
-
-  //Search bar
-  onSubmit(args) {
-      const searchBar = args.object as SearchBar
-      console.log(`Searching for ${searchBar.text}`)
+  public showSearch(){
+    // const options: ModalDialogOptions = {
+    //   viewContainerRef: this.viewContainerRef,
+    //   fullscreen: true,
+    //   context: {}
+    // }
+    // this.modalService.showModal(SearchComponent, options)
+    this.router.navigate(['/menu/search'])
   }
 
-  onTextChanged(args) {
-      const searchBar = args.object as SearchBar
-      console.log(`Input changed! New value: ${searchBar.text}`)
-  }
-
-  onClear(args) {
-      const searchBar = args.object as SearchBar
-      console.log(`Clear event raised`)
-  }
-  
   onTabClick(type: number) {
     this.salon.type = type
     this.router.navigate(['/menu/category'])
   }
   
   ngOnInit(): void {
-    var searchBar = this.page.getViewById('search-bar');
-    if (searchBar.android) {
-        searchBar.android.clearFocus();
-    }
+    // var searchBar = this.page.getViewById('search-bar');
+    // if (searchBar.android) {
+    //     searchBar.android.clearFocus();
+    // }
     
   }
 }

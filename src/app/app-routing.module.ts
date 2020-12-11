@@ -12,6 +12,7 @@ import { AccountComponent } from "../components/other/account/account.component"
 import { CategoryComponent } from '../components/other/category/category.component';
 import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
 import { WelcomeComponent } from "../components/other/welcome/welcome.component";
+import { SearchComponent } from "../components/modals/search/search.component";
 
 const routes: Routes = [
     {
@@ -57,6 +58,10 @@ const routes: Routes = [
             {
                 path: "account",
                 component: AccountComponent
+            },
+            {
+                path: "search",
+                component: SearchComponent 
             },
             {
                 path: '',

@@ -8,13 +8,18 @@
   padding-right: 30;
 }
 
-.search-bar {
-  border-radius: 5;
+.search-bar{
+  padding: 10;
   font-size: 20;
-  android-elevation: 1;
-  text-field-hint-color: #A8A8A8;
+  font-weight: 200;
+  background-color: white;
+  color: #A8A8A8
 }
 
+.search-icon{
+  width: 20;
+  margin-right: 15
+}
 .search-box{
   margin: 0 10 30 10;
 }

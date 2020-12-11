@@ -1,0 +1,35 @@
+<FlexboxLayout height="100%" class="page">
+    <StackLayout>
+        <SearchBar id="search-bar" class="search-bar" hint="Wpisz nazwę salonu..."
+        [text]="searchPhrase" (submit)="onSubmit($event)">
+        </SearchBar>
+        <ListView *ngIf="!onStart && !isEmpty" class="list" separatorColor="transparent" [items]="this.result">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <AbsoluteLayout>
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                            <Image (tap)="salon.onItemTap(item.id)" class="salon-thumb" src="res://placeholder_barber" stretch="aspectFill" height="180"></Image>
+                            <DockLayout>
+                                <StackLayout (tap)="salon.onItemTap(item.id)" dock="left" orientation="vertical">
+                                    <Label class="salon-name" [text]='item.name'></Label>
+                                    <Label class="salon-type" [text]='item.location.city'></Label>
+                                </StackLayout>
+                                <Image (tap)="salon.onFavTap(item.id, item.isFav); item.isFav = !item.isFav" dock="right" horizontalAlignment="right" class="fav-btn" [attr.src]="item.isFav ? 'res://unfav_btn' : 'res://fav_btn'"></Image>
+                            </DockLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label class="salon-rate" [text]='salon.rateAVG(item.rates)'></Label>
+                </AbsoluteLayout>
+            </ng-template>
+        </ListView>
+        <StackLayout *ngIf="onStart" class="not-found">
+            <Image class="nofav-icon" src="res://loupe_icon"></Image>
+            <Label class="not-found-text" text="Wyszukaj salony!"></Label>
+        </StackLayout>
+        <StackLayout *ngIf="isEmpty" class="not-found">
+            <Image src="res://notfound_icon" ></Image>
+            <Label class="not-found-text" text="Brak wyników"></Label>
+        </StackLayout>
+    </StackLayout>
+</FlexboxLayout>
+

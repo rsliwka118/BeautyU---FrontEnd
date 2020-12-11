@@ -4,10 +4,10 @@
             <Image src="res://search_icon" class="search-image"></Image>
             <StackLayout class="search-box">
                 <StackLayout class="search">
-                    <SearchBar id="search-bar" class="search-bar" hint="Wpisz nazwę salonu..."
-                    [text]="searchPhrase" (textChange)="onTextChanged($event)" 
-                    (clear)="onClear($event)" (submit)="onSubmit($event)">
-                    </SearchBar>
+                    <StackLayout ripple rippleColor="#777777" (tap)="showSearch()" class="search-bar" orientation="horizontal">
+                        <Image class="search-icon" src="res://search_ico"></Image>
+                        <Label text="Wpisz nazwę salonu"></Label>
+                    </StackLayout>
                 </StackLayout>
                 <StackLayout orientation="horizontal">
                     <Label class="list-title-city" [text]="location.currentCity"></Label>

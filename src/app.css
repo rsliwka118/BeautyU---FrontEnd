@@ -21,3 +21,7 @@ Button.-primary {
 .bar {
   background: transparent;
 }
+
+.bar-search {
+  background: white;
+}

@@ -34,6 +34,7 @@ import { SalonDetailsComponent } from "../components/other/salon-details/salon-d
 import { WelcomeComponent } from "../components/other/welcome/welcome.component";
 import { RatingComponent } from "../components/modals/rating/rating.component";
 import { LocationComponent } from "../components/modals/location/location.component";
+import { SearchComponent } from "../components/modals/search/search.component";
 import { NgRippleModule } from 'nativescript-ripple/angular';
 
 @NgModule({
@@ -60,7 +61,8 @@ import { NgRippleModule } from 'nativescript-ripple/angular';
         SalonDetailsComponent,
         RatingComponent,
         LocationComponent,
-        WelcomeComponent
+        WelcomeComponent,
+        SearchComponent
     ],
     providers: [
         {

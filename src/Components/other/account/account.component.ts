@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
       fullscreen: true,
       context: {}
     }
-    this.modalService.showModal(LocationComponent, options);
+    this.modalService.showModal(LocationComponent, options)
   }
 
   ngOnInit(): void {
