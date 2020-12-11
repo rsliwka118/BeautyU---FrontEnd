@@ -44,7 +44,7 @@ export class LocationComponent implements OnInit {
 
     }
 
-    private close(){
+    public close(){
         this.params.closeCallback()
     }
     

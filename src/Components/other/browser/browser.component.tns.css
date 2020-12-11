@@ -1,17 +1,11 @@
-.page {
-  background-color: #F5F5F5;
-}
 .search-image{
   height: 200;
   margin: 10 0 0 0;
 }
 .content {
-  orientation: vertical;
   background-color: #F5F5F5;
   padding-left: 30;
   padding-right: 30;
-  width: auto; 
-  height: auto;
 }
 
 .search-bar {
@@ -31,9 +25,6 @@
   border-color: #cfabc7; 
 }
 
-.list-title{
-  height: 70;
-}
 .list-title-header{
   font-size: 25;
   color: #AF83A5;
