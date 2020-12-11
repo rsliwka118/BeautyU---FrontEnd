@@ -1,0 +1,35 @@
+<Page loaded="pageLoaded()">    
+    <DockLayout *ngIf="showWelcome">
+        <StackLayout dock="bottom" verticalAlignment="bottom" orientation="vertical">
+            <Label verticalAlignment="center" horizontalAlignment="center"  class="hi-title" textWrap="true" [text]="'Witaj ' + userService.user.firstName +'!'"></Label>
+            <Label verticalAlignment="center"  class="hi" textWrap="true" text="Zanim zaczniemy muszę zapytać Cię o kilka rzeczy..."></Label>
+            <Button class="btn" (tap)="next(1)" text="Zaczynamy!"></Button>
+            <Image src="res://hi"></Image>
+        </StackLayout>
+    </DockLayout>
+    <StackLayout class="icons" verticalAlignment="center" *ngIf="showAccountType">
+        <StackLayout ripple rippleColor="#777777" (tap)="setAccountType('Salon')">
+            <Label horizontalAlignment="center" class="account-text" textWrap="true" text="Posiadasz salon?"></Label>
+            <Image width="200" src="res://salon"></Image>
+        </StackLayout>
+        <Label style="margin: 10 0 10 0"></Label>
+        <StackLayout ripple rippleColor="#777777" (tap)="setAccountType('Client')">
+            <Label horizontalAlignment="center" class="account-text" textWrap="true" text="Szukasz salonu?"></Label>
+            <Image width="250" src="res://client"></Image>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout *ngIf="showLocation" class="location-page">
+        <Label class="list-title" text="Wybierz miasto"></Label>
+        <ListView height="650" [items]="location.cities" class="list-group">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <DockLayout (tap)="setLocation(item.city)" stretchLastChild="true" class="item">
+                    <StackLayout dock="left" orientation="horizontal">
+                        <Label [text]="item.city" class="item-city"></Label>
+                        <Label [text]="'(' + item.count + ')'" class="item-count"></Label>
+                    </StackLayout>
+                    <Image dock="right" horizontalAlignment="right" class="arrow" src="res://city_arrow"></Image>
+                </DockLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>
+</Page>

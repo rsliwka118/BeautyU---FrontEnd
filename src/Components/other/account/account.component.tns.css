@@ -1,58 +1,73 @@
 .page {
-    align-items: center;
-    flex-direction: column;
     background-color: #F5F5F5;
-  }
-  .form {
-    margin-left: 30;
-    margin-right: 30;
-    flex-grow: 2;
-    vertical-align: middle;
-  }
- 
-  .bold-form {
-    color: #555555;
+    padding: 0 20 10 20;
+    height: 100%;
   }
 
-  .logo {
-    margin-bottom: 20;
-    height: 100;
-  }
-
-  .input-field {
-    margin-bottom: 0;
-  }
-  .input {
-    font-size: 18;
-    placeholder-color: #A8A8A8;
-  }
-
-  .btn-primary {
-    height: 50;
-    margin: 30 5 15 5;
-    background-color:#AF83A5;
-    color: white;
-    /* border-radius: 5; */
+  .btn {
+    height: 40;
+    margin: 5;
     font-size: 20;
     font-weight: 200;
   }
-  .login-label {
-    horizontal-align: center;
-    color: #A8A8A8;
-    font-size: 16;
+
+  .logout {
+    width: 50%;
+    background-color:#AF83A5;
+    border-width: 2;
+    border-color: #AF83A5;
+    border-radius: 2;
+    color: white;
   }
-  .sign-up-label {
-    margin-bottom: 20;
+
+  .delete {
+    width: 50%;
+    background-color: #F5F5F5;
+    color: rgb(215, 0, 0);
+    border-width: 1;
+    border-color: rgb(215, 0, 0);
+    border-radius: 2;
   }
-  .bold {
-    color: #000000;
+
+  .info{
+    width: 100%;
+    padding: 10;
+    text-align: left;
+    color: #777777;
+    background-color: #F5F5F5;
+    font-size: 20;
+    font-weight: 200;
   }
-  .error-msg {
-    color: rgba(255, 0, 0, 0.6);
-    margin-left: 15s;
+  
+  .header{
+    font: 30;
+    color: #AF83A5;
   }
-  .color-danger {
-    placeholder-color: rgba(255, 0, 0, 0.6);
-    color: rgba(255, 0, 0, 0.6);
-    margin-bottom: 0;
+
+  .header-box{
+    margin-bottom: 50;
   }
+
+  .list-title-city{
+    font-size: 20;
+    font-weight: 200;
+    color:  #A8A8A8;
+  }
+
+  .location{
+    width: 18;
+    height: 18;
+    vertical-align: center;
+  }
+
+  .my-hr{
+    margin: 0;
+  }
+
+  .icon {
+    margin-bottom: 10;
+  }
+
+  .arrow{
+    width: 10;
+}

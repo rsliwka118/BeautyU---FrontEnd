@@ -1,6 +1,6 @@
 <ActionBar flat="true" class="bar">
-    <NavigationButton *ngIf="!salon.checkRoute(['browser'])" icon="res://back_icon" (tap)="back()"></NavigationButton>
-    <StackLayout orientation="horizontal">
+    <NavigationButton *ngIf="!salon.checkRoute(['browser','visits','fav','account'])" icon="res://back_icon" (tap)="back()"></NavigationButton>
+    <StackLayout orientation="vertical">
       <Image src="res://logo_bar" class="action-image"></Image>
     </StackLayout>
 </ActionBar>

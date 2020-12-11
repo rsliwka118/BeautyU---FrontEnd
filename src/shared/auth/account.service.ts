@@ -10,6 +10,7 @@ import { HttpGetService } from "../http/http-get.service";
 import { HttpDeleteService } from "../http/http-delete.service";
 import { AuthService } from '../../shared/auth/auth.service'
 import { UserService } from "../user/user.service";
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Injectable({
   providedIn: "root"
@@ -91,6 +92,26 @@ export class AccountService {
       }, error => {
         this.toast.showToast(error.error)   
       })
-        
     }
+
+    deleteAccount(){
+
+      dialogs.confirm({
+        title: "Usuwanie konta",
+        message: "Jeśli usuniesz konto Twoje dane bezpowrotnie znikną z serwisu.\n\nCzy na pewno chcesz usunąć swoje konto?",
+        okButtonText: "Tak, usuwam konto",
+        cancelButtonText: "Jednak zostaję"
+      }).then(result => {
+
+          if(result){
+            this.deleteService
+            .deleteData(Config.apiAuthURL + "/account/" + getString("userID"), true)
+            .subscribe( (res: any) => {
+              this.logout()
+
+              this.toast.showToast(res.message)
+            })
+          }
+      })
   }
+}

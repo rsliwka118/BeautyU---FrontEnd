@@ -14,6 +14,7 @@ import { ActivatedRoute } from "@angular/router";
 import { catchError, first, map, switchMap, take } from "rxjs/operators";
 import { MenuComponent } from "../menu/menu.component";
 import { RouterExtensions } from "@nativescript/angular";
+import { LocationService } from "../../../shared/location/location.service";
 
 @Injectable({
   providedIn: "root"
@@ -34,6 +35,7 @@ export class BrowserComponent implements OnInit {
     public auth: AuthService, 
     private page: Page, 
     public salon: SalonService,
+    public location: LocationService,
     private activatedRoute: ActivatedRoute,
     private router: RouterExtensions) { 
       this.page.actionBarHidden = false;

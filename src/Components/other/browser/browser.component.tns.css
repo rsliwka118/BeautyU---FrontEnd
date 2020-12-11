@@ -21,12 +21,16 @@
   text-field-hint-color: #A8A8A8;
 }
 
+.search-box{
+  margin: 0 10 30 10;
+}
+
 .search{
   border-radius: 5;
   border-width: 0 0 1.5 0;
   border-color: #cfabc7; 
-  margin: 0 10 50 10;
 }
+
 .list-title{
   height: 70;
 }
@@ -34,8 +38,10 @@
   font-size: 25;
   color: #AF83A5;
 }
+
 .list-title-city{
   font-size: 20;
+  font-weight: 200;
   color:  #A8A8A8;
 }
 
@@ -44,6 +50,7 @@
   height: 18;
   vertical-align: center;
 }
+
 .list{
   height: 650;
 }

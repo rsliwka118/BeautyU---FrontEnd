@@ -42,6 +42,7 @@ export class AuthService {
         this.isAuthorized = true
         this.userService.user.firstName = result.user.firstName
         this.userService.user.lastName = result.user.lastName
+        this.location.currentCity = result.user.city
         fav = result.favorites
         this.salon.createFavArray(fav)
         this.location.cities = result.cities

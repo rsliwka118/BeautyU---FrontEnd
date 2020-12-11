@@ -18,89 +18,34 @@ import { Config } from "../../../shared/config";
 })
 
 export class LocationComponent implements OnInit {
-
-    private rate: number
-    private city: string
-    private accountType: string
-    public isSelect: boolean[]
-    public showWelcome: boolean
-    public showAccountType: boolean
-    public showLocation: boolean
-
+ 
     constructor(
-        private auth: AuthService,
-        private routerExtension: RouterExtensions,
         private toast: ToastsService,
+        private params: ModalDialogParams,
         private post: HttpPostService,
-        private page: Page,
         public userService: UserService,
         public location: LocationService,
         ) {
-            this.page.actionBarHidden = true
     }
 
     ngOnInit() {
-        this.showWelcome = true
-        this.showAccountType = false
-        this.showLocation = false
+        this.location.getCities()
     }
 
-    pageLoaded(args: EventData) {
-        let page = <Page>args.object;
-        page.bindingContext = new HomeViewModel();
-    }
-    
-    next(screen: number){
-        switch (screen) {
-            case 0:
-                this.showWelcome = true
-                this.showAccountType = false
-                this.showLocation = false
-                break
-            case 1:
-                this.showWelcome = false
-                this.showAccountType = true
-                this.showLocation = false
-                break
-            case 2:
-                this.showWelcome = false
-                this.showAccountType = false
-                this.showLocation = true
-                break
-            default:
-                console.log('incorrect page number')
-                break    
-        }
-    }
+    public sendSettings(city: string){
 
-    public setAccountType(type: string){
-        this.accountType = type
-        this.next(2)
-    }
-
-    public setLocation(city: string){
-        this.city = city
-        this.sendSettings()
-        this.routerExtension.navigate(['/menu'])
-    }
-
-    private sendSettings(){
-
-        this.post.postData(Config.apiAuthURL + "/settings/"+getString("userID"), {accountType: this.accountType, city: this.city}, true)
+        this.post.postData(Config.apiAuthURL + "/update-settings/"+getString("userID"), {city: city}, true)
             .subscribe( (res: any) => {
+                this.location.currentCity = city
                 this.toast.showToast(res.message)
             })
+
+        this.close()
+
     }
 
-    onTouch(args: TouchGestureEventData) {
-        const label = <StackLayout>args.object
-        switch (args.action) {
-            case 'up':
-                label.deletePseudoClass("pressed");
-                break;
-            case 'down':
-                label.addPseudoClass("pressed");
-                break;
-        }
-    }    
+    private close(){
+        this.params.closeCallback()
+    }
+    
 }

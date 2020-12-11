@@ -31,8 +31,10 @@ import { FavComponent } from "../components/other/fav/fav.component";
 import { AccountComponent } from "../components/other/account/account.component";
 import { CategoryComponent } from "../components/other/category/category.component";
 import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
+import { WelcomeComponent } from "../components/other/welcome/welcome.component";
 import { RatingComponent } from "../components/modals/rating/rating.component";
 import { LocationComponent } from "../components/modals/location/location.component";
+import { NgRippleModule } from 'nativescript-ripple/angular';
 
 @NgModule({
     bootstrap: [
@@ -43,7 +45,8 @@ import { LocationComponent } from "../components/modals/location/location.compon
         NativeScriptUIListViewModule,
         NativeScriptModule,
         NativeScriptFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgRippleModule
     ],
     declarations: [
         AppComponent,
@@ -56,7 +59,8 @@ import { LocationComponent } from "../components/modals/location/location.compon
         CategoryComponent,
         SalonDetailsComponent,
         RatingComponent,
-        LocationComponent
+        LocationComponent,
+        WelcomeComponent
     ],
     providers: [
         {

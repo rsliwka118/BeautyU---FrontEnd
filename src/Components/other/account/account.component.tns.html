@@ -1,7 +1,29 @@
-<FlexboxLayout class="page">
-    <StackLayout class="form" width="70%">
-        <Image class="logo" src="res://blogo"></Image>
-    </StackLayout>
-    <Button text="Account" (tap)="account.logout()" class="btn btn-primary m-t-20"></Button>
-</FlexboxLayout>
-
+<Page class="page">
+    <DockLayout>
+        <StackLayout class="header-box" dock="top">
+            <Label textWrap="true" class="header" [text]="'Witaj, '+userService.user.firstName+'!'"></Label>
+            <StackLayout orientation="horizontal">
+                <Label class="list-title-city" [text]="location.currentCity"></Label>
+                <Image src="res://location_icon" class="location"></Image>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout dock="top" verticalAlignment="center" orientation="vertical">
+            <DockLayout ripple rippleColor="#777777" (tap)="updateCity()" stretchLastChild="true" class="info"> 
+                <Label dock="left" text="Zmień miasto"></Label>
+                <Image dock="right" horizontalAlignment="right" class="arrow" src="res://city_arrow"></Image>
+            </DockLayout>
+            <StackLayout class="my-hr hr m-10"></StackLayout>
+            <DockLayout ripple rippleColor="#777777" (tap)="showInfo()" stretchLastChild="true" class="info"> 
+                <Label dock="left" text="O aplikacji"></Label>
+                <Image dock="right" horizontalAlignment="right" class="arrow" src="res://city_arrow"></Image>
+            </DockLayout>
+        </StackLayout>
+        <StackLayout dock="bottom" verticalAlignment="bottom" orientation="vertical">
+            <Image class="icon" src="res://cat"></Image>
+            <StackLayout horizontalAlignment="center" orientation="horizontal">
+                <Button text="Wyloguj" (tap)="account.logout()" class="btn logout"></Button>
+                <Button text="Usuń konto" (tap)="account.deleteAccount()" class="btn delete"></Button>
+            </StackLayout>
+        </StackLayout>
+    </DockLayout>
+</Page>
