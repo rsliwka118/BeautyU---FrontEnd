@@ -1,0 +1,34 @@
+<GridLayout rows="auto,*,auto" class="page" height="100%">
+    <StackLayout row="0" class="header">
+        <Label class="res" text="Rezerwacja"></Label>
+        <Label textWrap="true" class="salon-name" [text]="this.salonService.salon.name"></Label>
+        <Label *ngIf="!showSelectService" class="res" [text]="selectedService.offerTitle"></Label>
+    </StackLayout>
+    
+    <StackLayout *ngIf="showSelectService" row="1">
+        <Label horizontalAlignment="center" class="services-title" text="Wyberz usługę"></Label>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout *ngFor="let service of this.salonService.salon.services">
+                    <DockLayout class="services-item" stretchLastChild="true">
+                        <GridLayout dock="left" columns="auto" rows="*,*">
+                            <Label row="0" col="0" [text]="service.offerTitle" class="services-name" ></Label>
+                            <Label row="1" col="0" [text]="salonService.getServiceInfo(service)" class="services-info" ></Label>
+                        </GridLayout>
+                        <Label (tap)="setService(service)" dock="right" class="btn-add" horizontalAlignment="right" text="+"></Label>
+                    </DockLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+    
+    <StackLayout *ngIf="showSelectDay" row="1">
+        <Label horizontalAlignment="center" class="services-title" text="Wyberz dzień"></Label>
+        <Label horizontalAlignment="center" class="res" [text]="date"></Label>
+    </StackLayout>
+
+    <StackLayout row="2" horizontalAlignment="center" orientation="horizontal">
+        <Button (tap)="cancel()" text="Anuluj" class="btn btn-cancel"></Button>
+        <Button *ngIf="!showSelectService" (tap)="undo()" text="Cofnij" class="btn btn-next"></Button>
+    </StackLayout>
+</GridLayout>  

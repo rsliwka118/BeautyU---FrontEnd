@@ -23,7 +23,7 @@ interface Location {
 
 }
 
-interface Service {
+export interface Service {
 
     id: string;
     offerTitle: string;

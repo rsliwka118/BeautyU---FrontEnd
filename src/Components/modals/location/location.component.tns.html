@@ -1,6 +1,6 @@
 <Page class="location-page">
     <FlexLayout>
-        <StackLayout dock="top" verticalAlignment="top">
+        <StackLayout verticalAlignment="top">
             <Label class="list-title" text="Wybierz miasto"></Label>
             <ListView [items]="location.cities" class="list-group">
                 <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
@@ -14,7 +14,7 @@
                 </ng-template>
             </ListView>
         </StackLayout>
-        <StackLayout dock="bottom" verticalAlignment="bottom">
+        <StackLayout verticalAlignment="bottom">
             <Button text="Anuluj" (tap)="close()" class="btn"></Button>
         </StackLayout>
     </FlexLayout> 

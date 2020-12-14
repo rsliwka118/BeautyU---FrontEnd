@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
   }
 
   public back(){
-    this.location.back();
+    this.location.back()
   }
 
   ngOnInit() {

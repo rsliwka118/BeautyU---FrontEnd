@@ -33,6 +33,7 @@ export class SalonService {
     category: string
     type: number
     public favList = []
+    public salon: Salon
     
     public getPreview() {
         let typeUrl: string

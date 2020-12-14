@@ -114,12 +114,12 @@
 }
 
 .services-item{
-  padding: 5;
+  padding: 5 10 5 10;
   border-radius: 5;
   border-width: 0 0 1 0;
   border-color: #cccccc;
   background-color: white;
-  margin: 0 0 5 0;
+  margin: 5 0 0 0;
 }
 
 .services-title{
@@ -130,6 +130,22 @@
 }
 
 .services-name{
+  font-size: 15;
+  color: #747474;
+}
+
+.services-more{
+  padding: 5;
+  border-radius: 5;
+  border-width: 0 0 1 0;
+  border-color: #cccccc;
+  background-color: white;
+  margin: 0 0 5 0;
+
+}
+
+.services-more-text{
+  text-align: center;
   font-size: 15;
   color: #747474;
 }
@@ -158,4 +174,16 @@ Switch{
   border-radius: 2;
   color: #e09ad0;
   /* font-size: 20; */
+}
+
+.btn-add{
+  text-align: center;
+  font-size: 23;
+  font-weight: 200;
+  color: #e09ad0;
+  height: 40;
+  width: 40;
+  border-radius: 50%;
+  border-width: 1;
+  border-color: #e09ad0;
 }

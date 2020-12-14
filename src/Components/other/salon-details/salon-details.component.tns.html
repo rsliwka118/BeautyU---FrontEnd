@@ -9,16 +9,16 @@
                 <GridLayout rows="auto" columns="*">
                     <StackLayout row="0" col="0" horizontalAlignment="left" orientation="vertical">
                         <StackLayout orientation="vertical">
-                            <Label class="salon-name" [text]='salon.name'></Label>
-                            <Label textWrap="true" class="salon-type" [text]='salonService.getLocation(salon.location)'></Label>
+                            <Label class="salon-name" [text]='salonService.salon.name'></Label>
+                            <Label textWrap="true" class="salon-type" [text]='salonService.getLocation(salonService.salon.location)'></Label>
                         </StackLayout>
                             <StackLayout style="margin-top: 10" orientation="vertical">
                             <Label class="salon-description-title" text="Opis"></Label>
-                            <Label textWrap="true" class="salon-type" [text]='salon.describe'></Label>
+                            <Label textWrap="true" class="salon-type" [text]='salonService.salon.describe'></Label>
                         </StackLayout>
                     </StackLayout>
                     <StackLayout row="0" col="1" horizontalAlignment="right">
-                        <Label [text]="salonService.rateAVG(salon.rates)" class="salon-rate"></Label>
+                        <Label [text]="salonService.rateAVG(salonService.salon.rates)" class="salon-rate"></Label>
                         <Button text="Oceń" class="btn-rate" (tap)="rate()"></Button>
                     </StackLayout>
                 </GridLayout>
@@ -39,20 +39,42 @@
             </ScrollView>
             <StackLayout class="margin">
                 <Label class="services-title" text="Usługi"></Label>
-                <StackLayout *ngFor="let service of this.salon.services">
-                    <DockLayout class="services-item">
+                <StackLayout *ngIf="showMore()">
+                    <DockLayout class="services-item" stretchLastChild="true">
                         <GridLayout dock="left" columns="auto" rows="*,*">
-                            <Label row="0" col="0" [text]="service.offerTitle" class="services-name" ></Label>
-                            <Label row="1" col="0" [text]="salonService.getServiceInfo(service)" class="services-info" ></Label>
+                            <Label row="0" col="0" [text]="this.salonService.salon.services[0].offerTitle" class="services-name" ></Label>
+                            <Label row="1" col="0" [text]="salonService.getServiceInfo(this.salonService.salon.services[0])" class="services-info" ></Label>
                         </GridLayout>
-                        <Switch dock="right" color="#AF83A5" offBackgroundColor="#666666" backgroundColor="#e09ad0" checked="false" (checkedChange)="onCheckedChange($event)"></Switch>
-                    </DockLayout>    
-                </StackLayout>    
+                        <Label (tap)="showReservation()" dock="right" class="btn-add" horizontalAlignment="right" text="+"></Label>
+                    </DockLayout>
+                    <DockLayout class="services-item" stretchLastChild="true">
+                        <GridLayout dock="left" columns="auto" rows="*,*">
+                            <Label row="0" col="0" [text]="this.salonService.salon.services[1].offerTitle" class="services-name" ></Label>
+                            <Label row="1" col="0" [text]="salonService.getServiceInfo(this.salonService.salon.services[1])" class="services-info" ></Label>
+                        </GridLayout>
+                        <Label (tap)="showReservation()" dock="right" class="btn-add" horizontalAlignment="right" text="+"></Label>
+                    </DockLayout>
+                    <StackLayout ripple rippleColor="#777777" (tap)="showReservation()" class="services-more">
+                        <Label text="Pokaż więcej" class="services-more-text"></Label>
+                    </StackLayout>    
+                </StackLayout>
+                <StackLayout *ngIf="!showMore()">
+                    <StackLayout *ngFor="let service of this.salonService.salon.services">
+                        <DockLayout class="services-item" stretchLastChild="true">
+                            <GridLayout dock="left" columns="auto" rows="*,*">
+                                <Label row="0" col="0" [text]="service.offerTitle" class="services-name" ></Label>
+                                <Label row="1" col="0" [text]="salonService.getServiceInfo(service)" class="services-info" ></Label>
+                            </GridLayout>
+                            <Label (tap)="showReservation()" dock="right" class="btn-add" horizontalAlignment="right" text="+"></Label>
+                            <!-- <Switch dock="right" color="#AF83A5" offBackgroundColor="#666666" backgroundColor="#e09ad0" checked="false" (checkedChange)="onCheckedChange($event)"></Switch> -->
+                        </DockLayout>    
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
             <AbsoluteLayout height="200" class="map">
                 <Image width="100%" src="res://map_icon"></Image>
                 <GridLayout width="100%" height="100%">
-                    <Button (tap)="salonService.openMap(this.salon.location)" class="btn-primary" text="Sprawdź na mapie"></Button>
+                    <Button (tap)="salonService.openMap(this.salonService.salon.location)" class="btn-primary" text="Sprawdź na mapie"></Button>
                 </GridLayout>
             </AbsoluteLayout>
         </StackLayout>  

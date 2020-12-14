@@ -6,9 +6,10 @@ import { AuthService } from '../../../shared/auth/auth.service'
 import { Salon } from "../../../shared/salon/salon.model";
 import { EventData, ListView, ObservableArray, Switch } from "@nativescript/core";
 import { ActivatedRoute } from "@angular/router";
-import { ModalDialogOptions, ModalDialogService } from "@nativescript/angular";
+import { ModalDialogOptions, ModalDialogService, RouterExtensions } from "@nativescript/angular";
 
 import { RatingComponent } from "../../modals/rating/rating.component";
+import { ReservationComponent } from "../../../components/modals/reservation/reservation.component";
 
 @Component({
   selector: 'ns-salon-details',
@@ -17,15 +18,15 @@ import { RatingComponent } from "../../modals/rating/rating.component";
 })
 export class SalonDetailsComponent implements OnInit {
 
-  public salon: Salon
   public hours
   private sub: any
   id: string
-  
+
   public days = ["PN","WT","ŚR","CZW","PT","SO","ND"]
   constructor(
     public auth: AuthService, 
     public account: AccountService,
+    private routerExtensions: RouterExtensions,
     private route: ActivatedRoute,
     private page: Page,
     private modalService: ModalDialogService,
@@ -38,16 +39,17 @@ export class SalonDetailsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']
       this.salonService.getSalon(this.id).subscribe( (res: any) => {
-        this.salon = res.salon
-        this.salon.services = res.services
-        this.hours = this.salonService.getHours(this.salon.hours)
+        this.salonService.salon = res.salon
+        this.hours = this.salonService.getHours(this.salonService.salon.hours)
+        this.salonService.salon.services = res.services
       })
    })
   }
 
-  onCheckedChange(args: EventData) {
-    let sw = args.object as Switch;
-    let isChecked = sw.checked; // boolean
+  public showMore():boolean {
+    if(this.salonService.salon.services.length > 2) return true
+    else false
+
   }
 
   rate(){
@@ -57,6 +59,10 @@ export class SalonDetailsComponent implements OnInit {
       context: {}
     }
     this.modalService.showModal(RatingComponent, options);
+  }
+
+  public showReservation(){
+      this.routerExtensions.navigate(['/menu/reservation'])
   }
 
   ngOnDestroy() {

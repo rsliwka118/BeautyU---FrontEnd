@@ -13,6 +13,7 @@ import { CategoryComponent } from '../components/other/category/category.compone
 import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
 import { WelcomeComponent } from "../components/other/welcome/welcome.component";
 import { SearchComponent } from "../components/modals/search/search.component";
+import { ReservationComponent } from "../components/modals/reservation/reservation.component";
 
 const routes: Routes = [
     {
@@ -64,9 +65,13 @@ const routes: Routes = [
                 component: SearchComponent 
             },
             {
+                path: "reservation",
+                component: ReservationComponent
+            },
+            {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'browser' //redirectTo: 'details/0c84ca9d-9583-4936-8958-69e804ea5710'
+                redirectTo: 'details/c5d0efaa-be0a-40ca-93c2-f841d959e102' //redirectTo: 'browser'
             }
        ]   
     }

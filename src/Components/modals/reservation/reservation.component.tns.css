@@ -1,0 +1,78 @@
+.page {
+  background-color: #F5F5F5;
+  padding: 0 10 0 10;
+}
+
+.services-item{
+  padding: 5 10 5 10;
+  border-radius: 5;
+  border-width: 0 0 1 0;
+  border-color: #cccccc;
+  background-color: white;
+  margin: 5 0 0 0;
+}
+
+.btn {
+  width: 50%;
+  margin: 30 5 0 5;
+  font-size: 20;
+  font-weight: 200;
+  color: white;
+}
+
+.btn-next{
+  background-color:#e09ad0;
+
+}
+
+.btn-cancel{
+  background-color: #AF83A5;
+
+}
+
+.services-name{
+  font-size: 15;
+  color: #747474;
+}
+
+.services-info{
+  font-size: 25;
+  color: #e09ad0;
+}
+
+.switch {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.services-title{
+  font-size: 30;
+  color: #AF83A5;
+}
+
+.header{
+  margin-bottom: 20;
+}
+
+.salon-name{
+  font-size: 40;
+  color: #e09ad0;
+
+}
+
+.res{
+  font-size: 20;
+  color: #747474;
+}
+
+.btn-add{
+  text-align: center;
+  font-size: 23;
+  font-weight: 200;
+  color: #e09ad0;
+  height: 40;
+  width: 40;
+  border-radius: 50%;
+  border-width: 1;
+  border-color: #e09ad0;
+}

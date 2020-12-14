@@ -35,6 +35,7 @@ import { WelcomeComponent } from "../components/other/welcome/welcome.component"
 import { RatingComponent } from "../components/modals/rating/rating.component";
 import { LocationComponent } from "../components/modals/location/location.component";
 import { SearchComponent } from "../components/modals/search/search.component";
+import { ReservationComponent } from "../components/modals/reservation/reservation.component";
 import { NgRippleModule } from 'nativescript-ripple/angular';
 
 @NgModule({
@@ -62,7 +63,8 @@ import { NgRippleModule } from 'nativescript-ripple/angular';
         RatingComponent,
         LocationComponent,
         WelcomeComponent,
-        SearchComponent
+        SearchComponent,
+        ReservationComponent
     ],
     providers: [
         {
