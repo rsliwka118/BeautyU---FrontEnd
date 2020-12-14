@@ -18,6 +18,7 @@ import { ValidationService } from "../shared/auth/validation.service";
 import { AuthService } from "../shared/auth/auth.service";
 import { AccountService } from "../shared/auth/account.service";
 import { ToastsService } from "../shared/toasts.service";
+import { DateService } from "../shared/date/date.service";
 
 import { HttpPostService } from "../shared/http/http-post.service";
 import { HttpGetService } from "../shared/http/http-get.service";
@@ -86,6 +87,7 @@ import { NgRippleModule } from 'nativescript-ripple/angular';
         UserService,
         HttpDeleteService,
         ToastsService,
+        DateService,
         [AuthGuard],
         [LoginGuard]
     ],

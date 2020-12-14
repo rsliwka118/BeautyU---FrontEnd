@@ -24,7 +24,7 @@
     
     <StackLayout *ngIf="showSelectDay" row="1">
         <Label horizontalAlignment="center" class="services-title" text="Wyberz dzień"></Label>
-        <Label horizontalAlignment="center" class="res" [text]="date"></Label>
+        <Label horizontalAlignment="center" class="res" [text]="dateService.getDate(0)"></Label>
     </StackLayout>
 
     <StackLayout row="2" horizontalAlignment="center" orientation="horizontal">

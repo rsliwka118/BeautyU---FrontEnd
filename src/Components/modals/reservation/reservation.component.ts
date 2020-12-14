@@ -13,6 +13,7 @@ import { Config } from "../../../shared/config";
 import { SalonService } from "../../../shared/salon/salon.service";
 import { Location } from '@angular/common';
 import { Service } from "src/shared/salon/salon.model";
+import { DateService } from "../../../shared/date/date.service";
 
 @Component({
     selector: 'ns-reservation',
@@ -32,13 +33,13 @@ export class ReservationComponent implements OnInit {
     public selectedHour = "" 
 
     private actualPage = 0
-    private _date: Date
 
     constructor(
         private toast: ToastsService,
         private post: HttpPostService,
         private routeLocation: Location, 
         public userService: UserService,
+        public dateService: DateService,
         public location: LocationService,
         public salonService: SalonService
         ) {
@@ -49,8 +50,6 @@ export class ReservationComponent implements OnInit {
         this.showSelectDay = false
         this.showSelectTime = false
         this.showSummary = false
-
-        this._date = new Date()
     }
     
     public next(screen: number){
@@ -76,10 +75,7 @@ export class ReservationComponent implements OnInit {
         }
     }
 
-    get date(){
-        return this._date
-    }
-    
+
     public cancel(){
         this.routeLocation.back()
     }
