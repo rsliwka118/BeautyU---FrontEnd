@@ -62,6 +62,7 @@ export class SalonDetailsComponent implements OnInit {
   }
 
   public showReservation(){
+      this.salonService.salonID = this.id
       this.routerExtensions.navigate(['/menu/reservation'])
   }
 

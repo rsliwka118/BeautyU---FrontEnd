@@ -1,6 +1,7 @@
 <GridLayout rows="auto,*,auto" class="page" height="100%">
     <StackLayout row="0" class="header">
         <Label class="res" text="Rezerwacja"></Label>
+        <Label class="my-hr hr m-10"></Label>
         <Label textWrap="true" class="salon-name" [text]="this.salonService.salon.name"></Label>
         <Label *ngIf="!showSelectService" class="res" [text]="selectedService.offerTitle"></Label>
     </StackLayout>
@@ -24,7 +25,26 @@
     
     <StackLayout *ngIf="showSelectDay" row="1">
         <Label horizontalAlignment="center" class="services-title" text="Wyberz dzień"></Label>
-        <Label horizontalAlignment="center" class="res" [text]="dateService.getDate(0)"></Label>
+        <Label horizontalAlignment="center" class="week" text="Tydzień"></Label>
+        <GridLayout rows="auto,auto" columns="auto,*,auto" width="80%">
+            <Label row="0" col="1" class="my-hr hr m-10"></Label>
+            <Label *ngIf="!canUndo()" ripple rippleColor="#777777" (tap)="dateService.undoWeek()" row="1" col="0" class="btn-week undo"></Label>
+            <Label *ngIf="canUndo()" row="1" col="0" class="btn-week undo disable"></Label>
+            <StackLayout row="1" col="1" orientation="horizontal" horizontalAlignment="center">
+                <Label class="res" [text]="dateService.getStartDate()"></Label>
+                <Label style="margin: 0 10 0 10" class="res" text="|"></Label>
+                <Label class="res" [text]="dateService.getEndDate()"></Label>
+            </StackLayout>
+            <Label ripple rippleColor="#777777" (tap)="dateService.nextWeek()" row="1" col="2" class="btn-week next"></Label>
+        </GridLayout>
+        <ScrollView style="margin-top: 10" scrollBarIndicatorVisible="false" orientation ="horizontal">
+            <StackLayout orientation ="horizontal">
+                <AbsoluteLayout *ngFor="let day of dateService.day" style="margin: 0 5 0 5">
+                    <Label [className]="day.hours.length ? 'day' : 'day day-disable'" [text]="day.day"></Label>
+                    <Label *ngIf="day.hours.length" top="0" left="0" class="count" [text]="day.hours.length"></Label>
+                </AbsoluteLayout>
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
 
     <StackLayout row="2" horizontalAlignment="center" orientation="horizontal">

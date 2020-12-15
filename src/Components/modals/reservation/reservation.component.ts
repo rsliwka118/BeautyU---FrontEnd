@@ -14,6 +14,7 @@ import { SalonService } from "../../../shared/salon/salon.service";
 import { Location } from '@angular/common';
 import { Service } from "src/shared/salon/salon.model";
 import { DateService } from "../../../shared/date/date.service";
+import { Day } from "../../../shared/date/day.model"
 
 @Component({
     selector: 'ns-reservation',
@@ -29,7 +30,7 @@ export class ReservationComponent implements OnInit {
     public showSummary: boolean
 
     public selectedService: Service
-    public selelectedDay = ""
+    public selectedDay = ""
     public selectedHour = "" 
 
     private actualPage = 0
@@ -50,9 +51,15 @@ export class ReservationComponent implements OnInit {
         this.showSelectDay = false
         this.showSelectTime = false
         this.showSummary = false
+
+        this.dateService.getDays()
     }
-    
-    public next(screen: number){
+
+    ngOnDestroy(){
+        this.dateService.reset() 
+    }
+
+    public next(screen: number) {
         switch (screen) {
             case 0:
                 this.showSelectService = true
@@ -75,19 +82,25 @@ export class ReservationComponent implements OnInit {
         }
     }
 
-
     public cancel(){
         this.routeLocation.back()
     }
 
     public undo(){
         this.next( this.actualPage -= 1 )
+        this.dateService.reset()
+        this.dateService.getDays()
     }
 
     public setService(service: Service){
         this.selectedService = service
         this.actualPage += 1
         this.next(1)
+    }
+
+    public canUndo(){
+        let date = new Date()
+        return this.dateService.compareDates( date, this.dateService._dateCurrent )
     }
 
     public sendSettings(city: string){

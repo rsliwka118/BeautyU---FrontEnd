@@ -34,6 +34,7 @@ export class SalonService {
     type: number
     public favList = []
     public salon: Salon
+    public salonID: string
     
     public getPreview() {
         let typeUrl: string

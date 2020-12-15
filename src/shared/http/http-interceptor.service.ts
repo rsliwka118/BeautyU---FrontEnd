@@ -23,12 +23,12 @@ export class HttpInterceptorService implements HttpInterceptor {
     }
 
     private onStart(url: string) {
-        console.log("onStart", url);
+        //console.log("onStart", url);
         this.httpLoaderService.onRequestStart();
     }
 
     private onEnd(url: string): void {
-        console.log("onEnd", url);
+        //console.log("onEnd", url);
         this.httpLoaderService.onRequestEnd();
     }
 }

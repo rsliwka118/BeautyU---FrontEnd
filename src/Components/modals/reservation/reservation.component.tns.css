@@ -65,6 +65,15 @@
   color: #747474;
 }
 
+.week{
+  font-size: 15;
+  color: #a8a8a8;
+}
+
+.my-hr{
+  margin: 0
+}
+
 .btn-add{
   text-align: center;
   font-size: 23;
@@ -75,4 +84,62 @@
   border-radius: 50%;
   border-width: 1;
   border-color: #e09ad0;
+}
+
+.day{
+  text-align: center;
+  font-size: 20;
+  font-weight: 200;
+  border-radius: 50%;
+  border-width: 1;
+  color: white;
+  border-color: #AF83A5;
+  background-color: #AF83A5;
+  padding: 12 15 12 15;
+}
+
+.day-disable{
+  border-color:#a8a8a8;
+  background-color: #a8a8a8;
+}
+
+.day-active{
+  border-color: #e09ad0;
+  background-color: #e09ad0;
+}
+
+.count{
+  text-align: center;
+  font-size: 10;
+  font-weight: 200;
+  border-radius: 50%;
+  border-width: 1;
+  color: white;
+  border-color: #ffc629;
+  background-color: #ffc629;
+  width: 22;
+  height: 22;
+}
+
+.btn-week{
+  background-color: #F5F5F5;
+  height: 30;
+  width: 30;
+  border-radius: 50%;
+  border-width: 1;
+  border-color: #F5F5F5;
+}
+
+.next{
+  background: url("res://city_arrow") no-repeat center center;
+  background-size: contain;
+}
+
+.undo{
+  background: url("res://back_arrow") no-repeat center center;
+  background-size: contain;
+}
+
+.disable{
+  opacity: 0.5;
 }
