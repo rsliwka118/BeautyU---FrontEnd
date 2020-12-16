@@ -12,12 +12,16 @@ export class DateService {
     public _dateCurrent: Date
     public _dateWeek: Date
     public day: Array<Day>
+    public dayNumber
+    public selectedDate
 
     constructor( private salonService: SalonService, private post: HttpPostService ) { 
         this._dateCurrent = new Date()
         this._dateWeek = new Date()
         this._dateWeek.setDate( this._dateCurrent.getDate() + 6)
         this.day = []
+        this.dayNumber = 0
+        this.selectedDate = this.formatFullDate(this._dateCurrent)
     }
 
     public getStartDate(){
@@ -34,8 +38,11 @@ export class DateService {
     public nextWeek(){
         this._dateCurrent.setDate( this._dateCurrent.getDate() + 7)
         this._dateWeek.setDate( this._dateWeek.getDate() + 7)
-
+        
         this.getDays()
+        this.day[0].isFocus = true
+        this.dayNumber = 0
+        this.selectedDate = this.formatFullDate(this._dateCurrent)
     }
 
     public undoWeek(){
@@ -43,6 +50,9 @@ export class DateService {
         this._dateWeek.setDate( this._dateWeek.getDate() - 7)
 
         this.getDays()
+        this.day[0].isFocus = true
+        this.dayNumber = 0
+        this.selectedDate = this.formatFullDate(this._dateCurrent)
     }
 
     private formatDate(date){
@@ -75,9 +85,24 @@ export class DateService {
         let newDt = new Date(date)
 
         for( let i = 0; i < 7; i++ ) {
+
             newDt.setDate( newDt.getDate() + ( i === 0 ? 0 : 1 ) )
-            console.log(this._dateCurrent + " " + newDt)
             this.getAvailableHours( newDt, i )
+
+        }
+
+    }
+
+    private timeArr(arr) {
+
+        if( arr.length ){
+
+            if( arr[0] !== "Wybierz godzinę" )
+                arr.unshift("Wybierz godzinę")
+
+        } else {
+            if( arr[0] !== "Wybierz godzinę" )
+                arr.unshift("Zamknięte")
         }
 
     }
@@ -90,15 +115,20 @@ export class DateService {
             .subscribe( (res: any) => {
 
                 day.day = dd
+                day.isFocus = i === 0 ? true : false
                 day.hours = res.availableHours
-                day.isFocus = false
                 
+                this.timeArr(day.hours)
+
                 this.day[i] = day
+                
             })
     }
 
     reset(){
         this._dateCurrent = new Date()
         this._dateWeek.setDate( this._dateCurrent.getDate() + 6)
+        this.day[0].isFocus = true
+        this.dayNumber = 0
     }
 }

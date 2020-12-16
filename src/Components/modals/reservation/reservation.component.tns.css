@@ -1,6 +1,11 @@
 .page {
   background-color: #F5F5F5;
-  padding: 0 10 0 10;
+  padding: 30 10 0 10;
+}
+
+.picker {
+  width: 60%;
+  color: #747474;
 }
 
 .services-item{
@@ -13,21 +18,21 @@
 }
 
 .btn {
-  width: 50%;
-  margin: 30 5 0 5;
+  margin: 0;
   font-size: 20;
   font-weight: 200;
   color: white;
 }
 
-.btn-next{
-  background-color:#e09ad0;
+.btn-cancel{
+  width: 50%;
+  background-color: #AF83A5;
 
 }
 
-.btn-cancel{
-  background-color: #AF83A5;
-
+.btn-reserv{
+  width: 100%;
+  background-color: #e09ad0;
 }
 
 .services-name{
@@ -47,6 +52,12 @@
 
 .services-title{
   font-size: 30;
+  color: #AF83A5;
+}
+
+.summary-text{
+  font-size: 20;
+  font-weight: 200;
   color: #AF83A5;
 }
 
@@ -104,14 +115,13 @@
 }
 
 .day-active{
-  border-color: #e09ad0;
+  border-color: #ffc629;
   background-color: #e09ad0;
 }
 
 .count{
   text-align: center;
   font-size: 10;
-  font-weight: 200;
   border-radius: 50%;
   border-width: 1;
   color: white;
@@ -127,7 +137,7 @@
   width: 30;
   border-radius: 50%;
   border-width: 1;
-  border-color: #F5F5F5;
+  border-color: transparent;
 }
 
 .next{
@@ -140,6 +150,31 @@
   background-size: contain;
 }
 
+.hour{
+  font-size: 20;
+  font-weight: 200;
+  background-color: #ffbb01;
+  border-radius: 5;
+  border-width: 0 0 1 0;
+  border-color: #cccccc;
+  color: white;
+  padding: 5;
+}
+
 .disable{
   opacity: 0.5;
+}
+
+.input {
+  font-size: 18;
+  font-weight: 200;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
+  placeholder-color: #A8A8A8;
+}
+
+.text-box{
+  margin-bottom: 0;
+  height: 80;
 }
