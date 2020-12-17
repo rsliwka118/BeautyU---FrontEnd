@@ -55,6 +55,7 @@ export class AuthService {
         this.salon.createFavArray(fav)
         this.location.cities = result.cities
         this.isNew = result.user.isNew.data[0]
+        setString("accountType",result.user.accountType)
 
         if(this.isNew){
           this.routerExtension.navigate(['/menu']);

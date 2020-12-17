@@ -7,17 +7,14 @@
             <Image src="res://hi"></Image>
         </StackLayout>
     </DockLayout>
-    <StackLayout class="icons" verticalAlignment="center" *ngIf="showAccountType">
-        <StackLayout ripple rippleColor="#777777" (tap)="setAccountType('Salon')">
-            <Label horizontalAlignment="center" class="account-text" textWrap="true" text="Posiadasz salon?"></Label>
-            <Image width="200" src="res://salon"></Image>
+    <GridLayout class="icons" rows="auto,*,auto" *ngIf="showAccountType">
+        <Label row="0" horizontalAlignment="center" class="account-text" textWrap="true" text="Czy chcesz zarządzać swoim salonem?"></Label>
+        <Image row="1" width="90%" src="res://salon"></Image>
+        <StackLayout row="2" orientation="horizontal">
+            <Label horizontalAlignment="center" text="Nie" (tap)="setAccountType('Client')" class="btn-account btn-disactive"></Label>
+            <Label horizontalAlignment="center" text="Tak" (tap)="setAccountType('Salon')" class="btn-account btn-active"></Label>
         </StackLayout>
-        <Label style="margin: 10 0 10 0"></Label>
-        <StackLayout ripple rippleColor="#777777" (tap)="setAccountType('Client')">
-            <Label horizontalAlignment="center" class="account-text" textWrap="true" text="Szukasz salonu?"></Label>
-            <Image width="250" src="res://client"></Image>
-        </StackLayout>
-    </StackLayout>
+    </GridLayout>
     <StackLayout *ngIf="showLocation" class="location-page">
         <Label class="list-title" text="Wybierz miasto"></Label>
         <ListView height="650" [items]="location.cities" class="list-group">

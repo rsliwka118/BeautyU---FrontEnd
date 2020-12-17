@@ -1,5 +1,5 @@
 <GridLayout class="page" rows="*,auto" class="page" height="100%">
-    <StackLayout *ngIf="visitTab" row="0">
+    <FlexLayout *ngIf="visitTab" row="0">
         <ListView *ngIf="visitsEmpty" class="list" separatorColor="#a8a8a8" [items]="this.visits">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                     <StackLayout orientation="vertical">
@@ -29,9 +29,9 @@
             <Image class="nofav-icon" src="res://visit_404"></Image>
             <Label class="not-found-text" text="Brak wizyt"></Label>
         </StackLayout>
-    </StackLayout>
+    </FlexLayout>
 
-    <StackLayout *ngIf="!visitTab" row="0">
+    <FlexLayout *ngIf="!visitTab" row="0">
         <ListView *ngIf="historyEmpty" class="list" separatorColor="#a8a8a8" [items]="this.history">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                     <StackLayout orientation="vertical">
@@ -61,7 +61,7 @@
             <Image class="nofav-icon" src="res://visit_404"></Image>
             <Label class="not-found-text" text="Brak historii"></Label>
         </StackLayout>
-    </StackLayout>
+    </FlexLayout>
     <StackLayout class="button-bar" row="1" orientation="horizontal">
         <Label text="Wizyty" (tap)="visitTab = true" [className]="visitTab ? 'button button-active' : 'button button-disactive'"></Label>
         <Label text="Historia" (tap)="visitTab = false" [className]="!visitTab ? 'button button-active' : 'button button-disactive'"></Label>

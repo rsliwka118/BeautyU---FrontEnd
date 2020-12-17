@@ -89,7 +89,10 @@ export class WelcomeComponent implements OnInit {
 
         this.post.postData(Config.apiAuthURL + "/settings/"+getString("userID"), {accountType: this.accountType, city: this.city}, true)
             .subscribe( (res: any) => {
+
+                setString("accountType", this.accountType)
                 this.toast.showToast(res.message)
+
             })
     }
 }

@@ -69,9 +69,13 @@ const routes: Routes = [
                 component: ReservationComponent
             },
             {
+                path: "salon",
+                component: BrowserComponent
+            },
+            {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'visits' //redirectTo: 'browser'
+                redirectTo: 'browser'
             }
        ]   
     }

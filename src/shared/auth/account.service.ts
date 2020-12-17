@@ -31,6 +31,11 @@ export class AccountService {
       private auth: AuthService
       ) {}
 
+    checkAccountType(){
+      if( getString("accountType") === "Client" ) return false
+      if( getString("accountType") === "Salon" ) return true
+    }  
+
     login() {
       this.postService
       .postData(Config.apiAuthURL + "/login", { email: this.userService.user.email, password: this.userService.user.password }, false)

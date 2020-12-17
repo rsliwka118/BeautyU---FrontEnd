@@ -44,14 +44,37 @@
     font-weight: 200;
 }
 
-.account-screen{
-    margin-top: 30
-}
-
 .account-text{
+    margin-top: 50;
+    text-align: center;
     font-size: 30;
     color: #AF83A5;
 }
+
+.btn-account{
+    text-align: center;
+    width: 150;
+    font-size: 20;
+    font-weight: 200;
+    padding: 5;
+    margin: 5 5 20 5
+}
+
+.btn-active{
+    border-width: 1;
+    border-color: #e09ad0;
+    background-color: #e09ad0;
+    border-radius: 2;
+    color: white;
+  }
+  
+.btn-disactive{
+    border-width: 1;
+    border-color: #e09ad0;
+    background-color: transparent;
+    border-radius: 2;
+    color: #e09ad0;
+  }
 
 .location-page{
     padding-top: 50;
