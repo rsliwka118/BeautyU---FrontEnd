@@ -26,10 +26,18 @@ export class AuthService {
       private toast: ToastsService,
       private salon: SalonService,
       private postService: HttpPostService,
+      private router: RouterExtensions,
       private getService: HttpGetService,
       private deleteService: HttpDeleteService,
       private location: LocationService
       ) {}
+    
+    reloadComponent() {
+      let currentUrl = this.router.router.url;
+          this.router.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([currentUrl]);
+    }
 
     getDetails(checkToken) {
 

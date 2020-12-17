@@ -1,7 +1,69 @@
-<FlexboxLayout class="page">
-    <StackLayout class="form" width="70%">
-        <Image class="logo" src="res://blogo"></Image>
+<GridLayout class="page" rows="*,auto" class="page" height="100%">
+    <StackLayout *ngIf="visitTab" row="0">
+        <ListView *ngIf="visitsEmpty" class="list" separatorColor="#a8a8a8" [items]="this.visits">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                            <GridLayout columns="auto,*">
+                                <StackLayout col="0">
+                                    <AbsoluteLayout width="66" height="66">
+                                        <Label class="visit-date"></Label>
+                                        <StackLayout width="100%" height="100%">
+                                            <Label horizontalAlignment="center" class="month" [text]="getMonth(item.date)"></Label>
+                                            <Label horizontalAlignment="center" class="day" [text]="getDay(item.date)"></Label>
+                                        </StackLayout>
+                                    </AbsoluteLayout>
+                                    <Label class="hour" [text]="item.hour"></Label>
+                                </StackLayout>
+                                <StackLayout col="1" dock="left" orientation="vertical">
+                                    <Label (tap)="salon.onItemTap(item.salonID.id)" class="salon-name" [text]='item.salonID.name'></Label>
+                                    <Label class="salon-type" [text]='getServiceName(item)'></Label>
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                        <Label class="cancel-visit" (tap)="cancelVisit(item.id)" text="Anuluj"></Label>
+                    </StackLayout>
+            </ng-template>
+        </ListView>
+        <StackLayout *ngIf="!visitsEmpty" class="not-found">
+            <Image class="nofav-icon" src="res://visit_404"></Image>
+            <Label class="not-found-text" text="Brak wizyt"></Label>
+        </StackLayout>
     </StackLayout>
-    <Button text="Visits" (tap)="account.logout()" class="btn btn-primary m-t-20"></Button>
-</FlexboxLayout>
 
+    <StackLayout *ngIf="!visitTab" row="0">
+        <ListView *ngIf="historyEmpty" class="list" separatorColor="#a8a8a8" [items]="this.history">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <StackLayout orientation="vertical">
+                        <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
+                            <GridLayout columns="auto,*">
+                                <StackLayout col="0">
+                                    <AbsoluteLayout width="66" height="66">
+                                        <Label class="visit-date"></Label>
+                                        <StackLayout width="100%" height="100%">
+                                            <Label horizontalAlignment="center" class="month" [text]="getMonth(item.date)"></Label>
+                                            <Label horizontalAlignment="center" class="day" [text]="getDay(item.date)"></Label>
+                                        </StackLayout>
+                                    </AbsoluteLayout>
+                                    <!-- <Label class="hour" [text]="item.hour"></Label> -->
+                                </StackLayout>
+                                <StackLayout col="1" dock="left" orientation="vertical">
+                                    <Label class="salon-name" [text]='item.salonID.name'></Label>
+                                    <Label class="salon-type" [text]='getServiceName(item)'></Label>
+                                    <Label class="status" [text]='getStatus(item.status)'></Label>
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                    </StackLayout>
+            </ng-template>
+        </ListView>
+        <StackLayout *ngIf="!historyEmpty" class="not-found">
+            <Image class="nofav-icon" src="res://visit_404"></Image>
+            <Label class="not-found-text" text="Brak historii"></Label>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout class="button-bar" row="1" orientation="horizontal">
+        <Label text="Wizyty" (tap)="visitTab = true" [className]="visitTab ? 'button button-active' : 'button button-disactive'"></Label>
+        <Label text="Historia" (tap)="visitTab = false" [className]="!visitTab ? 'button button-active' : 'button button-disactive'"></Label>
+    </StackLayout>
+</GridLayout>

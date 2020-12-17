@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalDialogParams, RouterExtensions } from "@nativescript/angular";
 import { getString } from "@nativescript/core/application-settings";
+import { AuthService } from "../../../shared/auth/auth.service";
 import { Config } from "../../../shared/config";
 import { HttpPostService } from "../../../shared/http/http-post.service";
 import { ToastsService } from "../../../shared/toasts.service";
@@ -20,6 +21,7 @@ export class RatingComponent implements OnInit {
         private params: ModalDialogParams, 
         private postService: HttpPostService, 
         private toast: ToastsService,
+        private auth: AuthService,
         private router: RouterExtensions
         ) {
         this.rate = 0;
@@ -50,7 +52,7 @@ export class RatingComponent implements OnInit {
         }, error => {
             this.toast.showToast(error.error) 
         })
-        
+        this.auth.reloadComponent()
         this.close()
     }
 

@@ -26,7 +26,7 @@ export class FavComponent implements OnInit {
   get isEmpty() {
     return this._isEmpty
   }
-  
+
   ngOnInit(): void {
     
     if(this.salon.favList.length){

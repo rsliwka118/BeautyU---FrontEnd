@@ -71,7 +71,7 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'details/c5d0efaa-be0a-40ca-93c2-f841d959e102' //redirectTo: 'browser'
+                redirectTo: 'visits' //redirectTo: 'browser'
             }
        ]   
     }
