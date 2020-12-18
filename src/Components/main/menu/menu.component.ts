@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { HttpLoaderService } from "../../../shared/http/http-loader.service";
 import { SalonService } from "../../../shared/salon/salon.service";
 import { Location } from '@angular/common';
-import { LocationComponent } from "../../../components/modals/location/location.component";
+import { LocationComponent } from "../../modals/location/location.component";
 import { AccountService } from "../../../shared/auth/account.service";
 
 @Component({
@@ -15,6 +15,41 @@ import { AccountService } from "../../../shared/auth/account.service";
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
+  public routeName = [
+    {
+      path: "category",
+      name: "Kategorie"
+    },
+    {
+      path: "details",
+      name: "Szczegóły"
+    },
+    {
+      path: "visits",
+      name: "Rezerwacje"
+    },
+    {
+      path: "fav",
+      name: "Ulubione"
+    },
+    {
+      path: "account",
+      name: "Konto"
+    },
+    {
+      path: "search",
+      name: "Szukaj"
+    },
+    {
+      path: "reservation",
+      name: "Rezerwacja"
+    },
+    {
+      path: "salon",
+      name: "Moje salony"
+    },
+  ]
 
   constructor(
     private routerExtension: RouterExtensions,
@@ -28,6 +63,22 @@ export class MenuComponent implements OnInit {
     public loaderService: HttpLoaderService
     ) {
     this.page.actionBarHidden = true;
+  }
+
+  public getHeader(){
+    
+    let name = ""
+    
+    for( let i = 0; i < this.routeName.length; i++ ) {
+      
+      if ( this.salon.checkRoute([this.routeName[i].path]) ) { 
+        if( this.routeName[i].name === "Kategorie" ) return this.salon.category 
+          
+        return this.routeName[i].name
+      }
+      
+    }
+    return name
   }
 
   public back(){

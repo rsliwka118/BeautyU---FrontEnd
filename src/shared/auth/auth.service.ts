@@ -18,6 +18,7 @@ export class AuthService {
     isAuthorized: boolean
     hasExpired: boolean
     isNew: number
+    notification = [1,2,3,4,5,6]
 
     constructor(
       private zone: NgZone,
@@ -68,6 +69,12 @@ export class AuthService {
       })
   
     }      
+
+    showNotificationCounter(): boolean{
+
+      return this.notification.length > 0 ? true : false
+
+    }
 
     refreshToken(){
   

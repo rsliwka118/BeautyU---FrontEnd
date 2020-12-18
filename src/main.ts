@@ -1,7 +1,7 @@
 // this import should be first in order to load some required settings (like globals and reflect-metadata)
 import { platformNativeScriptDynamic } from "@nativescript/angular";
 
-import { AppModule } from "./app/app.module";
+import { AppModule } from "./components/main/app/app.module";
 
 
 // A traditional NativeScript application starts by initializing global objects,

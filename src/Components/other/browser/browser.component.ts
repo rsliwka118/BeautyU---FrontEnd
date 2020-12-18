@@ -12,10 +12,10 @@ import { HttpLoaderService } from "../../../shared/http/http-loader.service";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, first, map, switchMap, take } from "rxjs/operators";
-import { MenuComponent } from "../menu/menu.component";
+import { MenuComponent } from "../../main/menu/menu.component";
 import { ModalDialogOptions, ModalDialogService, RouterExtensions } from "@nativescript/angular";
 import { LocationService } from "../../../shared/location/location.service";
-import { SearchComponent } from "../../../components/modals/search/search.component";
+import { SearchComponent } from "../search/search.component";
 
 @Injectable({
   providedIn: "root"

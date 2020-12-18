@@ -1,0 +1,60 @@
+.fas {
+  font-family: "Font Awesome 5 Free", "fa-regular-400";
+}
+
+.tab-active
+{
+  color: #AF83A5;
+  padding: 7 5 0 5;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.tab-icon{
+  height: 30;
+}
+
+.tab-text{
+  font-size: 15;
+  font-weight: 200;
+  text-align: center;
+}
+
+.tab{
+    color: #555555;
+    padding: 7 5 0 5;
+}
+
+.title {
+  text-align: left;
+  font-size: 25;
+  font-weight: 200;
+  color: gray;
+}
+
+.bell {
+  margin-top: 5;
+  width: 45;
+  height: 45;
+  background-image: url("res://notification");
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+
+.notification {
+ 
+  width: 15;
+  height: 15;
+  
+}
+
+.notification-text {
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  font-size: 11;
+  font-weight: 200;
+  padding: 0;
+  margin: 0;
+  background-color: #dd7295;
+  border-radius: 50%;
+}

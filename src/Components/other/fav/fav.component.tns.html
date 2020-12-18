@@ -1,6 +1,5 @@
 <FlexboxLayout height="100%" class="page">
     <StackLayout>
-        <Label horizontalAlignment="left" class="list-title" text="Ulubione"></Label>
         <ListView *ngIf="isEmpty" class="list" separatorColor="transparent" [items]="this.favs">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <AbsoluteLayout>

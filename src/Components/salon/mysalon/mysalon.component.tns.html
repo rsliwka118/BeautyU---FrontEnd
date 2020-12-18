@@ -1,0 +1,27 @@
+<GridLayout class="page" rows="auto,*,auto" class="page" height="100%">
+    <FlexLayout row="1">
+        <ListView *ngIf="salonsEmpty" class="list" separatorColor="transparent" [items]="this.salons">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <StackLayout style="margin: 0; padding: 0;">
+                    <StackLayout class="salon-item" style="margin-bottom: 10;" [class.odd]="odd" [class.even]="even">
+                        <GridLayout columns="*,80">
+                            <StackLayout col="0" class="info" orientation="vertical">
+                                <Label class="salon-name" [text]='item.salon_name'></Label>
+                                <Label class="salon-type" [text]='item.salon_type'></Label>
+                            </StackLayout>
+                            <StackLayout class="visits" col="1">
+                                <Label class="visits-title-text" text="Wizyty"></Label>
+                                <Label class="visits-text" [text]="item.visits > 9999 ? '9999+' : item.visits"></Label>
+                            </StackLayout>
+                        </GridLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+        <StackLayout *ngIf="!salonsEmpty" class="not-found">
+            <Image class="nofav-icon" src="res://mysalon_404"></Image>
+            <Label class="not-found-text" text="Nie posiadasz salonu"></Label>
+        </StackLayout>
+    </FlexLayout>
+    <Label ripple rippleColor="white" row="2" textWrap="true" text="Dodaj salon" class="button button-active"></Label>
+</GridLayout>

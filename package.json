@@ -37,6 +37,7 @@
     "@nativescript/angular": "~10.1.0",
     "@nativescript/core": "^7.0.13",
     "@nativescript/theme": "~2.3.0",
+    "@nstudio/nativescript-floatingactionbutton": "^3.0.4",
     "nativescript-app-sync": "^2.0.0",
     "nativescript-emulator-reload": "^1.2.0",
     "nativescript-fontawesome": "^1.0.0",

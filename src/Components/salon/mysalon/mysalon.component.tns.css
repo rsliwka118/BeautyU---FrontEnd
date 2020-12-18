@@ -1,6 +1,9 @@
-
 .page {
     background-color: #F5F5F5;
+}
+
+.list {
+  margin: 10 10 0 10;
 }
 
 .button-bar{
@@ -8,29 +11,33 @@
 }
 
 .button{
-  color:#777777;
   text-align: center;
-  width: 50%;
-  font-size: 15;
+  width: 100%;
+  font-size: 20;
   font-weight: 200;
   padding: 5;
-  background-color: white;
 }
 
 .button-active{
-  border-bottom-width: 2;
+  border-width: 1;
   border-color: #e09ad0;
+  background-color: #e09ad0;
+  color: white;
 }
 
 .button-disactive{
-  border: none;
+  border-width: 1;
+  border-color: #e09ad0;
+  background-color: transparent;
+  color: #e09ad0;
 }
 
 .not-found{
-  padding: 100 20 20 20;
+  padding: 20 20 20 20;
 }
 
 .not-found-text{
+  margin-top: 20;
   font-size: 30;
   color: #777777;
   text-align: center;
@@ -43,7 +50,7 @@
 }
 
 .nofav-icon{
-  width: 200;
+  width: 250;
 }
 
 .fav-btn{
@@ -54,21 +61,16 @@
 
 .salon-item{
   background-color: white;
-  border-radius: 5 5 0 0;
   padding: 0;
+  border-radius: 5;
+  border-width: 0 0 1 0;
+  border-color: #cecece;
 }
 
-.cancel-visit{
-  text-align: center;
-  width: 100%;
-  height: 30;
-  background-color: rgb(155, 39, 39);
-  border-radius: 0 0 5 5;
-  border-width: 0 0 1 0;
-  border-color: rgb(97, 18, 18);
-  margin: 0;
-  color: white;
+.info{
+  padding: 5;
 }
+
 .salon-name{
   padding: 0;
   font-size: 30;
@@ -81,35 +83,27 @@
   color: #A8A8A8;
 }
 
-.visit-date {
-  width: 66;
-  height: 66;
-  border-radius: 100;
-  background-color: #e09ad0;
-}
-
-.day{
-  text-align: center;
-  color: white;
-  font-size: 25;
-  margin: 0;
+.visits{
+  background-color: #dd7295;
+  border-radius: 0 5 5 0;
   padding: 0;
 }
 
-.month {
+.visits-text {
+  vertical-align: middle;
   text-align: center;
-  color: white;
-  font-size: 10;
-  margin: 0;
-  padding: 0;
-}
-
-.hour {
-  text-align: center;
-  color: #e09ad0;
   font-size: 20;
-  margin: 0;
+  color: white;
   padding: 0;
+}
+
+.visits-title-text {
+  opacity: .7;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 15;
+  color: white;
+  padding-top: 5;
 }
 
 .status {

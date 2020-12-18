@@ -1,19 +1,21 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule, NSEmptyOutletComponent } from "@nativescript/angular";
-import { LoginComponent } from "../components/main/login/login.component";
-import { AuthGuard } from "../auth-guard.service";
-import { LoginGuard } from "../login-guard.service";
-import { MenuComponent } from "../components/other/menu/menu.component";
-import { BrowserComponent } from "../components/other/browser/browser.component";
-import { VisitsComponent } from "../components/other/visits/visits.component";
-import { FavComponent } from "../components/other/fav/fav.component";
-import { AccountComponent } from "../components/other/account/account.component";
-import { CategoryComponent } from '../components/other/category/category.component';
-import { SalonDetailsComponent } from "../components/other/salon-details/salon-details.component";
-import { WelcomeComponent } from "../components/other/welcome/welcome.component";
-import { SearchComponent } from "../components/modals/search/search.component";
-import { ReservationComponent } from "../components/modals/reservation/reservation.component";
+import { LoginComponent } from "../../../components/main/login/login.component";
+import { AuthGuard } from "../../../shared/guards/auth-guard.service";
+import { LoginGuard } from "../../../shared/guards/login-guard.service";
+import { AccountTypeGuard } from "../../../shared/guards/account-type-guard.service";
+import { MenuComponent } from "../menu/menu.component";
+import { BrowserComponent } from "../../../components/other/browser/browser.component";
+import { VisitsComponent } from "../../../components/other/visits/visits.component";
+import { FavComponent } from "../../../components/other/fav/fav.component";
+import { AccountComponent } from "../../../components/other/account/account.component";
+import { CategoryComponent } from '../../../components/other/category/category.component';
+import { SalonDetailsComponent } from "../../../components/other/salon-details/salon-details.component";
+import { WelcomeComponent } from "../../../components/other/welcome/welcome.component";
+import { SearchComponent } from "../../other/search/search.component";
+import { ReservationComponent } from "../../other/reservation/reservation.component";
+import { MySalonComponent } from "../../../components/salon/mysalon/mysalon.component";
 
 const routes: Routes = [
     {
@@ -70,12 +72,13 @@ const routes: Routes = [
             },
             {
                 path: "salon",
-                component: BrowserComponent
+                canActivate: [AccountTypeGuard],
+                component: MySalonComponent
             },
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'browser'
+                redirectTo: 'salon'
             }
        ]   
     }

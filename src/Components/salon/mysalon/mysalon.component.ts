@@ -12,19 +12,14 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 import { RouterExtensions } from "@nativescript/angular";
 
 @Component({
-  selector: 'ns-visits',
-  templateUrl: './visits.component.html',
-  styleUrls: ['./visits.component.css']
+  selector: 'ns-mysalon',
+  templateUrl: './mysalon.component.html',
+  styleUrls: ['./mysalon.component.css']
 })
-export class VisitsComponent implements OnInit {
+export class MySalonComponent implements OnInit {
 
-  public visits: Array<Visit>
-  public history: Array<Visit>
-
-  public visitsEmpty: boolean
-  public historyEmpty: boolean
-
-  public visitTab: boolean
+  public salons: Array<Visit>
+  public salonsEmpty: boolean
 
   constructor(
     public auth: AuthService, 
@@ -35,9 +30,7 @@ export class VisitsComponent implements OnInit {
     public salon: SalonService,
     private page: Page) {
       this.page.actionBarHidden = false;
-      this.visitsEmpty = false
-      this.historyEmpty = false
-      this.visitTab = true
+      this.salonsEmpty = false
 
   }
 
@@ -65,14 +58,12 @@ export class VisitsComponent implements OnInit {
       if(status === "Finished" ) return "Zakończona"
   }
 
-  private getVisits(){
-    this.get.getData(Config.apiAppURL + "/visits", true)
+  private getMySalons(){
+    this.get.getData(Config.apiAppURL + "/mysalons", true)
     .subscribe( (res: any) => {
-      this.visits = res.visits 
-      this.history = res.history
+      this.salons = res
 
-      this.visitsEmpty = ( this.visits.length ) ? true : false
-      this.historyEmpty = ( this.history.length ) ? true : false
+      this.salonsEmpty = ( this.salons.length ) ? true : false
 
     })
   }
@@ -83,7 +74,7 @@ export class VisitsComponent implements OnInit {
       title: "Anulowanie rezerwacji",
       message: "Czy na pewno chcesz anulować wizytę?",
       okButtonText: "Tak, anuluj wizytę",
-      cancelButtonText: "Cofnij"
+      cancelButtonText: "Rozmyśliłem się"
     }).then(result => {
 
         if(result){
@@ -98,10 +89,6 @@ export class VisitsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getVisits()
-  }
-
-  ngOnDestroy(): void {
-    this.visitTab = true
+    this.getMySalons()
   }
 }

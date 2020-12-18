@@ -1,5 +1,9 @@
-<GridLayout class="page" rows="*,auto" class="page" height="100%">
-    <FlexLayout *ngIf="visitTab" row="0">
+<GridLayout class="page" rows="auto,*" class="page" height="100%">
+    <StackLayout class="button-bar" row="0" orientation="horizontal">
+        <Label text="Wizyty" (tap)="visitTab = true" [className]="visitTab ? 'button button-active' : 'button button-disactive'"></Label>
+        <Label text="Historia" (tap)="visitTab = false" [className]="!visitTab ? 'button button-active' : 'button button-disactive'"></Label>
+    </StackLayout>
+    <FlexLayout *ngIf="visitTab" row="1">
         <ListView *ngIf="visitsEmpty" class="list" separatorColor="#a8a8a8" [items]="this.visits">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                     <StackLayout orientation="vertical">
@@ -27,11 +31,11 @@
         </ListView>
         <StackLayout *ngIf="!visitsEmpty" class="not-found">
             <Image class="nofav-icon" src="res://visit_404"></Image>
-            <Label class="not-found-text" text="Brak wizyt"></Label>
+            <Label class="not-found-text" text="Brak umówionych wizyt"></Label>
         </StackLayout>
     </FlexLayout>
 
-    <FlexLayout *ngIf="!visitTab" row="0">
+    <FlexLayout *ngIf="!visitTab" row="1">
         <ListView *ngIf="historyEmpty" class="list" separatorColor="#a8a8a8" [items]="this.history">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                     <StackLayout orientation="vertical">
@@ -62,8 +66,4 @@
             <Label class="not-found-text" text="Brak historii"></Label>
         </StackLayout>
     </FlexLayout>
-    <StackLayout class="button-bar" row="1" orientation="horizontal">
-        <Label text="Wizyty" (tap)="visitTab = true" [className]="visitTab ? 'button button-active' : 'button button-disactive'"></Label>
-        <Label text="Historia" (tap)="visitTab = false" [className]="!visitTab ? 'button button-active' : 'button button-disactive'"></Label>
-    </StackLayout>
 </GridLayout>

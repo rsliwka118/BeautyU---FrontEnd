@@ -9,7 +9,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ModalDialogOptions, ModalDialogService, RouterExtensions } from "@nativescript/angular";
 
 import { RatingComponent } from "../../modals/rating/rating.component";
-import { ReservationComponent } from "../../../components/modals/reservation/reservation.component";
+import { ReservationComponent } from "../reservation/reservation.component";
 
 @Component({
   selector: 'ns-salon-details',

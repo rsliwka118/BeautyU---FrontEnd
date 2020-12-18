@@ -1,8 +1,14 @@
-<ActionBar flat="true" [className]="!salon.checkRoute(['search']) ? 'bar' : 'bar-search'">
-    <NavigationButton *ngIf="!salon.checkRoute(['browser','visits','fav','account'])" icon="res://back_icon" (tap)="back()"></NavigationButton>
-    <StackLayout orientation="vertical">
-      <Image [attr.src]="account.checkAccountType() ? 'res://logo_bar_salon' : 'res://logo_bar' " class="action-image"></Image>
-    </StackLayout>
+<ActionBar title="" [flat]="true" [className]="salon.checkRoute(['browser']) ? 'bar' : 'bar-search'">
+    <NavigationButton *ngIf="!salon.checkRoute(['browser','visits','fav','account','salon'])" icon="res://back_icon" (tap)="back()"></NavigationButton> 
+    <Image *ngIf="salon.checkRoute(['browser'])" [attr.src]="account.checkAccountType() ? 'res://logo_bar_salon' : 'res://logo_bar' " class="action-image"></Image>
+    <Label *ngIf="!salon.checkRoute(['browser'])" class="title" [text]="getHeader()"></Label>
+    <ActionItem (tap)="back()">
+        <StackLayout class="bell">
+            <StackLayout *ngIf="auth.showNotificationCounter()" class="notification">
+                <Label class="notification-text" [text]="auth.notification.length"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ActionItem>
 </ActionBar>
 
 <DockLayout>
