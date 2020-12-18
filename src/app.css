@@ -25,3 +25,16 @@ Button.-primary {
 .bar-search {
   background: white;
 }
+
+.no-found-text{
+  margin-top: 0;
+  font-size: 25;
+  font-weight: 200;
+  color: #777777;
+  text-align: center;
+}
+
+.no-found-icon{
+  width: 200;
+  height: 200;
+}

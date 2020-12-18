@@ -29,9 +29,9 @@
                     </StackLayout>
             </ng-template>
         </ListView>
-        <StackLayout *ngIf="!visitsEmpty" class="not-found">
-            <Image class="nofav-icon" src="res://visit_404"></Image>
-            <Label class="not-found-text" text="Brak umówionych wizyt"></Label>
+        <StackLayout verticalAlignment="middle" *ngIf="!visitsEmpty">
+            <Image class="no-found-icon" src="res://visit_404"></Image>
+            <Label class="no-found-text" text="Brak rezerwacji"></Label>
         </StackLayout>
     </FlexLayout>
 
@@ -61,9 +61,9 @@
                     </StackLayout>
             </ng-template>
         </ListView>
-        <StackLayout *ngIf="!historyEmpty" class="not-found">
-            <Image class="nofav-icon" src="res://visit_404"></Image>
-            <Label class="not-found-text" text="Brak historii"></Label>
+        <StackLayout verticalAlignment="middle" *ngIf="!historyEmpty">
+            <Image class="no-found-icon" src="res://visit_404"></Image>
+            <Label class="no-found-text" text="Brak historii"></Label>
         </StackLayout>
     </FlexLayout>
 </GridLayout>

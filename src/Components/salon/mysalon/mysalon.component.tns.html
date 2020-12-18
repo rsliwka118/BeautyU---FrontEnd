@@ -18,9 +18,9 @@
                 </StackLayout>
             </ng-template>
         </ListView>
-        <StackLayout *ngIf="!salonsEmpty" class="not-found">
-            <Image class="nofav-icon" src="res://mysalon_404"></Image>
-            <Label class="not-found-text" text="Nie posiadasz salonu"></Label>
+        <StackLayout verticalAlignment="middle" *ngIf="!salonsEmpty">
+            <Image class="no-found-icon" src="res://mysalon_404"></Image>
+            <Label class="no-found-text" text="Nie posiadasz salonu"></Label>
         </StackLayout>
     </FlexLayout>
     <Label ripple rippleColor="white" row="2" textWrap="true" text="Dodaj salon" class="button button-active"></Label>

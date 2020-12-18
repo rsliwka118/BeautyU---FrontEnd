@@ -5,6 +5,11 @@
   padding-left: 10;
 }
 
+.no-found-icon{
+  width: 250;
+  height: 250;
+}
+
 .salon-item{
   background-color: white;
   border-radius: 5;
@@ -41,16 +46,6 @@
   font-size: 40;
   padding-left: 20;
   color: #e09ad0;
-}
-
-.not-found{
-  padding: 100 20 20 20
-}
-
-.not-found-text{
-  font-size: 40;
-  color: #777777;
-  text-align: center;
 }
 
 .fav-btn{

@@ -1,5 +1,5 @@
 <FlexboxLayout height="100%" class="page">
-    <StackLayout>
+    <GridLayout>
         <ListView *ngIf="isEmpty" class="list" separatorColor="transparent" [items]="this.favs">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <AbsoluteLayout>
@@ -19,10 +19,10 @@
                 </AbsoluteLayout>
             </ng-template>
         </ListView>
-        <StackLayout *ngIf="!isEmpty" class="not-found">
-            <Image class="nofav-icon" src="res://notfav_icon"></Image>
-            <Label class="not-found-text" text="Polub salony!"></Label>
+        <StackLayout verticalAlignment="middle" *ngIf="!isEmpty">
+            <Image class="no-found-icon" src="res://notfav_icon"></Image>
+            <Label class="no-found-text" text="Polub salony!"></Label>
         </StackLayout>
-    </StackLayout>
+    </GridLayout>
 </FlexboxLayout>
 
