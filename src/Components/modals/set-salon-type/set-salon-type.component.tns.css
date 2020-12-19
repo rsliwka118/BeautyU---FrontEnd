@@ -1,0 +1,22 @@
+.modal{
+    padding: 0 5 0 5;
+    background-color: #F5F5F5;
+}
+
+.arrow{
+    width: 10;
+}
+
+.info{
+    width: 100%;
+    padding: 10;
+    text-align: left;
+    color: #777777;
+    background-color: #F5F5F5;
+    font-size: 20;
+    font-weight: 200;
+}
+
+.my-hr {
+    margin: 0;
+}

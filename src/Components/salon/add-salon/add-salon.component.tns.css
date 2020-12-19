@@ -64,6 +64,11 @@
   }
   .color-danger {
     placeholder-color: rgba(255, 0, 0, 0.6);
+    border-color:rgba(255, 0, 0, 0.6);
     color: rgba(255, 0, 0, 0.6);
     margin-bottom: 0;
+  }
+
+  .type-text {
+    color: black;
   }

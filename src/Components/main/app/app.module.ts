@@ -34,13 +34,15 @@ import { AccountComponent } from "../../../components/other/account/account.comp
 import { CategoryComponent } from "../../../components/other/category/category.component";
 import { SalonDetailsComponent } from "../../../components/other/salon-details/salon-details.component";
 import { WelcomeComponent } from "../../../components/other/welcome/welcome.component";
-import { RatingComponent } from "../../..//components/modals/rating/rating.component";
+import { RatingComponent } from "../../../components/modals/rating/rating.component";
+import { SetSalonTypeComponent } from "../../../components/modals/set-salon-type/set-salon-type.component";
 import { LocationComponent } from "../../../components/modals/location/location.component";
 import { SearchComponent } from "../../other/search/search.component";
 import { ReservationComponent } from "../../other/reservation/reservation.component";
 import { MySalonComponent } from "../../salon/mysalon/mysalon.component"
 import { AddSalonComponent } from "../../salon/add-salon/add-salon.component"
 import { FloatButtonComponent } from "../../modals/float-btn/float-btn.component"
+import { AddSalonService } from "../../../shared/salon/add-salon.service"
 
 @NgModule({
     bootstrap: [
@@ -71,7 +73,8 @@ import { FloatButtonComponent } from "../../modals/float-btn/float-btn.component
         ReservationComponent,
         MySalonComponent,
         FloatButtonComponent,
-        AddSalonComponent
+        AddSalonComponent,
+        SetSalonTypeComponent
     ],
     providers: [
         {
@@ -94,6 +97,7 @@ import { FloatButtonComponent } from "../../modals/float-btn/float-btn.component
         HttpDeleteService,
         ToastsService,
         DateService,
+        AddSalonService,
         [AuthGuard],
         [LoginGuard],
         [AccountTypeGuard]

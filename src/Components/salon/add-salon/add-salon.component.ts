@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, OnInit, ViewContainerRef } from '@angular/core'
 import { Page } from "@nativescript/core/ui/page"
 import { ValidationService } from '../../../shared/auth/validation.service'
 import { ToastsService } from '../../../shared/toasts.service'
@@ -6,6 +6,11 @@ import { AuthService } from '../../../shared/auth/auth.service'
 import { AccountService } from '../../../shared/auth/account.service'
 import { UserService } from '../../../shared/user/user.service'
 import { EventData, ListPicker } from '@nativescript/core'
+import { AddSalonService } from '../../../shared/salon/add-salon.service'
+import { Toast } from 'nativescript-toast'
+import { ModalDialogOptions, ModalDialogService } from '@nativescript/angular'
+import { SetSalonTypeComponent } from '../../../components/modals/set-salon-type/set-salon-type.component'
+import { Salon } from '../../../shared/salon/salon.model'
 
 @Component({
   selector: 'ns-add-salon',
@@ -15,26 +20,30 @@ import { EventData, ListPicker } from '@nativescript/core'
 export class AddSalonComponent implements OnInit {
 
  
-  confirmPassword = ""
-  emailError = ""
-  loginError = ""
-  passwordError = ""
-  confirmPasswordError = ""
-  firstNameError = ""
-  lastNameError = ""
+  nameError = ""
+  typeError = ""
+  describeError = ""
+  cityError = ""
+  zipCodeError = ""
+  streetError = ""
+  houseNumberError = ""
 
-  emailFocus = false
-  passwordFocus = false
-  firstNameFocus = false
-  lastNameFocus = false
-  confirmPasswordFocus = false
+  nameFocus = false
+  cityFocus = false
+  zipCodeFocus = false
+  streetFocus = false
+  describeFocus = false
+  houseNumberFocus = false
  
 
   constructor(
     public auth: AuthService,
     public account: AccountService, 
     public userService: UserService,
-    private page: Page, 
+    public salon: AddSalonService,
+    private page: Page,
+    private modalService: ModalDialogService,
+    private viewContainerRef: ViewContainerRef, 
     public validService: ValidationService, 
     public toast: ToastsService
     ) {
@@ -45,194 +54,210 @@ export class AddSalonComponent implements OnInit {
     this.page.actionBarHidden = false
   }
 
-  public emailErrors() {
+  public showTypeModal(){
+    const options: ModalDialogOptions = {
+      viewContainerRef: this.viewContainerRef,
+      fullscreen: false,
+      context: {}
+    }
+    this.modalService.showModal(SetSalonTypeComponent, options);
+  }
 
-    const errorMsg = !!this.emailError
+  public nameErrors() {
+    const errorMsg = !!this.nameError
     if (!errorMsg) return false
 
-    const isValidEmail = this.userService.user.hasEmail() && this.validService.isValidEmail(this.userService.user.email)
-    let error = errorMsg || !isValidEmail
+    const isValidName = this.salon.salon.name.length > 4
+    let error = errorMsg || !isValidName
 
-    if (isValidEmail) {
+    if (isValidName) {
 
-      this.emailError = ""
+      this.nameError = ""
       return false
 
     }
     return error
   }
 
-  public passwordErrors() {
-    const errorMsg = !!this.passwordError
+  public cityErrors() {
+    const errorMsg = !!this.cityError
     if (!errorMsg) return false
 
-    const isValidPassword = this.userService.user.password.length > 0 && this.validService.isValidPassword(this.userService.user.password)
-    let error = errorMsg || !isValidPassword
+    const isValidCity = this.salon.salon.location.city.length > 0
+    let error = errorMsg || !isValidCity
 
-    if (isValidPassword) {
-      this.passwordError = ""
-      return false
-    }
-    return error
-  }
+    if (isValidCity) {
 
-  public confirmErrors() {
-    const errorMsg = !!this.confirmPasswordError
-    if (!errorMsg) return false
-
-    const isValidConfirm = this.confirmPassword.length > 0 && this.validService.isValidConfirm(this.confirmPassword, this.userService.user.password)
-    let error = errorMsg || !isValidConfirm
-
-    if (isValidConfirm) {
-
-      this.confirmPasswordError = ""
+      this.cityError = ""
       return false
 
     }
     return error
   }
 
-  public firstNameErrors() {
-    const errorMsg = !!this.firstNameError
+  public zipCodeErrors() {
+    const errorMsg = !!this.zipCodeError
     if (!errorMsg) return false
 
-    const isValidFirstName = this.userService.user.firstName.length > 0
-    let error = errorMsg || !isValidFirstName
+    const isValidZipCode = this.salon.salon.location.code.length > 0 && this.validService.isValidZipCode(this.salon.salon.location.code)
+    let error = errorMsg || !isValidZipCode
 
-    if (isValidFirstName) {
+    if (isValidZipCode) {
 
-      this.firstNameError = ""
+      this.zipCodeError = ""
       return false
 
     }
     return error
   }
 
-  public lastNameErrors() {
-    const errorMsg = !!this.lastNameError
+  public describeErrors() {
+    const errorMsg = !!this.describeError
     if (!errorMsg) return false
 
-    const isValidLastName = this.userService.user.lastName.length > 0
-    let error = errorMsg || !isValidLastName
+    const isValidDescribe = this.salon.salon.describe.length > 0
+    let error = errorMsg || !isValidDescribe
 
-    if (isValidLastName) {
+    if (isValidDescribe) {
 
-      this.firstNameError = ""
+      this.describeError = ""
       return false
 
     }
     return error
   }
 
-  updateErrors(checkPassword, checkConfirm) {
+  public streetErrors() {
+    const errorMsg = !!this.streetError
+    if (!errorMsg) return false
 
-    this.firstNameError = this.userService.user.hasFirstName() ? "" : "Podaj imię"
-    this.lastNameError = this.userService.user.hasLastName() ? "" : "Podaj nazwisko"
+    const isValidStreet = this.salon.salon.location.street.length > 0
+    let error = errorMsg || !isValidStreet
 
-    if (this.userService.user.hasEmail()) {
-      if (this.validService.isValidEmail(this.userService.user.email)) {
-        this.emailError = "";
-      } else {
-        this.emailError = "Nieprawidłowy email"
-      }
+    if (isValidStreet) {
+
+      this.streetError = ""
+      return false
+
+    }
+    return error
+  }
+
+  public houseNumberErrors() {
+    const errorMsg = !!this.houseNumberError
+    if (!errorMsg) return false
+
+    const isValidHouseNumber = this.salon.salon.location.houseNumber.length > 0
+    let error = errorMsg || !isValidHouseNumber
+
+    if (isValidHouseNumber) {
+
+      this.houseNumberError = ""
+      return false
+
+    }
+    return error
+  }
+
+  public typeErrors() {
+    const errorMsg = !!this.typeError
+    if (!errorMsg) return false
+
+    const isValidType = this.salon.salon.type.length > 0
+    let error = errorMsg || !isValidType
+
+    if (isValidType) {
+
+      this.typeError = ""
+      return false
+
+    }
+    return error
+  }
+
+  next(){
+      if( this.isValidForm() ) console.log("next")
+      else console.log("stay")
+  }
+
+  updateErrors() {
+
+    if( this.salon.salon.hasName() ) {
+
+        if(this.salon.salon.name.length >= 5) this.nameError = ""
+        
+        else  this.nameError = "Podaj nazwę salonu | 5-50 znaków"
+
     } else {
-      this.emailError = "Email nie może być pusty"
+      this.nameError = "Podaj nazwę salonu | 5-50 znaków"
     }
 
-    if (checkPassword) {
-      let lengthPass = this.userService.user.password.length
+    this.cityError = this.salon.salon.location.hasCity() ? "" : "Podaj miasto"
+    this.zipCodeError = ( this.salon.salon.location.hasCode() && this.validService.isValidZipCode(this.salon.salon.location.code))? "" : "np. 66-620"
+    this.describeError = this.salon.salon.hasDescribe() ? "" : "Opisz swój salon | do 250 znaków"
+    this.streetError = this.salon.salon.location.hasStreet() ? "" : "Podaj ulicę"
+    this.houseNumberError = this.salon.salon.location.hashouseNumber() ? "" : "Podaj nr budynku"
+    this.typeError = this.salon.salon.hasType() ? "" : "Podaj rodzaj salonu"
 
-      if (lengthPass != 0) {
-        if (this.validService.isValidPassword(this.userService.user.password)) {
-          this.passwordError = ""
-        } else {
-          this.passwordError = this.account.isLoggingIn ? "Nieprawidłowe hasło" : "8-20 znaków, 1 duża litera, 1 znak specjalny"
-        }
-      } else {
-        this.passwordError = "Hasło nie może być puste"
-      }
-      if (checkConfirm) {
-        let lengthConf = this.confirmPassword.length
-
-        if (lengthConf != 0) {
-          if (this.validService.isValidConfirm(this.confirmPassword, this.userService.user.password)) {
-            this.confirmPasswordError = ""
-          } else {
-            this.confirmPasswordError = "Hasła są różne"
-          }
-        } else {
-          this.confirmPasswordError = "Potwierdź swoje hasło"
-        }
-      }
-    }
   }
+
   private isValidForm() {
     let isValid
 
-    if (!this.account.isLoggingIn) {
-      isValid = !!this.emailError || !!this.passwordError || !!this.firstNameError || !!this.lastNameError || !!this.confirmPasswordError;
-    } else {
-      isValid = !!this.emailError || !!this.passwordError
-    }
+    isValid = ( !!this.nameError || !!this.cityError || 
+                !!this.zipCodeError || !!this.streetError || 
+                !!this.houseNumberError || !!this.describeError || !!this.typeError )
+    
     return !isValid;
   }
 
-  getEmailError() {
-    return this.emailError
+  getSalonType() {
+    let types = ["Hairdresser","Barber","Beautician","Nails","Massager","Depilation"]
+    let typesPL = ["Fryzjer","Barber","Makijaż","Paznokcie","Masaż","Depilacja"]
+
+    for(let i in types) {
+        if( types[i] === this.salon.salon.type ) return typesPL[i]
+    }
+    return "error"
   }
 
-  getFirstNameError() {
-    return this.firstNameError
+  getNameError() {
+    return this.nameError
   }
 
-  getLastNameError() {
-    return this.lastNameError
+  getCityError() {
+    return this.cityError
   }
 
-  getPasswordError() {
-    return this.passwordError
+  getZipCodeError() {
+    return this.zipCodeError
   }
 
-  getConfirmPasswordError() {
-    return this.confirmPasswordError
+  getTypeError() {
+    return this.typeError
   }
 
-  onEmailFocus() {
-    this.emailFocus = true;
+  getDescribeError() {
+    return this.describeError
   }
 
-  onFirstNameFocus() {
-    this.firstNameFocus = true;
+  getStreetError() {
+    return this.streetError
   }
 
-  onLastNameFocus() {
-    this.lastNameFocus = true;
-  }
-
-  onPasswordFocus() {
-    this.passwordFocus = true;
-    this.updateErrors(false, false);
-  }
-
-  onConfirmFocus() {
-    this.confirmPasswordFocus = true;
-    this.updateErrors(false, false);
-  }
-
-  isSubmitEnabled() {
-    return this.validService.isValidEmail(this.userService.user.email);
+  getHouseNumberError() {
+    return this.houseNumberError
   }
 
   submit() {
-    if(this.isValidForm()){
-      if (this.account.isLoggingIn) {
-        this.updateErrors(true, false);
-        this.account.login()
-      } else {
-        this.updateErrors(true, true);
-        this.account.register()
-      }
+
+    this.updateErrors()
+
+    if(this.isValidForm()) {
+        this.updateErrors()
+        this.next()
     }
+  
   }
 
 }

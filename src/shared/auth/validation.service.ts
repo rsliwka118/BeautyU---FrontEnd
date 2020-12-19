@@ -2,9 +2,16 @@ import { Injectable } from "@angular/core";
 
 const regexEmail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 const regexPassword = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)
+const regexCode = new RegExp(/\b\d{2}-\d{3}\b/)
 
 @Injectable()
 export class ValidationService {
+
+    public isValidZipCode(code: string){
+        if(!code)
+            return false
+        return regexCode.test(code)
+    }
 
     public isValidEmail(email: string) {
         if (!email) 

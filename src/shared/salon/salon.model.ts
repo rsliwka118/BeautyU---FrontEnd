@@ -1,4 +1,4 @@
-export interface Salon {
+export class Salon {
     
     id: string;
     ownerID: string;
@@ -6,13 +6,25 @@ export interface Salon {
     type: string;
     describe: string;
     hours: string;
-    location: Location;
+    location =  new Location();
     services: Service[];
     rates: Rate[];
+    
+    hasName() {
+        return this.name > '';
+    }
+
+    hasType() {
+        return this.type != '';
+    }
+
+    hasDescribe() {
+        return this.describe != '';
+    }
 
 }   
 
-interface Location {
+export class Location {
     
     id: string;
     city: string;
@@ -21,9 +33,25 @@ interface Location {
     houseNumber: string;
     apartmentNumber: string;
 
+    hasCity() {
+        return this.city != '';
+    }
+
+    hasCode() {
+        return this.code != '';
+    }
+
+    hasStreet() {
+        return this.street != '';
+    }
+
+    hashouseNumber() {
+        return this.houseNumber != '';
+    }
+
 }
 
-export interface Service {
+export class Service {
 
     id: string;
     offerTitle: string;
@@ -32,7 +60,7 @@ export interface Service {
 
 }
 
-export interface Rate {
+export class Rate {
 
     id: string;
     rate: number;
