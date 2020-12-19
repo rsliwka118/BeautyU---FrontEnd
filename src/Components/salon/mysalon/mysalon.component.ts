@@ -10,6 +10,7 @@ import { HttpPostService } from "../../../shared/http/http-post.service";
 import { ToastsService } from "../../../shared/toasts.service";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { RouterExtensions } from "@nativescript/angular";
+import { Route } from "@angular/compiler/src/core";
 
 @Component({
   selector: 'ns-mysalon',
@@ -27,11 +28,16 @@ export class MySalonComponent implements OnInit {
     private get: HttpGetService,
     private post: HttpPostService,
     private toast: ToastsService,
+    private routerExtensions: RouterExtensions,
     public salon: SalonService,
     private page: Page) {
       this.page.actionBarHidden = false;
       this.salonsEmpty = false
 
+  }
+
+  public showAddSalon(){
+    this.routerExtensions.navigate(['/menu/add'])
   }
 
   public getServiceName(item: any){

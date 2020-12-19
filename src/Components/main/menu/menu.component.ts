@@ -49,6 +49,10 @@ export class MenuComponent implements OnInit {
       path: "salon",
       name: "Moje salony"
     },
+    {
+      path: "add",
+      name: "Dodaj salon"
+    }
   ]
 
   constructor(
@@ -73,7 +77,6 @@ export class MenuComponent implements OnInit {
       
       if ( this.salon.checkRoute([this.routeName[i].path]) ) { 
         if( this.routeName[i].name === "Kategorie" ) return this.salon.category 
-          
         return this.routeName[i].name
       }
       

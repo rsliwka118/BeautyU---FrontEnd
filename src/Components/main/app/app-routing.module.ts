@@ -16,6 +16,7 @@ import { WelcomeComponent } from "../../../components/other/welcome/welcome.comp
 import { SearchComponent } from "../../other/search/search.component";
 import { ReservationComponent } from "../../other/reservation/reservation.component";
 import { MySalonComponent } from "../../../components/salon/mysalon/mysalon.component";
+import { AddSalonComponent } from "../../../components/salon/add-salon/add-salon.component";
 
 const routes: Routes = [
     {
@@ -71,6 +72,11 @@ const routes: Routes = [
                 component: ReservationComponent
             },
             {
+                path: "add",
+                canActivate: [AccountTypeGuard],
+                component: AddSalonComponent
+            },
+            {
                 path: "salon",
                 canActivate: [AccountTypeGuard],
                 component: MySalonComponent
@@ -78,7 +84,7 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'salon'
+                redirectTo: 'add'
             }
        ]   
     }

@@ -5,13 +5,18 @@
 
 .button-bar{
   width: 100%;
+  background-color: white;
+}
+
+.button-container {
+  width: 50%;
 }
 
 .button{
   color:#777777;
   text-align: center;
-  width: 50%;
   font-size: 15;
+  width: 130;
   font-weight: 200;
   padding: 5;
   background-color: white;

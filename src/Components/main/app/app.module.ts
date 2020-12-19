@@ -39,6 +39,7 @@ import { LocationComponent } from "../../../components/modals/location/location.
 import { SearchComponent } from "../../other/search/search.component";
 import { ReservationComponent } from "../../other/reservation/reservation.component";
 import { MySalonComponent } from "../../salon/mysalon/mysalon.component"
+import { AddSalonComponent } from "../../salon/add-salon/add-salon.component"
 import { FloatButtonComponent } from "../../modals/float-btn/float-btn.component"
 
 @NgModule({
@@ -69,7 +70,8 @@ import { FloatButtonComponent } from "../../modals/float-btn/float-btn.component
         SearchComponent,
         ReservationComponent,
         MySalonComponent,
-        FloatButtonComponent
+        FloatButtonComponent,
+        AddSalonComponent
     ],
     providers: [
         {

@@ -1,0 +1,45 @@
+<GridLayout rows="*,auto" class="page">
+    <ScrollView row="0"> 
+        <StackLayout>
+            <StackLayout class="input-field">
+                <TextField  class="input" hint="Nazwa salonu" [(ngModel)]="userService.user.password" (focus)="onPasswordFocus()" [ngClass]="{'color-danger': passwordErrors()}"></TextField>
+                <Label *ngIf="passwordErrors()" class="error-msg" [text]="getPasswordError()"></Label>
+            </StackLayout>
+
+            <Label text="Rodzaj salonu" class="input-field input type-box"></Label>
+
+            <StackLayout class="input-field" orientation="horizontal">
+                <StackLayout width="60%">
+                    <TextField class="input" hint="Miasto" [ngClass]="{'color-danger': firstNameErrors()}"></TextField>
+                    <Label *ngIf="firstNameErrors()" class="error-msg" [text]="getFirstNameError()"></Label>
+                </StackLayout>
+    
+                <StackLayout width="40%">
+                    <TextField class="input" hint="Kod"  [ngClass]="{'color-danger': lastNameErrors()}"></TextField>
+                    <Label *ngIf="lastNameErrors()" class="error-msg" [text]="getLastNameError()"></Label>
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout style="margin-bottom: 0;" class="input-field">
+                <TextField class="input" hint="Adres" [(ngModel)]="userService.user.password" (focus)="onPasswordFocus()" [ngClass]="{'color-danger': passwordErrors()}"></TextField>
+                <Label *ngIf="passwordErrors()" class="error-msg" [text]="getPasswordError()"></Label>
+            </StackLayout>
+
+            <GridLayout style="margin-top: 0;" class="input-field" columns="*,auto,*">
+                <StackLayout col="0" >
+                    <TextField class="input" hint="Nr domu" [ngClass]="{'color-danger': firstNameErrors()}"></TextField>
+                    <Label *ngIf="firstNameErrors()" class="error-msg" [text]="getFirstNameError()"></Label>
+                </StackLayout>
+                <TextField editable= "false" readOnly="true" col="1" borderWidth="0" class="break" hint="/"></TextField> -->
+                <StackLayout col="2">
+                    <TextField class="input" hint="Nr lokalu"  [ngClass]="{'color-danger': lastNameErrors()}"></TextField>
+                    <Label *ngIf="lastNameErrors()" class="error-msg" [text]="getLastNameError()"></Label>
+                </StackLayout>
+            </GridLayout>
+
+            <TextView style="margin-top: 20;" hint="Opis salonu" class="input-field input input-border"></TextView>
+        </StackLayout>
+    </ScrollView>
+    <Button row="1" text="Dalej" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+</GridLayout>
+

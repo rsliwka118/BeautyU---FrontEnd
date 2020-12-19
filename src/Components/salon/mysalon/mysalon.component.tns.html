@@ -3,7 +3,7 @@
         <ListView *ngIf="salonsEmpty" class="list" separatorColor="transparent" [items]="this.salons">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <StackLayout style="margin: 0; padding: 0;">
-                    <StackLayout class="salon-item" style="margin-bottom: 10;" [class.odd]="odd" [class.even]="even">
+                    <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
                         <GridLayout columns="*,80">
                             <StackLayout col="0" class="info" orientation="vertical">
                                 <Label class="salon-name" [text]='item.salon_name'></Label>
@@ -23,5 +23,5 @@
             <Label class="no-found-text" text="Nie posiadasz salonu"></Label>
         </StackLayout>
     </FlexLayout>
-    <Label ripple rippleColor="white" row="2" textWrap="true" text="Dodaj salon" class="button button-active"></Label>
+    <Label ripple rippleColor="white" row="2" textWrap="true" text="Dodaj salon" (tap)="showAddSalon()" class="button button-active"></Label>
 </GridLayout>
