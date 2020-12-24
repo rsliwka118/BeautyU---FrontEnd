@@ -17,6 +17,7 @@ import { SearchComponent } from "../../other/search/search.component";
 import { ReservationComponent } from "../../other/reservation/reservation.component";
 import { MySalonComponent } from "../../../components/salon/mysalon/mysalon.component";
 import { AddSalonComponent } from "../../../components/salon/add-salon/add-salon.component";
+import { SetSalonServiceComponent } from "../../../components/modals/set-salon-service/set-salon-service.component";
 
 const routes: Routes = [
     {
@@ -82,9 +83,14 @@ const routes: Routes = [
                 component: MySalonComponent
             },
             {
+                path: "services/:id",
+                canActivate: [AccountTypeGuard],
+                component: SetSalonServiceComponent
+            },
+            {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'add'
+                redirectTo: 'services/9b6dcf95-d13a-4ae8-8d60-0a087ec5247d'
             }
        ]   
     }

@@ -58,7 +58,24 @@ export class Service {
     price: string;
     time: string;
 
-}
+    constructor(){
+        this.offerTitle = ""
+        this.price = ""
+        this.time = ""
+    }
+
+    hasTitle(){
+        return this.offerTitle != '';
+    }
+
+    hasTime(){
+        return this.time != '';
+    }
+
+    hasPrice(){
+        return this.price != '';
+    }
+}   
 
 export class Rate {
 

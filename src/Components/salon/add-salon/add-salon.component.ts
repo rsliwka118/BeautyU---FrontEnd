@@ -5,12 +5,16 @@ import { ToastsService } from '../../../shared/toasts.service'
 import { AuthService } from '../../../shared/auth/auth.service'
 import { AccountService } from '../../../shared/auth/account.service'
 import { UserService } from '../../../shared/user/user.service'
-import { EventData, ListPicker } from '@nativescript/core'
+import { Button, EventData, ListPicker } from '@nativescript/core'
 import { AddSalonService } from '../../../shared/salon/add-salon.service'
 import { Toast } from 'nativescript-toast'
-import { ModalDialogOptions, ModalDialogService } from '@nativescript/angular'
+import { ModalDialogOptions, ModalDialogService, RouterExtensions } from '@nativescript/angular'
 import { SetSalonTypeComponent } from '../../../components/modals/set-salon-type/set-salon-type.component'
 import { Salon } from '../../../shared/salon/salon.model'
+import { SetSalonServiceComponent } from '../../modals/set-salon-service/set-salon-service.component'
+import { DateTimePicker } from "@nativescript/datetimepicker";
+import { getString } from '@nativescript/core/application-settings'
+import { SalonService } from '../../../shared/salon/salon.service'
 
 @Component({
   selector: 'ns-add-salon',
@@ -19,7 +23,6 @@ import { Salon } from '../../../shared/salon/salon.model'
 })
 export class AddSalonComponent implements OnInit {
 
- 
   nameError = ""
   typeError = ""
   describeError = ""
@@ -34,21 +37,25 @@ export class AddSalonComponent implements OnInit {
   streetFocus = false
   describeFocus = false
   houseNumberFocus = false
- 
-
+  
+  pageNumber: number
+  scrollView: any
+  
   constructor(
     public auth: AuthService,
     public account: AccountService, 
     public userService: UserService,
+    private routerExtensions: RouterExtensions,
     public salon: AddSalonService,
+    private salonService: SalonService,
     private page: Page,
     private modalService: ModalDialogService,
     private viewContainerRef: ViewContainerRef, 
     public validService: ValidationService, 
     public toast: ToastsService
     ) {
-
-  }
+          this.pageNumber = 0
+      }
 
   ngOnInit(): void {
     this.page.actionBarHidden = false
@@ -62,6 +69,52 @@ export class AddSalonComponent implements OnInit {
     }
     this.modalService.showModal(SetSalonTypeComponent, options);
   }
+
+  public showServices(id){
+    this.routerExtensions.navigate(['/menu/services/',id])
+  }
+
+  public onPickTimeTap(args: EventData, day, isOpen): void {
+    const dateToday = new Date();
+    const dateTomorrow = new Date(dateToday.getFullYear(), dateToday.getMonth(), dateToday.getDate() + 1);
+    dateTomorrow.setHours(8);
+    dateTomorrow.setMinutes(0);
+    DateTimePicker.pickTime({
+        context: (<Button>args.object)._context,
+        time: dateTomorrow,
+        okButtonText: "OK",
+        cancelButtonText: "Cofnij",
+        title: isOpen ? "Godzina otwarcia" : "Godzina zamknięcia",
+        locale: "en_GB",
+        is24Hours: true
+    }).then((selectedTime: Date) => {
+      
+        if (selectedTime) {
+            let hour = this.getFormattedTime(selectedTime);
+            
+            if(isOpen) this.salon.hours[day].open = hour
+            else this.salon.hours[day].close = hour
+        }
+    });
+  }
+  
+  public getHour(day, isOpen): string {
+    if(isOpen) 
+      return this.salon.hours[day].open.length ? this.salon.hours[day].open : "Otwarcie"
+    else
+      return this.salon.hours[day].close.length ? this.salon.hours[day].close : "Zamknięcie" 
+  } 
+
+  public resetHour(day) {
+      this.salon.hours[day].open = ""
+      this.salon.hours[day].close = ""
+  }
+
+  getFormattedTime(date: Date): string {
+    const h = date.getHours();
+    const m = date.getMinutes();
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+}
 
   public nameErrors() {
     const errorMsg = !!this.nameError
@@ -175,11 +228,6 @@ export class AddSalonComponent implements OnInit {
     return error
   }
 
-  next(){
-      if( this.isValidForm() ) console.log("next")
-      else console.log("stay")
-  }
-
   updateErrors() {
 
     if( this.salon.salon.hasName() ) {
@@ -218,7 +266,7 @@ export class AddSalonComponent implements OnInit {
     for(let i in types) {
         if( types[i] === this.salon.salon.type ) return typesPL[i]
     }
-    return "error"
+    return ""
   }
 
   getNameError() {
@@ -247,6 +295,23 @@ export class AddSalonComponent implements OnInit {
 
   getHouseNumberError() {
     return this.houseNumberError
+  }
+
+  next(){
+    if( this.isValidForm() ) this.pageNumber += 1
+    else this.toast.showToast("Wypełnij pola poprawnie")
+  }
+
+  undo(){
+    this.pageNumber -= 1
+  }
+
+  addSalon(){
+     this.salon.addNewSalon().subscribe( (res: any) => {
+       this.salonService.salonID = res.id
+       this.toast.showToast(res.message)
+       this.showServices(this.salonService.salonID)
+     })
   }
 
   submit() {

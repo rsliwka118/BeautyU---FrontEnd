@@ -1,0 +1,24 @@
+<GridLayout rows="*,auto" class="modal" height="100%">
+    <ListView *ngIf="isEmpty" row="0" height="100%" separatorColor="transparent" [items]="this.services">
+        <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+            <StackLayout style="padding: 0 0 5 0;">
+                <GridLayout columns="*,auto" class="services-item" [class.odd]="odd" [class.even]="even">
+                    <GridLayout col="0" columns="auto" rows="*,*">
+                        <Label row="0" col="0" [text]="item.offerTitle" class="services-name" ></Label>
+                        <Label row="1" col="0" [text]="salonService.getServiceInfo(item)" class="services-info"></Label>
+                    </GridLayout>
+                    <StackLayout (tap)="removeService(item.id)" col="1" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>    
+        </ng-template>
+    </ListView>
+    <Stacklayout *ngIf="!isEmpty" row="0" class="header" >
+        <Label text="Dodaj przynajmniej jedną usługę" wrapText="true"></Label>
+    </Stacklayout>
+    <StackLayout row="1">
+        <Button (tap)="showAddServiceModal()" text="Dodaj usługę" class="btn btn-reserv"></Button>
+        <Button (tap)="done()" text="Gotowe" [isEnabled]="isEmpty" class="btn btn-done"></Button>
+    </StackLayout>
+</GridLayout>

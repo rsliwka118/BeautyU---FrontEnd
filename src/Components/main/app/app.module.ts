@@ -4,6 +4,7 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { NgRippleModule } from 'nativescript-ripple/angular';
+import { NativeScriptDateTimePickerModule } from "@nativescript/datetimepicker/angular";
 
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
@@ -36,6 +37,8 @@ import { SalonDetailsComponent } from "../../../components/other/salon-details/s
 import { WelcomeComponent } from "../../../components/other/welcome/welcome.component";
 import { RatingComponent } from "../../../components/modals/rating/rating.component";
 import { SetSalonTypeComponent } from "../../../components/modals/set-salon-type/set-salon-type.component";
+import { SetSalonServiceComponent } from "../../../components/modals/set-salon-service/set-salon-service.component";
+import { AddServiceComponent } from "../../../components/modals/set-salon-service/add-service/add-service.component";
 import { LocationComponent } from "../../../components/modals/location/location.component";
 import { SearchComponent } from "../../other/search/search.component";
 import { ReservationComponent } from "../../other/reservation/reservation.component";
@@ -51,6 +54,7 @@ import { AddSalonService } from "../../../shared/salon/add-salon.service"
     imports: [
         NativeScriptHttpClientModule,
         NativeScriptUIListViewModule,
+        NativeScriptDateTimePickerModule,
         NativeScriptModule,
         NativeScriptFormsModule,
         AppRoutingModule,
@@ -74,7 +78,9 @@ import { AddSalonService } from "../../../shared/salon/add-salon.service"
         MySalonComponent,
         FloatButtonComponent,
         AddSalonComponent,
-        SetSalonTypeComponent
+        SetSalonTypeComponent,
+        SetSalonServiceComponent,
+        AddServiceComponent
     ],
     providers: [
         {

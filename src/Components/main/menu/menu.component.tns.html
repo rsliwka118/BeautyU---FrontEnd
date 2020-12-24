@@ -5,7 +5,7 @@
     <ActionItem (tap)="back()">
         <StackLayout class="bell">
             <StackLayout *ngIf="auth.showNotificationCounter()" class="notification">
-                <Label class="notification-text" [text]="auth.notification.length"></Label>
+                <Label class="notification-text" [text]="auth.notification.length < 10 ? auth.notification.length : '+'"></Label>
             </StackLayout>
         </StackLayout>
     </ActionItem>

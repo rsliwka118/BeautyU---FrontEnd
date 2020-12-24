@@ -36,6 +36,7 @@
     "@nativescript-community/ui-material-bottomnavigationbar": "^5.1.4",
     "@nativescript/angular": "~10.1.0",
     "@nativescript/core": "^7.0.13",
+    "@nativescript/datetimepicker": "^2.0.4",
     "@nativescript/theme": "~2.3.0",
     "@nstudio/nativescript-floatingactionbutton": "^3.0.4",
     "nativescript-app-sync": "^2.0.0",

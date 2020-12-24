@@ -6,13 +6,13 @@
                     <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
                         <GridLayout columns="*,80">
                             <StackLayout col="0" class="info" orientation="vertical">
-                                <Label class="salon-name" [text]='item.salon_name'></Label>
-                                <Label class="salon-type" [text]='item.salon_type'></Label>
+                                <Label class="salon-name" [text]='item.name'></Label>
+                                <Label class="salon-type" [text]='item.type'></Label>
                             </StackLayout>
-                            <StackLayout class="visits" col="1">
+                            <!-- <StackLayout class="visits" col="1">
                                 <Label class="visits-title-text" text="Wizyty"></Label>
                                 <Label class="visits-text" [text]="item.visits > 9999 ? '9999+' : item.visits"></Label>
-                            </StackLayout>
+                            </StackLayout> -->
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>

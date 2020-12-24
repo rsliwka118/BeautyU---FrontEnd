@@ -1,35 +1,32 @@
 <GridLayout rows="*,auto" class="page">
-    <!-- FIRST PAGE -->
     <ScrollView row="0"> 
-        <StackLayout>
+        <!-- FIRST PAGE -->
+        <StackLayout *ngIf="pageNumber === 0">
+            <Label class="header" text="Podaj informacje"></Label>
+            <!-- <StackLayout class="my-hr hr m-10"></StackLayout> -->
             <StackLayout class="input-field">
                 <TextField  maxLength="50" class="input" hint="Nazwa salonu" [(ngModel)]="salon.salon.name" [ngClass]="{'color-danger': nameErrors()}"></TextField>
                 <Label *ngIf="nameErrors()" class="error-msg" [text]="getNameError()"></Label>
             </StackLayout>
-
             <StackLayout>
                 <Label ripple rippleColor="#777777" [text]="salon.salon.type.length ? getSalonType() : 'Rodzaj salonu'" 
                 (tap)="showTypeModal()" class="input-field input type-box" [ngClass]="{'color-danger': typeErrors(), 'type-text' : salon.salon.type.length}"></Label>
                 <Label *ngIf="typeErrors()" class="error-msg" [text]="getTypeError()"></Label>
             </StackLayout>
-
             <StackLayout orientation="horizontal">
                 <StackLayout width="60%">
                     <TextField class="input" hint="Miasto" [(ngModel)]="salon.salon.location.city" [ngClass]="{'color-danger': cityErrors()}"></TextField>
                     <Label *ngIf="cityErrors()" class="error-msg" [text]="getCityError()"></Label>
                 </StackLayout>
-    
                 <StackLayout width="40%">
                     <TextField class="input" keyboardType="datetime" hint="Kod" [(ngModel)]="salon.salon.location.code" [ngClass]="{'color-danger': zipCodeErrors()}"></TextField>
                     <Label *ngIf="zipCodeErrors()" class="error-msg" [text]="getZipCodeError()"></Label>
                 </StackLayout>
             </StackLayout>
-            
             <StackLayout style="margin-bottom: 0;" class="input-field">
                 <TextField class="input" hint="Ulica" [(ngModel)]="salon.salon.location.street" [ngClass]="{'color-danger': streetErrors()}"></TextField>
                 <Label *ngIf="streetErrors()" class="error-msg" [text]="getStreetError()"></Label>
             </StackLayout>
-
             <GridLayout style="margin-top: 0;" class="input-field" columns="*,auto,*">
                 <StackLayout col="0" >
                     <TextField class="input" hint="Nr domu" [(ngModel)]="salon.salon.location.houseNumber" [ngClass]="{'color-danger': houseNumberErrors()}"></TextField>
@@ -40,15 +37,104 @@
                     <TextField class="input" [(ngModel)]="salon.salon.location.apartmentNumber" hint="Nr lokalu"></TextField>
                 </StackLayout>
             </GridLayout>
-
             <StackLayout class="input-field">
                 <TextView style="margin-top: 10;" maxLength="250" hint="Opis salonu" class="input input-border" [(ngModel)]="salon.salon.describe" [ngClass]="{'color-danger': describeErrors()}"></TextView>
                 <Label *ngIf="describeErrors()" class="error-msg" [text]="getDescribeError()"></Label>
             </StackLayout>
         </StackLayout>
+        <!-- SECOND PAGE -->
+        <StackLayout *ngIf="pageNumber === 1">
+            <Label class="header" text="Podaj godziny pracy"></Label>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="PN" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 1, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(1, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 1, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(1, false)"></Label>
+                    <StackLayout (tap)="resetHour(1)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="WT" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 2, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(2, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 2, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(2, false)"></Label>
+                    <StackLayout (tap)="resetHour(2)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="ŚR" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 3, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(3, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 3, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(3, false)"></Label>
+                    <StackLayout (tap)="resetHour(3)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="CZW" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 4, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(4, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 4, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(4, false)"></Label>
+                    <StackLayout (tap)="resetHour(4)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="PT" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 5, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(5, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 5, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(5, false)"></Label>
+                    <StackLayout (tap)="resetHour(5)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="SO" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 6, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(6, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 6, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(6, false)"></Label>
+                    <StackLayout (tap)="resetHour(6)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="ND" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 0, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(0, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 0, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(0, false)"></Label>
+                    <StackLayout (tap)="resetHour(0)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+        </StackLayout>
     </ScrollView>
-    <!-- SECOND PAGE -->
-    
-    <Button row="1" text="Dalej" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+    <StackLayout row="1" horizontalAlignment="center" orientation="horizontal">
+        <Button *ngIf="!( pageNumber === 0 )" (tap)="undo()" text="Cofnij" class="btn btn-cancel"></Button>
+        <Button *ngIf="pageNumber === 0" (tap)="submit()" text="Dalej" class="btn btn-cancel"></Button>
+        <Button *ngIf="pageNumber === 1" (tap)="addSalon()" text="Utwórz" class="btn btn-send"></Button>
+    </StackLayout>
 </GridLayout>
 

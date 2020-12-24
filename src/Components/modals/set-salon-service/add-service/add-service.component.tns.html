@@ -1,0 +1,22 @@
+<StackLayout class="modal">
+    <StackLayout class="form">
+        <StackLayout class="input-field">
+            <TextField  maxLength="50" class="input" hint="Opis oferty" [(ngModel)]="newService.offerTitle" [ngClass]="{'color-danger': offerTitleErrors()}"></TextField>
+            <Label *ngIf="offerTitleErrors()" class="error-msg" [text]="getOfferTitleError()"></Label>
+        </StackLayout>
+        <GridLayout class="input-field" columns="*,*" rows="auto">
+            <StackLayout row="0" col="0" >
+                <TextField keyboardType="number" class="input" hint="Czas (min)" [(ngModel)]="newService.time" [ngClass]="{'color-danger': timeErrors()}"></TextField>
+                <Label *ngIf="timeErrors()" class="error-msg" [text]="getTimeError()"></Label>
+            </StackLayout>
+            <StackLayout row="0" col="1" >
+                <TextField keyboardType="number" class="input" hint="Cena (zł)" [(ngModel)]="newService.price" [ngClass]="{'color-danger': priceErrors()}"></TextField>
+                <Label *ngIf="priceErrors()" class="error-msg" [text]="getPriceError()"></Label>
+            </StackLayout>
+        </GridLayout>
+    </StackLayout>
+    <StackLayout horizontalAlignment="center" dock="bottom" class="buttons" orientation="horizontal">
+        <Button class="btn close" text="Anuluj" (tap)="close()"></Button>
+        <Button class="btn send" text="Dodaj" (tap)="submit()"></Button>
+    </StackLayout>
+</StackLayout>

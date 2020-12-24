@@ -52,6 +52,10 @@ export class MenuComponent implements OnInit {
     {
       path: "add",
       name: "Dodaj salon"
+    },
+    {
+      path: "services",
+      name: "Usługi salonu"
     }
   ]
 
