@@ -2,12 +2,12 @@
     <FlexLayout row="1">
         <ListView *ngIf="salonsEmpty" class="list" separatorColor="transparent" [items]="this.salons">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                <StackLayout style="margin: 0; padding: 0;">
+                <StackLayout (tap)="mysalon.onItemTap(item.id, item.name)" style="margin: 0; padding: 0;">
                     <StackLayout class="salon-item" [class.odd]="odd" [class.even]="even">
                         <GridLayout columns="*,80">
                             <StackLayout col="0" class="info" orientation="vertical">
                                 <Label class="salon-name" [text]='item.name'></Label>
-                                <Label class="salon-type" [text]='item.type'></Label>
+                                <Label class="salon-type" [text]='getType(item.type)'></Label>
                             </StackLayout>
                             <!-- <StackLayout class="visits" col="1">
                                 <Label class="visits-title-text" text="Wizyty"></Label>

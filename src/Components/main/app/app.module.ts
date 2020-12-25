@@ -1,5 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule, NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule } from "@nativescript/angular";
+import { ModalDialogService, NativeScriptCommonModule, NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule } from "@nativescript/angular";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -23,6 +23,8 @@ import { HttpPostService } from "../../../shared/http/http-post.service";
 import { HttpGetService } from "../../../shared/http/http-get.service";
 import { HttpDeleteService } from "../../../shared/http/http-delete.service";
 import { HttpInterceptorService } from "../../../shared/http/http-interceptor.service";
+import { MySalonService } from "../../../shared/salon/mysalon.service"
+import { AddSalonService } from "../../../shared/salon/add-salon.service"
 import { AuthInterceptor } from "../../../shared/http/auth-interceptor.service";
 
 import { AppComponent } from "./app.component";
@@ -45,7 +47,9 @@ import { ReservationComponent } from "../../other/reservation/reservation.compon
 import { MySalonComponent } from "../../salon/mysalon/mysalon.component"
 import { AddSalonComponent } from "../../salon/add-salon/add-salon.component"
 import { FloatButtonComponent } from "../../modals/float-btn/float-btn.component"
-import { AddSalonService } from "../../../shared/salon/add-salon.service"
+import { MySalonDetailsComponent } from "../../salon/mysalon-details/mysalon-details.component"
+import { EditHoursComponent } from "../../modals/edit-hours/edit-hours.component"
+import { EditInfoComponent } from "../../modals/edit-info/edit-info.component"
 
 @NgModule({
     bootstrap: [
@@ -80,7 +84,10 @@ import { AddSalonService } from "../../../shared/salon/add-salon.service"
         AddSalonComponent,
         SetSalonTypeComponent,
         SetSalonServiceComponent,
-        AddServiceComponent
+        AddServiceComponent,
+        MySalonDetailsComponent,
+        EditHoursComponent,
+        EditInfoComponent
     ],
     providers: [
         {
@@ -93,6 +100,7 @@ import { AddSalonService } from "../../../shared/salon/add-salon.service"
             useClass: HttpInterceptorService,
             multi: true
         },
+        ModalDialogService,
         ValidationService,
         AuthService,
         AccountService,
@@ -104,6 +112,7 @@ import { AddSalonService } from "../../../shared/salon/add-salon.service"
         ToastsService,
         DateService,
         AddSalonService,
+        MySalonService,
         [AuthGuard],
         [LoginGuard],
         [AccountTypeGuard]

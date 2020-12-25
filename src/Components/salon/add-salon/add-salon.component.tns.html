@@ -48,6 +48,18 @@
             <DockLayout stretchLastChild="false">
                 <Label dock="left" text="PN" class="info day"></Label>
                 <StackLayout dock="right" orientation="horizontal">
+                    <Label (tap)="onPickTimeTap($event, 0, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(0, true)"></Label>
+                    <Label text="|" class="info hour"></Label>
+                    <Label (tap)="onPickTimeTap($event, 0, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(0, false)"></Label>
+                    <StackLayout (tap)="resetHour(0)" ripple rippleColor="#777777" class="btn-reset">
+                        <Label class="btn-reset-text" text="—"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </DockLayout>
+            <StackLayout class="hours-hr hr m-10"></StackLayout>
+            <DockLayout stretchLastChild="false">
+                <Label dock="left" text="WT" class="info day"></Label>
+                <StackLayout dock="right" orientation="horizontal">
                     <Label (tap)="onPickTimeTap($event, 1, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(1, true)"></Label>
                     <Label text="|" class="info hour"></Label>
                     <Label (tap)="onPickTimeTap($event, 1, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(1, false)"></Label>
@@ -58,7 +70,7 @@
             </DockLayout>
             <StackLayout class="hours-hr hr m-10"></StackLayout>
             <DockLayout stretchLastChild="false">
-                <Label dock="left" text="WT" class="info day"></Label>
+                <Label dock="left" text="ŚR" class="info day"></Label>
                 <StackLayout dock="right" orientation="horizontal">
                     <Label (tap)="onPickTimeTap($event, 2, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(2, true)"></Label>
                     <Label text="|" class="info hour"></Label>
@@ -70,7 +82,7 @@
             </DockLayout>
             <StackLayout class="hours-hr hr m-10"></StackLayout>
             <DockLayout stretchLastChild="false">
-                <Label dock="left" text="ŚR" class="info day"></Label>
+                <Label dock="left" text="CZW" class="info day"></Label>
                 <StackLayout dock="right" orientation="horizontal">
                     <Label (tap)="onPickTimeTap($event, 3, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(3, true)"></Label>
                     <Label text="|" class="info hour"></Label>
@@ -82,7 +94,7 @@
             </DockLayout>
             <StackLayout class="hours-hr hr m-10"></StackLayout>
             <DockLayout stretchLastChild="false">
-                <Label dock="left" text="CZW" class="info day"></Label>
+                <Label dock="left" text="PT" class="info day"></Label>
                 <StackLayout dock="right" orientation="horizontal">
                     <Label (tap)="onPickTimeTap($event, 4, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(4, true)"></Label>
                     <Label text="|" class="info hour"></Label>
@@ -94,7 +106,7 @@
             </DockLayout>
             <StackLayout class="hours-hr hr m-10"></StackLayout>
             <DockLayout stretchLastChild="false">
-                <Label dock="left" text="PT" class="info day"></Label>
+                <Label dock="left" text="SO" class="info day"></Label>
                 <StackLayout dock="right" orientation="horizontal">
                     <Label (tap)="onPickTimeTap($event, 5, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(5, true)"></Label>
                     <Label text="|" class="info hour"></Label>
@@ -106,24 +118,12 @@
             </DockLayout>
             <StackLayout class="hours-hr hr m-10"></StackLayout>
             <DockLayout stretchLastChild="false">
-                <Label dock="left" text="SO" class="info day"></Label>
+                <Label dock="left" text="ND" class="info day"></Label>
                 <StackLayout dock="right" orientation="horizontal">
                     <Label (tap)="onPickTimeTap($event, 6, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(6, true)"></Label>
                     <Label text="|" class="info hour"></Label>
                     <Label (tap)="onPickTimeTap($event, 6, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(6, false)"></Label>
                     <StackLayout (tap)="resetHour(6)" ripple rippleColor="#777777" class="btn-reset">
-                        <Label class="btn-reset-text" text="—"></Label>
-                    </StackLayout>
-                </StackLayout>
-            </DockLayout>
-            <StackLayout class="hours-hr hr m-10"></StackLayout>
-            <DockLayout stretchLastChild="false">
-                <Label dock="left" text="ND" class="info day"></Label>
-                <StackLayout dock="right" orientation="horizontal">
-                    <Label (tap)="onPickTimeTap($event, 0, true)" ripple rippleColor="#777777" class="info hour" [text]="getHour(0, true)"></Label>
-                    <Label text="|" class="info hour"></Label>
-                    <Label (tap)="onPickTimeTap($event, 0, false)" ripple rippleColor="#777777" class="info hour" [text]="getHour(0, false)"></Label>
-                    <StackLayout (tap)="resetHour(0)" ripple rippleColor="#777777" class="btn-reset">
                         <Label class="btn-reset-text" text="—"></Label>
                     </StackLayout>
                 </StackLayout>

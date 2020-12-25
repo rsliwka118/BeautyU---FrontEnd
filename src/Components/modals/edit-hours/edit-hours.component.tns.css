@@ -1,0 +1,66 @@
+.modal{
+    padding: 10 10 10 10;
+    background-color: #F5F5F5;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    color: gray;
+    font-size: 20;
+    font-weight: 200;
+    margin-bottom: 30;
+}
+
+.my-hr{
+    margin-top: 0;
+}
+
+    .hours-hr {
+    margin: 0;
+}
+
+.day {
+    font-size: 20;
+  }
+  
+.hour {
+    vertical-align: middle;
+    font-size: 15;
+}
+  
+.btn-reset {
+    width: 20;
+    height: 20;
+    border-radius: 50%;
+    background-color:#dd7295;
+}
+  
+.btn-reset-text {
+    font-size: 11;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.info {
+    padding: 10;
+    color: #777777;
+    background-color: #F5F5F5;
+    font-weight: 200;
+}
+
+.button{
+    text-align: center;
+    width: 100%;
+    font-size: 20;
+    font-weight: 200;
+    padding: 5;
+}
+  
+.button-active{
+    border-width: 1;
+    border-color: #e09ad0;
+    background-color: #e09ad0;
+    color: white;
+}

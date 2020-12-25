@@ -18,7 +18,13 @@ import { HttpDeleteService } from "../http/http-delete.service";
 })
 export class SalonService {
 
-
+    category: string
+    type: number
+    public favList = []
+    public salon: Salon
+    public salonID: string
+    public isMySalon: boolean
+    
     constructor( 
         private http: HttpClient, 
         private getService: HttpGetService,
@@ -28,14 +34,9 @@ export class SalonService {
         private toast: ToastsService
         ) { 
       this.category = ""
+      this.isMySalon = false
     }
 
-    category: string
-    type: number
-    public favList = []
-    public salon: Salon
-    public salonID: string
-    
     public getPreview() {
         let typeUrl: string
         let headers = new HttpHeaders({
@@ -149,6 +150,7 @@ export class SalonService {
     
     public getHours(hours) {
         let hrs = hours.split('#')
+        let buff
 
         for(let i=0; i < hrs.length; i++){
             hrs[i]=hrs[i].split('&')
@@ -226,6 +228,10 @@ export class SalonService {
 
     private addToFavArray(salonId: string){
         this.favList.push(salonId)
+    }
+
+    public serviceDone(){
+        this.router.navigate(['/menu/salon/'])
     }
 
     public setFav(salons) {

@@ -11,6 +11,7 @@ import { ToastsService } from "../../../shared/toasts.service";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { RouterExtensions } from "@nativescript/angular";
 import { Route } from "@angular/compiler/src/core";
+import { MySalonService } from "../../../shared/salon/mysalon.service";
 
 @Component({
   selector: 'ns-mysalon',
@@ -30,6 +31,7 @@ export class MySalonComponent implements OnInit {
     private toast: ToastsService,
     private routerExtensions: RouterExtensions,
     public salon: SalonService,
+    public mysalon: MySalonService,
     private page: Page) {
       this.page.actionBarHidden = false;
       this.salonsEmpty = false
@@ -38,30 +40,6 @@ export class MySalonComponent implements OnInit {
 
   public showAddSalon(){
     this.routerExtensions.navigate(['/menu/add'])
-  }
-
-  public getServiceName(item: any){
-    return item.serviceID.offerTitle + " | " + item.serviceID.price +"zł"
-  }
-
-  public getDay(date){
-    let day = date.split("-")
-    return day[2]
-  }
-
-  public getMonth(date){
-    let month = date.split("-")
-    let mm = parseInt(month[1])
-    
-    let months = ["STY","LUT","MAR","KWI","MAJ","CZE","LIP","SIE","WRZ","PAŹ","LIS","GRU"]
-
-    return mm <= 12 ? months[mm - 1] : "Err"
-  }
-
-  public getStatus(status){
-      if(status === "Canceled") return "Anulowana"
-      if(status === "Scheduled") return "Zaplanowana"
-      if(status === "Finished" ) return "Zakończona"
   }
 
   private getMySalons(){
@@ -74,24 +52,16 @@ export class MySalonComponent implements OnInit {
     })
   }
 
-  public cancelVisit(id){
+  public getType(type): string {
+    let types = ["Hairdresser","Barber","Beautician","Nails","Massager","Depilation"]
+    let typesPL = ["Fryzjer","Barber","Makijaż","Paznokcie","Masaż","Depilacja"]
+    let typePL
 
-    dialogs.confirm({
-      title: "Anulowanie rezerwacji",
-      message: "Czy na pewno chcesz anulować wizytę?",
-      okButtonText: "Tak, anuluj wizytę",
-      cancelButtonText: "Rozmyśliłem się"
-    }).then(result => {
-
-        if(result){
-          this.post.postData(Config.apiAppURL + "/visits/status/"+id,{ status: "Canceled"}, true)
-          .subscribe( (res: any) => {
-            this.toast.showToast(res.message)
-          })
-          this.auth.reloadComponent()
-        }
-    })
+    for(let i in types) {
+       if( types[i] === type ) typePL = typesPL[i]
+    }
     
+    return typePL
   }
 
   ngOnInit(): void {

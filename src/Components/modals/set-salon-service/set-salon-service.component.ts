@@ -16,6 +16,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Page } from "@nativescript/core";
 import { HttpDeleteService } from "../../../shared/http/http-delete.service";
 import * as dialogs from "tns-core-modules/ui/dialogs";
+import { MySalonService } from "../../../shared/salon/mysalon.service";
 
 @Component({
     selector: 'ns-set-salon-service',
@@ -35,6 +36,7 @@ export class SetSalonServiceComponent implements OnInit {
     constructor( 
         public salon: AddSalonService,
         public salonService: SalonService,
+        public mysalon: MySalonService,
         private route: ActivatedRoute,
         private deleteService: HttpDeleteService,
         private toast: ToastsService,
@@ -71,8 +73,8 @@ export class SetSalonServiceComponent implements OnInit {
           this.modalService.showModal(AddServiceComponent, options);
     }
 
-    done(){
-        this.routerExtensions.navigate(['/menu/salon/'])
+    done(isMySalon){
+        isMySalon ? this.mysalon.serviceDone() : this.salonService.serviceDone()
     }
 
     removeService(id){

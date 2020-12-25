@@ -1,0 +1,149 @@
+.modal {
+  background-color: #F5F5F5;
+}
+
+.header {
+  text-align: center;
+  color: gray;
+  font-size: 20;
+  font-weight: 200;
+  margin: 10 0 20 0;
+}
+
+.my-hr{
+  margin-top: 0;
+}
+
+.hours-hr {
+  margin: 0;
+}
+
+.type-box {
+  border-color: #C7C7C7;
+  border-width: 1;
+  color:  #A8A8A8;
+  margin: 0 16 0 16;
+}
+
+.input-field {
+  margin-bottom: 10;
+}
+
+.input-border{
+  height: 100;
+  border-width: 1;
+  padding-top: 0
+}
+
+.input {
+  font-size: 18;
+  font-weight: 200;
+  placeholder-color: #A8A8A8;
+}
+
+.break {
+  margin: 0;
+  padding: 0;
+  font-size: 18;
+  font-weight: 200;
+  placeholder-color: #A8A8A8;
+}
+
+.btn-primary {
+  height: 50;
+  width: 200;
+  margin: 30 5 15 5;
+  background-color:#AF83A5;
+  color: white;
+  /* border-radius: 5; */
+  font-size: 20;
+  font-weight: 200;
+}
+
+.btn {
+  margin: 0;
+  font-size: 20;
+  font-weight: 200;
+  color: white;
+}
+  
+.btn-cancel{
+  width: 50%;
+  background-color: #AF83A5;
+}
+
+.btn-send{
+  width: 50%;
+  background-color: #e09ad0;
+}
+
+.error-msg {
+  color: rgba(255, 0, 0, 0.6);
+  margin-left: 15s;
+}
+
+.color-danger {
+  placeholder-color: rgba(255, 0, 0, 0.6);
+  border-color:rgba(255, 0, 0, 0.6);
+  color: rgba(255, 0, 0, 0.6);
+  margin-bottom: 0;
+}
+
+.type-text {
+    color: black;
+}
+
+.modal {
+    padding: 0 5 0 5;
+    background-color: #F5F5F5;
+}
+
+.arrow {
+    width: 12;
+}
+
+.info {
+    padding: 10;
+    color: #777777;
+    background-color: #F5F5F5;
+    font-weight: 200;
+}
+
+.day {
+  font-size: 20;
+}
+
+.hour {
+  vertical-align: middle;
+  font-size: 15;
+}
+
+.btn-reset {
+  width: 20;
+  height: 20;
+  border-radius: 50%;
+  background-color:#dd7295;
+}
+
+.btn-reset-text {
+  font-size: 11;
+  color: white;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.button{
+  text-align: center;
+  width: 100%;
+  font-size: 20;
+  font-weight: 200;
+  padding: 5;
+  margin-bottom: 10;
+}
+
+.button-active{
+  border-width: 1;
+  border-color: #e09ad0;
+  background-color: #e09ad0;
+  color: white;
+}

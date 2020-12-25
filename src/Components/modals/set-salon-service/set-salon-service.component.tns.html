@@ -19,6 +19,6 @@
     </Stacklayout>
     <StackLayout row="1">
         <Button (tap)="showAddServiceModal()" text="Dodaj usługę" class="btn btn-reserv"></Button>
-        <Button (tap)="done()" text="Gotowe" [isEnabled]="isEmpty" class="btn btn-done"></Button>
+        <Button (tap)="done(salonService.isMySalon)" text="Gotowe" [isEnabled]="isEmpty" class="btn btn-done"></Button>
     </StackLayout>
 </GridLayout>

@@ -1,0 +1,42 @@
+<GridLayout height="100%" rows="auto,auto" class="modal">
+    <StackLayout row="0">
+        <Label class="header" text="Edytuj informacje"></Label>
+        <StackLayout class="input-field">
+            <TextField  maxLength="50" class="input" hint="Nazwa salonu" [(ngModel)]="salon.salon.name" [ngClass]="{'color-danger': nameErrors()}"></TextField>
+            <Label *ngIf="nameErrors()" class="error-msg" [text]="getNameError()"></Label>
+        </StackLayout>
+        <StackLayout>
+            <Label ripple rippleColor="#777777" [text]="salon.salon.type.length ? getSalonType() : 'Rodzaj salonu'" 
+            (tap)="showTypeModal()" class="input-field input type-box" [ngClass]="{'color-danger': typeErrors(), 'type-text' : salon.salon.type.length}"></Label>
+            <Label *ngIf="typeErrors()" class="error-msg" [text]="getTypeError()"></Label>
+        </StackLayout>
+        <StackLayout orientation="horizontal">
+            <StackLayout width="60%">
+                <TextField class="input" hint="Miasto" [(ngModel)]="salon.salon.location.city" [ngClass]="{'color-danger': cityErrors()}"></TextField>
+                <Label *ngIf="cityErrors()" class="error-msg" [text]="getCityError()"></Label>
+            </StackLayout>
+            <StackLayout width="40%">
+                <TextField class="input" keyboardType="datetime" hint="Kod" [(ngModel)]="salon.salon.location.code" [ngClass]="{'color-danger': zipCodeErrors()}"></TextField>
+                <Label *ngIf="zipCodeErrors()" class="error-msg" [text]="getZipCodeError()"></Label>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout style="margin-bottom: 0;" class="input-field">
+            <TextField class="input" hint="Ulica" [(ngModel)]="salon.salon.location.street" [ngClass]="{'color-danger': streetErrors()}"></TextField>
+            <Label *ngIf="streetErrors()" class="error-msg" [text]="getStreetError()"></Label>
+        </StackLayout>
+        <GridLayout style="margin-top: 0;" class="input-field" columns="*,*">
+            <StackLayout col="0">
+                <TextField class="input" hint="Nr domu" [(ngModel)]="salon.salon.location.houseNumber" [ngClass]="{'color-danger': houseNumberErrors()}"></TextField>
+                <Label *ngIf="houseNumberErrors()" class="error-msg" [text]="getHouseNumberError()"></Label>
+            </StackLayout>
+            <StackLayout col="1">
+                <TextField class="input" [(ngModel)]="salon.salon.location.apartmentNumber" hint="Nr lokalu"></TextField>
+            </StackLayout>
+        </GridLayout>
+        <StackLayout class="input-field">
+            <TextView style="margin-top: 10;" maxLength="250" hint="Opis salonu" class="input input-border" [(ngModel)]="salon.salon.describe" [ngClass]="{'color-danger': describeErrors()}"></TextView>
+            <Label *ngIf="describeErrors()" class="error-msg" [text]="getDescribeError()"></Label>
+        </StackLayout>
+    </StackLayout>
+    <Label ripple rippleColor="white" row="1" textWrap="true" (tap)="submit()" text="Akceptuj zmiany" class="button button-active"></Label>
+</GridLayout>
