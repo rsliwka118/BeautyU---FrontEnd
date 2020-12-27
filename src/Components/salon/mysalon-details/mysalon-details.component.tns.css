@@ -13,7 +13,7 @@
 }
 
 .margin-hours{
-  margin: 0 2 0 2;
+  margin: 0 1 0 0;
 }
 
 .button-bar{
@@ -361,3 +361,39 @@ Switch{
   padding: 0;
 }
 /*Dashboard tab*/
+
+.text {
+  color:#777777;
+  font-weight: 200;
+}
+
+.rate-chart {
+
+}
+
+.rate-chart-text {
+  text-align: center;
+  font-size: 30;
+  padding: 0;
+}
+
+.rate-chart-title {
+  text-align: center;
+  font-size: 10;
+  margin: 0;
+}
+
+.dash-title {
+  font-size: 25;
+  text-align: center;
+}
+
+.legend-box {
+  width: 20;
+  height: 20;
+  border-radius: 50%;
+}
+
+.legend-text {
+  font-size: 15;
+}

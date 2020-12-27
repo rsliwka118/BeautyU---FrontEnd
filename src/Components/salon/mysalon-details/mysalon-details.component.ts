@@ -13,6 +13,8 @@ import { DateService } from "../../../shared/date/date.service";
 import { Config } from "../../../shared/config";
 import { HttpPostService } from "../../../shared/http/http-post.service";
 import { ToastsService } from "../../../shared/toasts.service";
+import { DashboardService } from "../../../shared/salon/dashboard.service";
+import { ObservableArray } from "@nativescript/core";
 
 @Component({
   selector: 'ns-mysalon-details',
@@ -29,6 +31,14 @@ export class MySalonDetailsComponent implements OnInit {
   public tabNumber: number
   public visitTabNumber: number
   public visitsEmpty = false
+  public data = [
+    { Country: "Germany", Amount: 15, SecondVal: 14, ThirdVal: 24, Impact: 0, Year: 0 },
+    { Country: "France", Amount: 13, SecondVal: 23, ThirdVal: 25, Impact: 0, Year: 0 },
+    { Country: "Bulgaria", Amount: 24, SecondVal: 17, ThirdVal: 23, Impact: 0, Year: 0 },
+    { Country: "Spain", Amount: 11, SecondVal: 19, ThirdVal: 24, Impact: 0, Year: 0 },
+    { Country: "USA", Amount: 18, SecondVal: 8, ThirdVal: 21, Impact: 0, Year: 0 }
+  ]
+  private _pieSource: ObservableArray<any>
 
   public days = ["PN","WT","ŚR","CZW","PT","SO","ND"]
   constructor(
@@ -37,6 +47,7 @@ export class MySalonDetailsComponent implements OnInit {
     private routerExtensions: RouterExtensions,
     private route: ActivatedRoute,
     private page: Page,
+    public dash: DashboardService,
     public dateService: DateService,
     private modalService: ModalDialogService,
     private post: HttpPostService,
@@ -46,12 +57,15 @@ export class MySalonDetailsComponent implements OnInit {
     public salon: SalonService) {
       
       this.page.actionBarHidden = false
-      this.tabNumber = 1
+      this.tabNumber = 0
       this.visitTabNumber = 0
 
   }
 
   ngOnInit(): void {
+
+    this._pieSource = new ObservableArray(this.dash.getRateSource())
+
     this.dateService.getDays(true)
 
     this.subDetails = this.route.params.subscribe(params => {
@@ -71,6 +85,10 @@ export class MySalonDetailsComponent implements OnInit {
    })
   }
   
+  get pieSource(): ObservableArray<any> {
+    return this._pieSource
+  }
+
   public canUndo() {
     let date = new Date()
     return this.dateService.compareDates( date, this.dateService._dateCurrent )

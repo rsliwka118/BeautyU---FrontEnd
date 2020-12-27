@@ -11,6 +11,59 @@
         </Stacklayout>
     </GridLayout>
     <!--Dashboard tab-->
+    <ScrollView *ngIf="tabNumber === 0" row="1" scrollBarIndicatorVisible="true" orientation ="vertical">
+        <StackLayout style="padding-top: 10;">
+            <!--RATES-->
+            <Label class="text dash-title" text="Oceny salonu"></Label>
+            <StackLayout width="90%" class="hr"></StackLayout>
+            <GridLayout horizontalAlignment="center" rows="auto,auto" columns="180, 100">
+                <GridLayout class="rate-chart" row="0" col="0" rows="*" height="180">
+                    <RadPieChart allowAnimation="true" row="0">
+                        <DonutSeries tkPieSeries seriesName="pie" selectionMode="None"
+                            outerRadiusFactor="1" expandRadius="0.1"
+                            innerRadiusFactor="0.7" [items]="pieSource" valueProperty="Rates"
+                            legendLabel="Rate"></DonutSeries>
+                        <Palette tkPiePalette seriesName="pie">
+                            <PaletteEntry tkPiePaletteEntry fillColor="#ffe7c2" strokeColor="#f5f5f5"></PaletteEntry>
+                            <PaletteEntry tkPiePaletteEntry fillColor="#FFAFAF" strokeColor="#f5f5f5"></PaletteEntry>
+                            <PaletteEntry tkPiePaletteEntry fillColor="#F086A3" strokeColor="#f5f5f5"></PaletteEntry>
+                            <PaletteEntry tkPiePaletteEntry fillColor="#e09ad0" strokeColor="#f5f5f5"></PaletteEntry>
+                            <PaletteEntry tkPiePaletteEntry fillColor="#AF83A5" strokeColor="#f5f5f5"></PaletteEntry>
+                        </Palette>
+                    </RadPieChart>
+                    <StackLayout verticalAlignment="middle" horizontalAlignment="center" row="0">
+                        <Label class="text rate-chart-text" [text]="salon.rateAVG(salonService.salon.rates)"></Label>
+                        <Label class="text rate-chart-title" text="Wszystkie"></Label>
+                    </StackLayout>
+                </GridLayout>
+                <StackLayout style="padding-left: 20; padding-top: 10;" row="0" col="1">
+                        <StackLayout orientation="horizontal">
+                            <Label class="legend-box" style="background-color: #ffe7c2;"></Label>
+                            <Label class="text legend-text" text="Ocena 5"></Label>
+                        </StackLayout>
+                        <StackLayout orientation="horizontal">
+                            <Label class="legend-box" style="background-color: #FFAFAF;"></Label>
+                            <Label class="text legend-text" text="Ocena 4"></Label>
+                        </StackLayout>
+                        <StackLayout orientation="horizontal">
+                            <Label class="legend-box" style="background-color: #F086A3;"></Label>
+                            <Label class="text legend-text" text="Ocena 3"></Label>
+                        </StackLayout>
+                        <StackLayout orientation="horizontal">
+                            <Label class="legend-box" style="background-color: #e09ad0;"></Label>
+                            <Label class="text legend-text" text="Ocena 2"></Label>
+                        </StackLayout>
+                        <StackLayout orientation="horizontal">
+                            <Label class="legend-box" style="background-color: #AF83A5;"></Label>
+                            <Label class="text legend-text" text="Ocena 1"></Label>
+                        </StackLayout>
+                </StackLayout>
+            </GridLayout>
+            <!--VISITS-->
+            <Label class="text dash-title" text="Wizyty"></Label>
+            <StackLayout width="90%" class="hr"></StackLayout>
+        </StackLayout>
+    </ScrollView>    
     <!--Visit tab-->
     <GridLayout rows="auto,*" *ngIf="tabNumber === 1" row="1">
         <GridLayout row="0" rows="auto" columns="auto,auto" class="button-visit-bar" orientation="horizontal">

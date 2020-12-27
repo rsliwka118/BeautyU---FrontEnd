@@ -1,10 +1,12 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { ModalDialogService, NativeScriptCommonModule, NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule } from "@nativescript/angular";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { NgRippleModule } from 'nativescript-ripple/angular';
 import { NativeScriptDateTimePickerModule } from "@nativescript/datetimepicker/angular";
+
 
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
@@ -25,6 +27,7 @@ import { HttpDeleteService } from "../../../shared/http/http-delete.service";
 import { HttpInterceptorService } from "../../../shared/http/http-interceptor.service";
 import { MySalonService } from "../../../shared/salon/mysalon.service"
 import { AddSalonService } from "../../../shared/salon/add-salon.service"
+import { DashboardService } from "../../../shared/salon/dashboard.service"
 import { AuthInterceptor } from "../../../shared/http/auth-interceptor.service";
 
 import { AppComponent } from "./app.component";
@@ -58,6 +61,7 @@ import { EditInfoComponent } from "../../modals/edit-info/edit-info.component"
     imports: [
         NativeScriptHttpClientModule,
         NativeScriptUIListViewModule,
+        NativeScriptUIChartModule,
         NativeScriptDateTimePickerModule,
         NativeScriptModule,
         NativeScriptFormsModule,
@@ -113,6 +117,7 @@ import { EditInfoComponent } from "../../modals/edit-info/edit-info.component"
         DateService,
         AddSalonService,
         MySalonService,
+        DashboardService,
         [AuthGuard],
         [LoginGuard],
         [AccountTypeGuard]
