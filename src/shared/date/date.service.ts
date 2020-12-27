@@ -5,6 +5,7 @@ import { Day } from "./day.model";
 import { HttpPostService } from "../http/http-post.service";
 import { Config } from "../config";
 import { dateProperty } from "@nativescript/core/ui/date-picker";
+import { MySalonService } from "../salon/mysalon.service";
 
 @Injectable()
 export class DateService {
@@ -14,8 +15,9 @@ export class DateService {
     public day: Array<Day>
     public dayNumber
     public selectedDate
+    public mySalon: string
 
-    constructor( private salonService: SalonService, private post: HttpPostService ) { 
+    constructor( private salonService: SalonService, private mySalonService: MySalonService, private post: HttpPostService ) { 
         this._dateCurrent = new Date()
         this._dateWeek = new Date()
         this._dateWeek.setDate( this._dateCurrent.getDate() + 6)
@@ -35,23 +37,28 @@ export class DateService {
         return this.formatDate(this._dateWeek)
     }
 
-    public nextWeek(){
+    public nextWeek(isSalon){
+
         this._dateCurrent.setDate( this._dateCurrent.getDate() + 7)
         this._dateWeek.setDate( this._dateWeek.getDate() + 7)
         
-        this.getDays()
-        this.day[0].isFocus = true
-        this.dayNumber = 0
+        this.getDays(isSalon)
+        if(!isSalon) {
+            this.day[0].isFocus = true
+            this.dayNumber = 0
+        }
         this.selectedDate = this.formatFullDate(this._dateCurrent)
     }
 
-    public undoWeek(){
+    public undoWeek(isSalon){
         this._dateCurrent.setDate( this._dateCurrent.getDate() - 7)
         this._dateWeek.setDate( this._dateWeek.getDate() - 7)
 
-        this.getDays()
-        this.day[0].isFocus = true
-        this.dayNumber = 0
+        this.getDays(isSalon)
+        if(!isSalon) {
+            this.day[0].isFocus = true
+            this.dayNumber = 0
+        }
         this.selectedDate = this.formatFullDate(this._dateCurrent)
     }
 
@@ -80,15 +87,23 @@ export class DateService {
         return yyyy + '-' + mm + '-' + dd
     }
 
-    public getDays(){
-        let date = new Date(this._dateCurrent)
-        let newDt = new Date(date)
+    public getDays(isSalon: boolean){
+        let dateStart = new Date(this._dateCurrent)
+        let dateEnd = new Date(this._dateWeek)
+        let start = new Date(dateStart)
+        let end = new Date(dateEnd)
 
-        for( let i = 0; i < 7; i++ ) {
+        if(isSalon){
 
-            newDt.setDate( newDt.getDate() + ( i === 0 ? 0 : 1 ) )
-            this.getAvailableHours( newDt, i )
+            this.getAvailableHours( isSalon, start, end, 0 )
 
+        } else {
+            for( let i = 0; i < 7; i++ ) {
+
+                start.setDate( start.getDate() + ( i === 0 ? 0 : 1 ) )
+                this.getAvailableHours( isSalon, start, end, i )
+
+            }
         }
 
     }
@@ -107,11 +122,22 @@ export class DateService {
 
     }
 
-    private getAvailableHours(date,i){
+    private getAvailableHours( isSalon: boolean, start, end,i){
         let day = new Day()
-        let dd = String(date.getDate()).padStart(2, '0')
+        let dd = String(start.getDate()).padStart(2, '0')
 
-        this.post.postData(Config.apiAppURL + "/visits/date/" + this.salonService.salonID, {date: this.formatFullDate(date)}, true)
+        if(isSalon){
+            this.post.postData(Config.apiAppURL + "/mysalon/" + this.mySalonService.salonID + "/visits", {start: this.formatFullDate(start), end: this.formatFullDate(end)}, true)
+            .subscribe( (res: any) => {
+
+                this.mySalonService.salonVisits = res.visits
+                this.mySalonService.salonHistory = res.history
+                this.mySalonService.isVisitsEmpty = this.mySalonService.salonVisits.length ? false : true
+                this.mySalonService.isHistoryEmpty = this.mySalonService.salonHistory.length ? false : true
+                
+            })
+        } else {
+            this.post.postData(Config.apiAppURL + "/visits/date/" + this.mySalon, {date: this.formatFullDate(start)}, true)
             .subscribe( (res: any) => {
 
                 day.day = dd
@@ -123,6 +149,8 @@ export class DateService {
                 this.day[i] = day
                 
             })
+        }
+        
     }
 
     reset(){

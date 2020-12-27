@@ -45,7 +45,7 @@ export class ReservationComponent implements OnInit {
 
     ngOnInit() {
         this.showSelectTime = false
-        this.dateService.getDays()
+        this.dateService.getDays(false)
     }
 
     ngOnDestroy() {
@@ -78,7 +78,7 @@ export class ReservationComponent implements OnInit {
     public undo(){
         this.actualPage -= 1
         this.dateService.reset()
-        this.dateService.getDays()
+        this.dateService.getDays(false)
     }
 
     public setService(service: Service) {

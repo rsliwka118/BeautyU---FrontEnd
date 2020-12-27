@@ -28,14 +28,14 @@
         <Label horizontalAlignment="center" class="week" text="Tydzień"></Label>
         <GridLayout rows="auto,auto" columns="auto,*,auto" width="80%">
             <Label row="0" col="1" class="my-hr hr m-10"></Label>
-            <Label *ngIf="!canUndo()" ripple rippleColor="#777777" (tap)="dateService.undoWeek()" row="1" col="0" class="btn-week undo"></Label>
+            <Label *ngIf="!canUndo()" ripple rippleColor="#777777" (tap)="dateService.undoWeek(0)" row="1" col="0" class="btn-week undo"></Label>
             <Label *ngIf="canUndo()" row="1" col="0" class="btn-week undo disable"></Label>
             <StackLayout row="1" col="1" orientation="horizontal" horizontalAlignment="center">
                 <Label class="res" [text]="dateService.getStartDate()"></Label>
                 <Label style="margin: 0 10 0 10" class="res" text="|"></Label>
                 <Label class="res" [text]="dateService.getEndDate()"></Label>
             </StackLayout>
-            <Label ripple rippleColor="#777777" (tap)="dateService.nextWeek()" row="1" col="2" class="btn-week next"></Label>
+            <Label ripple rippleColor="#777777" (tap)="dateService.nextWeek(0)" row="1" col="2" class="btn-week next"></Label>
         </GridLayout>
         <ScrollView style="margin-top: 20" scrollBarIndicatorVisible="false" orientation ="horizontal">
             <StackLayout orientation ="horizontal">

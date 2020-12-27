@@ -12,6 +12,7 @@ import { openUrl } from "@nativescript/core/utils";
 import { HttpPostService } from "../http/http-post.service";
 import { ToastsService } from "../toasts.service";
 import { HttpDeleteService } from "../http/http-delete.service";
+import { SalonVisit } from "./visit.model";
 
 class Hour {
     open: string
@@ -36,6 +37,10 @@ export class MySalonService {
     public salon: Salon
     public salonID: string
     public salonName: string
+    public salonVisits: Array<SalonVisit>
+    public salonHistory: Array<SalonVisit>
+    public isVisitsEmpty: boolean
+    public isHistoryEmpty: boolean
 
     constructor( 
         private http: HttpClient, 
@@ -48,7 +53,9 @@ export class MySalonService {
             this.category = ""
             this.salonName = ""
             this.salonID = ""
-
+            this.isVisitsEmpty = true
+            this.isHistoryEmpty = true
+            
             this.hours = new Array<Hour>(7)
             this.salon = new Salon()
         

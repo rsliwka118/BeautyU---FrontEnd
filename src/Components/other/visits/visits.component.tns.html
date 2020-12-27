@@ -1,10 +1,10 @@
 <GridLayout rows="auto,*" class="page" height="100%">
     <StackLayout class="button-bar" row="0" orientation="horizontal">
-        <Stacklayout class="button-container">
-            <Label text="Wizyty" (tap)="visitTab = true" [className]="visitTab ? 'button button-active' : 'button button-disactive'"></Label>
+        <Stacklayout ripple rippleColor="#777777" (tap)="visitTab = true" class="button-container">
+            <Label text="Wizyty" [className]="visitTab ? 'button button-active' : 'button button-disactive'"></Label>
         </Stacklayout>
-        <Stacklayout class="button-container">
-            <Label text="Historia" (tap)="visitTab = false" [className]="!visitTab ? 'button button-active' : 'button button-disactive'"></Label>
+        <Stacklayout ripple rippleColor="#777777" (tap)="visitTab = false"  class="button-container">
+            <Label text="Historia" [className]="!visitTab ? 'button button-active' : 'button button-disactive'"></Label>
         </Stacklayout>
     </StackLayout>
     <FlexLayout *ngIf="visitTab" row="1">
