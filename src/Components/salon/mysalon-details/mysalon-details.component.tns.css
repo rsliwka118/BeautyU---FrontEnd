@@ -384,6 +384,7 @@ Switch{
 }
 
 .dash-title {
+  margin-top: 10;
   font-size: 25;
   text-align: center;
 }
@@ -392,8 +393,13 @@ Switch{
   width: 20;
   height: 20;
   border-radius: 50%;
+  margin-right: 2;
 }
 
 .legend-text {
+  font-size: 18;
+}
+
+.legend-data {
   font-size: 15;
 }

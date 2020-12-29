@@ -15,6 +15,7 @@ import { HttpPostService } from "../../../shared/http/http-post.service";
 import { ToastsService } from "../../../shared/toasts.service";
 import { DashboardService } from "../../../shared/salon/dashboard.service";
 import { ObservableArray } from "@nativescript/core";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'ns-mysalon-details',
@@ -31,13 +32,9 @@ export class MySalonDetailsComponent implements OnInit {
   public tabNumber: number
   public visitTabNumber: number
   public visitsEmpty = false
-  public data = [
-    { Country: "Germany", Amount: 15, SecondVal: 14, ThirdVal: 24, Impact: 0, Year: 0 },
-    { Country: "France", Amount: 13, SecondVal: 23, ThirdVal: 25, Impact: 0, Year: 0 },
-    { Country: "Bulgaria", Amount: 24, SecondVal: 17, ThirdVal: 23, Impact: 0, Year: 0 },
-    { Country: "Spain", Amount: 11, SecondVal: 19, ThirdVal: 24, Impact: 0, Year: 0 },
-    { Country: "USA", Amount: 18, SecondVal: 8, ThirdVal: 21, Impact: 0, Year: 0 }
-  ]
+  public rates
+  public statuses 
+  public visits
   private _pieSource: ObservableArray<any>
 
   public days = ["PN","WT","ŚR","CZW","PT","SO","ND"]
@@ -65,6 +62,9 @@ export class MySalonDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this._pieSource = new ObservableArray(this.dash.getRateSource())
+
+    this.rates = this.dash.getRateSource()
+    this.statuses = this.dash.getVisitsStatusSource()
 
     this.dateService.getDays(true)
 

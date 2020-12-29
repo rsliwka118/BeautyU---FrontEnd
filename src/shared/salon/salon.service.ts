@@ -198,6 +198,7 @@ export class SalonService {
     public onItemTap(id) {
 
         this.router.navigate(['/menu/details', id])
+        this.salonID = id
 
     }
 

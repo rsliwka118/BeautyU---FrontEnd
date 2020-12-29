@@ -96,7 +96,7 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'salon'
+                redirectTo: 'browser'
             }
        ]   
     }

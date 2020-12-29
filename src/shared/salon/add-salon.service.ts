@@ -32,25 +32,15 @@ export class AddSalonService {
              this.hours[i] = new Hour("","")
 
         this.salon = new Salon()
-        // this.salon.name = ""
-        // this.salon.type = ""
-        // this.salon.describe = ""
+        this.salon.name = ""
+        this.salon.type = ""
+        this.salon.describe = ""
         
-        // this.salon.location.city = ""
-        // this.salon.location.code = ""
-        // this.salon.location.street = ""
-        // this.salon.location.houseNumber = ""
-        // this.salon.location.apartmentNumber = ""
-        
-        this.salon.name = "Fryzjer męski"
-        this.salon.type = "Fryzjer"
-        this.salon.describe = "Najlepszy fryzjer w mieście!"
-        
-        this.salon.location.city = "Zielona Góra"
-        this.salon.location.code = "65-045"
-        this.salon.location.street = "Podgórna"
-        this.salon.location.houseNumber = "12a"
-        this.salon.location.apartmentNumber = "4"
+        this.salon.location.city = ""
+        this.salon.location.code = ""
+        this.salon.location.street = ""
+        this.salon.location.houseNumber = ""
+        this.salon.location.apartmentNumber = ""
     }
 
     public hoursFormat(): string{

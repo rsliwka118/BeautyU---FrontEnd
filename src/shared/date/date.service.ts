@@ -137,7 +137,7 @@ export class DateService {
                 
             })
         } else {
-            this.post.postData(Config.apiAppURL + "/visits/date/" + this.mySalon, {date: this.formatFullDate(start)}, true)
+            this.post.postData(Config.apiAppURL + "/visits/date/" + this.salonService.salonID, {date: this.formatFullDate(start)}, true)
             .subscribe( (res: any) => {
 
                 day.day = dd
